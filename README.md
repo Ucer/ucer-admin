@@ -3,12 +3,12 @@
   <b>Ucer-admin</b>
   <br>
   <a href="https://www.codehaoshi.com">
-    <img src="http://ovdt3w8zp.bkt.clouddn.com/2017-08-28%2014-27-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" width=350>
+    <img src="http://ovdt3w8zp.bkt.clouddn.com/2017-08-28%2014-27-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" width=800>
   </a>
   
   <br>
   <a href="https://www.codehaoshi.com">
-    <img src="http://ww1.sinaimg.cn/large/6d86d850gw1fao8va0fv0j208y0aw74v.jpg" width=200>
+    <img src="http://ovdt3w8zp.bkt.clouddn.com/2017-08-28%2015-05-30%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" width=800>
   </a>
 </p>
 
