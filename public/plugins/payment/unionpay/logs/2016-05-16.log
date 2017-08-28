@@ -1,0 +1,472 @@
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID> 
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[91]------ 没有找到证书ID为[]的证书 
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串> 
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>da39a3ee5e6b4b0d3255bfef95601890afd80709 
+2016-05-16 14:19:46, INFO, 119.147.207.158, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签失败 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID> 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[91]------ 没有找到证书ID为[]的证书 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串> 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>da39a3ee5e6b4b0d3255bfef95601890afd80709 
+2016-05-16 14:19:46, INFO, 101.226.68.217, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签失败 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID> 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[91]------ 没有找到证书ID为[]的证书 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串> 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>da39a3ee5e6b4b0d3255bfef95601890afd80709 
+2016-05-16 14:19:47, INFO, 14.17.34.191, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签失败 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID> 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[91]------ 没有找到证书ID为[]的证书 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串> 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>da39a3ee5e6b4b0d3255bfef95601890afd80709 
+2016-05-16 14:20:06, INFO, 180.153.206.13, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签失败 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID> 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[91]------ 没有找到证书ID为[]的证书 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串> 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>da39a3ee5e6b4b0d3255bfef95601890afd80709 
+2016-05-16 14:21:07, INFO, 183.60.15.20, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签失败 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/218.html&merId=777290058130619&orderId=201605161419113846&signMethod=01&txnAmt=209900&txnSubType=01&txnTime=20160516141911&txnType=01&version=5.0.0 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >a85db2fa79bed481be38fadde77455461d6e19db 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >BaCtE8FE0lKB0imZ7qj9mHC5V3CFahYvfg3SEK8UB/NsfMF8buUzwtkRnXNl3kNBLEsq8t0Wd4LnZ8NtuRhFyKXg9dI9rAx0A4oSt33Cg9IOuJp3uViyDLf/yy7aXdBp9pO4FSn0Rfstm2OmvM2B5cbIpklCxnJ823Mag0y6Ems= 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 14:22:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/218.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161419113846" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516141911" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="209900" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="BaCtE8FE0lKB0imZ7qj9mHC5V3CFahYvfg3SEK8UB/NsfMF8buUzwtkRnXNl3kNBLEsq8t0Wd4LnZ8NtuRhFyKXg9dI9rAx0A4oSt33Cg9IOuJp3uViyDLf/yy7aXdBp9pO4FSn0Rfstm2OmvM2B5cbIpklCxnJ823Mag0y6Ems=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161419113846&queryId=201605161419117646408&respCode=00&respMsg=Success!&settleAmt=209900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=764640&traceTime=0516141911&txnAmt=209900&txnSubType=01&txnTime=20160516141911&txnType=01&version=5.0.0 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>2b9dcbf0781883f9705edc1698fd4ae7547a2c56 
+2016-05-16 14:22:53, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&merId=777290058130619&orderId=201605161432458386&signMethod=01&txnAmt=149900&txnSubType=01&txnTime=20160516143245&txnType=01&version=5.0.0 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >88d8cc97bcff1e2fd17a7fe01a10e2e1c4220f32 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >TP0WpoQTw3TYnCBMbkUNZ5zlKzXuODHWVgE54ojcOPBZ4d/n5879qF6pEIZjx02MyoIwBctKbbvO/vL6MzzUHqGSPlbDh7NHPV0pkEPA8l7Tamne96UaMSqVyP7wfbogYiRj1oXWuEYnQr0KaK0SuoXJuGWQAfo5AbCShvfg6ag= 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 14:32:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161432458386" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516143245" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="149900" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="TP0WpoQTw3TYnCBMbkUNZ5zlKzXuODHWVgE54ojcOPBZ4d/n5879qF6pEIZjx02MyoIwBctKbbvO/vL6MzzUHqGSPlbDh7NHPV0pkEPA8l7Tamne96UaMSqVyP7wfbogYiRj1oXWuEYnQr0KaK0SuoXJuGWQAfo5AbCShvfg6ag=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161432458386&queryId=201605161432451240658&respCode=00&respMsg=Success!&settleAmt=149900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=124065&traceTime=0516143245&txnAmt=149900&txnSubType=01&txnTime=20160516143245&txnType=01&version=5.0.0 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>a948bdf15c11a72b4300a9cc0c9dbfc937a89ed3 
+2016-05-16 14:33:14, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161432458386&queryId=201605161432451240658&respCode=00&respMsg=success&settleAmt=149900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=124065&traceTime=0516143245&txnAmt=149900&txnSubType=01&txnTime=20160516143245&txnType=01&version=5.0.0 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>b1f52cda6384daf3eb78c3201d206c2923aee585 
+2016-05-16 14:34:29, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/220.html&merId=777290058130619&orderId=201605161445019265&signMethod=01&txnAmt=139900&txnSubType=01&txnTime=20160516144501&txnType=01&version=5.0.0 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >f8db64bfdf0ff9d9166de0b5180443e64c169780 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >ZpuhtiFKEJMRyc/8G6x9/DuHSvkyZSCePmJbyumpmDUL91y0OGzAfGQO78R4Ipve9CgXyzhcIbx8yqwltIHG+OcBeDkrGEm8g9h0YRvbxR4HpscvCl5dWOUJQWnCULvz/whsLqoJBdhdC4pBHQdecAZsJEvOJVXHrpUoPfxEdKE= 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 14:45:05, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/220.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161445019265" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516144501" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="139900" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="ZpuhtiFKEJMRyc/8G6x9/DuHSvkyZSCePmJbyumpmDUL91y0OGzAfGQO78R4Ipve9CgXyzhcIbx8yqwltIHG+OcBeDkrGEm8g9h0YRvbxR4HpscvCl5dWOUJQWnCULvz/whsLqoJBdhdC4pBHQdecAZsJEvOJVXHrpUoPfxEdKE=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161445019265&queryId=201605161445017713768&respCode=00&respMsg=Success!&settleAmt=139900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=771376&traceTime=0516144501&txnAmt=139900&txnSubType=01&txnTime=20160516144501&txnType=01&version=5.0.0 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>2ac9b2fb20577a0a7cdd7c5c08049ddb53ff7930 
+2016-05-16 14:45:21, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/221.html&merId=777290058130619&orderId=201605161448509800&signMethod=01&txnAmt=209900&txnSubType=01&txnTime=20160516144850&txnType=01&version=5.0.0 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >d67b5692c8e9b346fd74bfbac35967fa2ea3f076 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >PJbvZB/53wNBEdSQGds0Pn2VuMThXMELXAA9cE3cRUUkXiAII8aK4CK9WrinIRjTlEbqXpO724moqrKns8IQna97BPdJ5uw9/IZGzXOvcBFupyi19XyBXR2R2MwNT3knedqQwZ0vthyycVGCf6vP9ZL1TBWWddfr/qXBIuLT68Y= 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 14:48:55, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/221.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161448509800" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516144850" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="209900" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="PJbvZB/53wNBEdSQGds0Pn2VuMThXMELXAA9cE3cRUUkXiAII8aK4CK9WrinIRjTlEbqXpO724moqrKns8IQna97BPdJ5uw9/IZGzXOvcBFupyi19XyBXR2R2MwNT3knedqQwZ0vthyycVGCf6vP9ZL1TBWWddfr/qXBIuLT68Y=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161448509800&queryId=201605161448501294258&respCode=00&respMsg=Success!&settleAmt=209900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=129425&traceTime=0516144850&txnAmt=209900&txnSubType=01&txnTime=20160516144850&txnType=01&version=5.0.0 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>c434cc76b047e6618f535cce120321c97a06207c 
+2016-05-16 14:49:12, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/222.html&merId=777290058130619&orderId=201605161453461639&signMethod=01&txnAmt=150000&txnSubType=01&txnTime=20160516145346&txnType=01&version=5.0.0 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >384e9354d440132d73f3bc525de3505378848b33 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >blBSX+QOSodgKdS8Ji6RrYXoqu+Wd8YAP3xJIX6ACvPVyc/qv9dUnI6yCtrmwuIwo+pGL+wMl7OHfaKDdOQoW1a6gU9mIydNqAga8GhbpO5sWH7l1xGChQVwplKkCzoAI2Wri9KyI5U4SLHCv9uaLJw1EB1MSv41hmQqAkL14qc= 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 14:53:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/222.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161453461639" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516145346" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="150000" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="blBSX+QOSodgKdS8Ji6RrYXoqu+Wd8YAP3xJIX6ACvPVyc/qv9dUnI6yCtrmwuIwo+pGL+wMl7OHfaKDdOQoW1a6gU9mIydNqAga8GhbpO5sWH7l1xGChQVwplKkCzoAI2Wri9KyI5U4SLHCv9uaLJw1EB1MSv41hmQqAkL14qc=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161453461639&queryId=201605161453467723208&respCode=00&respMsg=Success!&settleAmt=150000&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=772320&traceTime=0516145346&txnAmt=150000&txnSubType=01&txnTime=20160516145346&txnType=01&version=5.0.0 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>3ebca7b0e2dd08b07a927815f2d61a4801e763c9 
+2016-05-16 14:54:06, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/223.html&merId=777290058130619&orderId=201605161502111908&signMethod=01&txnAmt=220000&txnSubType=01&txnTime=20160516150211&txnType=01&version=5.0.0 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >37a02d69b4c6ce2fcd65dde4fb680831e97ab2df 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >IjmnaXNUrYW3EWGjf7Ns+NUVeD+VMGlMdrMKPGe5N5m/JuvosoRVEAsPMjOCULhkhQLdW42l6Y1onIFg1HbsmdTj9cV0f/jTqiWJn2Fq0PWNLJT8jKUbfy40YIWNNivdbTATCs68MiLzHGW3DTyrxZayia+370QrqxgeFIS/0gk= 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:02:19, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/223.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161502111908" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516150211" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="220000" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="IjmnaXNUrYW3EWGjf7Ns+NUVeD+VMGlMdrMKPGe5N5m/JuvosoRVEAsPMjOCULhkhQLdW42l6Y1onIFg1HbsmdTj9cV0f/jTqiWJn2Fq0PWNLJT8jKUbfy40YIWNNivdbTATCs68MiLzHGW3DTyrxZayia+370QrqxgeFIS/0gk=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161502111908&queryId=201605161502111310898&respCode=00&respMsg=Success!&settleAmt=220000&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=131089&traceTime=0516150211&txnAmt=220000&txnSubType=01&txnTime=20160516150211&txnType=01&version=5.0.0 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>d4f373f72c6fce3632b6af93be125799532045d0 
+2016-05-16 15:02:37, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/224.html&merId=777290058130619&orderId=201605161510231510&signMethod=01&txnAmt=9500&txnSubType=01&txnTime=20160516151023&txnType=01&version=5.0.0 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >3804cb7cc3758c37a182be43cd2ae759428f917b 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >TkuYWRWkYfewxbkcEcU33JnAbW6fFGK/p76/Dwue8NVWC9F4/9SSI42QnoMOtEux6FgnLkW9QmBbpLdYJMMM4xYFxISANReCEOdAqgKqxTMLBAm++hRq4b3cauIIIua5lUkERr7B0BGJ2Sk2HAEJQTHjKshTodSar16bERC/Ga0= 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:10:28, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/224.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161510231510" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516151023" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="9500" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="TkuYWRWkYfewxbkcEcU33JnAbW6fFGK/p76/Dwue8NVWC9F4/9SSI42QnoMOtEux6FgnLkW9QmBbpLdYJMMM4xYFxISANReCEOdAqgKqxTMLBAm++hRq4b3cauIIIua5lUkERr7B0BGJ2Sk2HAEJQTHjKshTodSar16bERC/Ga0=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161510231510&queryId=201605161510237739848&respCode=00&respMsg=Success!&settleAmt=9500&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=773984&traceTime=0516151023&txnAmt=9500&txnSubType=01&txnTime=20160516151023&txnType=01&version=5.0.0 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>7fd006494f17f0c1147deaa1381e9068588f4156 
+2016-05-16 15:11:41, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/User/order_detail/id/225.html&merId=777290058130619&orderId=201605161512193936&signMethod=01&txnAmt=215600&txnSubType=01&txnTime=20160516151219&txnType=01&version=5.0.0 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >40fc1d0757c1651a6755a08b7ea0fbce68a5ebbe 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >AI5XVUFPuhrPGTv2IraXjn2zHyeVXjG5Tsq3XQ5uGySxcLZKJINEtPLTbm0VhG1jJcL4CaQbXBGHpWhosV8NBwRZHUM2WijMxdyJ7LtR0Hq9S0yXvmUSHBYO973dfMaR4dyIK+Ub5rcYLiJwO6H0LKfuNEPJRyv9ji/mxAsXAeg= 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:12:23, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/User/order_detail/id/225.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161512193936" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516151219" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="215600" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="AI5XVUFPuhrPGTv2IraXjn2zHyeVXjG5Tsq3XQ5uGySxcLZKJINEtPLTbm0VhG1jJcL4CaQbXBGHpWhosV8NBwRZHUM2WijMxdyJ7LtR0Hq9S0yXvmUSHBYO973dfMaR4dyIK+Ub5rcYLiJwO6H0LKfuNEPJRyv9ji/mxAsXAeg=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161512193936&queryId=201605161512191325938&respCode=00&respMsg=Success!&settleAmt=215600&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=132593&traceTime=0516151219&txnAmt=215600&txnSubType=01&txnTime=20160516151219&txnType=01&version=5.0.0 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>c8da85953a925d2d2120842159d7eba1432e0fd0 
+2016-05-16 15:13:27, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&merId=777290058130619&orderId=201605161517079108&signMethod=01&txnAmt=220000&txnSubType=01&txnTime=20160516151707&txnType=01&version=5.0.0 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >c485c1e5973e5a15f02bbb2b93b86f1f9a2fada9 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >dYsx+gT+FgaWWIluxpIOgovF9DtTZ9XzeISv99RpNVXO5tWjVvymgtDe3VTu1NGMPdo/i+yQd7DO99pWSshe8lmv/hLRuEephyK4e7t0Z2qEDJyM/FbLCzQ4ZGRQyqYbpQdrgOnzX7YxTABHqNxokOlIjebLiRaPhV0bfHcNGVA= 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:17:12, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" target="_blank" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161517079108" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516151707" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="220000" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="dYsx+gT+FgaWWIluxpIOgovF9DtTZ9XzeISv99RpNVXO5tWjVvymgtDe3VTu1NGMPdo/i+yQd7DO99pWSshe8lmv/hLRuEephyK4e7t0Z2qEDJyM/FbLCzQ4ZGRQyqYbpQdrgOnzX7YxTABHqNxokOlIjebLiRaPhV0bfHcNGVA=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161517079108&queryId=201605161517077747208&respCode=00&respMsg=Success!&settleAmt=220000&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=774720&traceTime=0516151707&txnAmt=220000&txnSubType=01&txnTime=20160516151707&txnType=01&version=5.0.0 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>ebbfb31b12c63f5cc01c4a15f31bd88348bf8140 
+2016-05-16 15:17:30, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161517079108&queryId=201605161517077747208&respCode=00&respMsg=success&settleAmt=220000&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=774720&traceTime=0516151707&txnAmt=220000&txnSubType=01&txnTime=20160516151707&txnType=01&version=5.0.0 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>fc42e869164762ade840b63293b7bce3e58ef8aa 
+2016-05-16 15:17:49, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/Payment/returnUrl/pay_code/unionpay.html&merId=777290058130619&orderId=201605161528091471&signMethod=01&txnAmt=9500&txnSubType=01&txnTime=20160516152809&txnType=01&version=5.0.0 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >cbb7443a4adf023de05dfb9f41ca25aea235a4be 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >Ygk00Ls7OSEJ46IdVmfNyQvBuN3zVA6cy9JJQCA5BJWTsUEW312BRZNFHmPUzAXXlCyF4wDcrzGKGYeM6HDd301qqfoVbctpNvCk50Nj+SHyt9IOt4UIjVbsmzbNXC+zgu6WZdLZdhiaqbEy1jaqZpXzHz+j/spoD/JErjy/jU4= 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:28:14, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" target="_blank" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161528091471" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516152809" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="9500" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="Ygk00Ls7OSEJ46IdVmfNyQvBuN3zVA6cy9JJQCA5BJWTsUEW312BRZNFHmPUzAXXlCyF4wDcrzGKGYeM6HDd301qqfoVbctpNvCk50Nj+SHyt9IOt4UIjVbsmzbNXC+zgu6WZdLZdhiaqbEy1jaqZpXzHz+j/spoD/JErjy/jU4=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161528091471&queryId=201605161528091342578&respCode=00&respMsg=Success!&settleAmt=9500&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=134257&traceTime=0516152809&txnAmt=9500&txnSubType=01&txnTime=20160516152809&txnType=01&version=5.0.0 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>8d7150414a1fabda8f39f07653178df64142156b 
+2016-05-16 15:28:33, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161528091471&queryId=201605161528091342578&respCode=00&respMsg=success&settleAmt=9500&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=134257&traceTime=0516152809&txnAmt=9500&txnSubType=01&txnTime=20160516152809&txnType=01&version=5.0.0 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>dbd2f3f00bdf14be4e331156d14192f8a81958a0 
+2016-05-16 15:28:51, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://shop.369es.com/index.php/Home/Payment/returnUrl/pay_code/unionpay.html&merId=777290058130619&orderId=201605161529548863&signMethod=01&txnAmt=29900&txnSubType=01&txnTime=20160516152954&txnType=01&version=5.0.0 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >726de67c7fac664637bc31af9e32344296ba8ec3 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >NO7dU4T5RJIFuH6hNQ+wgCf3gH5bxdkWIzb2SKR4GaTccl8e7ekXwsLAKtVNlDQPvFzBxCP7knvprJhAw8RTa0uoVV7DKlFNMvc8UhwRsN5eiU0CHdMz9LmPVoCD9wiP9ZGQj7QF7hkcM1euuw6un0bYuoi9I/HWLXmSFSy1ssM= 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-16 15:29:59, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" target="_blank" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://shop.369es.com/index.php/Home/Payment/returnUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://shop.369es.com/index.php/Home/Payment/notifyUrl/pay_code/unionpay.html" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605161529548863" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160516152954" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="29900" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="NO7dU4T5RJIFuH6hNQ+wgCf3gH5bxdkWIzb2SKR4GaTccl8e7ekXwsLAKtVNlDQPvFzBxCP7knvprJhAw8RTa0uoVV7DKlFNMvc8UhwRsN5eiU0CHdMz9LmPVoCD9wiP9ZGQj7QF7hkcM1euuw6un0bYuoi9I/HWLXmSFSy1ssM=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161529548863&queryId=201605161529547759368&respCode=00&respMsg=Success!&settleAmt=29900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=775936&traceTime=0516152954&txnAmt=29900&txnSubType=01&txnTime=20160516152954&txnType=01&version=5.0.0 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>ee7f1b037c7a5b17d1f7c8f352bf6c7f99cd72e1 
+2016-05-16 15:30:17, INFO, 116.246.38.72, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[72]------ 报文返回的证书ID>68759585097 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[75]------ 验证签名证书目录 :>D:/tpshop/plugins/payment/unionpay/certs/ 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[85]------ 加载验签证书成功 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[54]------ 报文去[signature] key=val&串>accNo=6216***********0018&accessType=0&bizType=000201&certId=68759585097&currencyCode=156&encoding=utf-8&merId=777290058130619&orderId=201605161529548863&queryId=201605161529547759368&respCode=00&respMsg=success&settleAmt=29900&settleCurrencyCode=156&settleDate=0516&signMethod=01&traceNo=775936&traceTime=0516152954&txnAmt=29900&txnSubType=01&txnTime=20160516152954&txnType=01&version=5.0.0 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[58]------ 摘要shax16>e5d813f411331af913c861da56aa70ac8e62cdbb 
+2016-05-16 15:30:31, INFO, 222.170.20.34, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[60]------ 验签成功 

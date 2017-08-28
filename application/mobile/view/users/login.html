@@ -1,0 +1,59 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta name="Generator" content="TPshop1.2" />
+<meta charset="urlTF-8">
+<meta name="viewport" content="width=device-width">
+<title>登录-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/login.css"/>
+</head>
+<body>
+  <header id="header" class='header'>
+    <div class="h-left"><a href="javascript:history.back(-1)" class="sb-back"></a></div>
+	<div class="h-mid">会员登录     </div>
+ </header>
+  	<div class="denglu">
+		<form action="" method="post">        	
+            <div class="Login">
+				<dl>
+	            <dt>用户名：</dt>
+			    	<dd><input type="text" name="username" id="username" placeholder="请输入手机号/邮箱" value="" /></dd>
+				</dl>
+                <dl style=" margin-top:15px;">
+                <dt>密码：</dt>
+					<dd><input type="password" name="password" id="password" placeholder="密码"/></dd>
+	            </dl>
+				<div class="field submit-btn">
+					<input type="button" class="btn_big1" onClick="checkSubmit()" value="登 录" />
+					<input type="hidden" name="referurl" id="referurl" value="{referurl}">
+				</div>
+            <div class="ng-foot">
+              <div class="ng-cookie-area" >
+                <label class="bf1 login_ffri">
+					<input type="checkbox" name="remember" value="1" checked=""> &nbsp;自动登录 
+				</label>
+              </div>
+              <div class="ng-link-area" >
+                <span style=" margin-right:5px; border-right:1px solid #eeeeee">
+                  <a href="{:url('urlser/reg')}" >免费注册</a>
+                </span>
+                 <span class="user_line"></span>
+                   <span >
+                  <a href="{:url('urlser/forget_pwd')}" >忘记密码？</a>
+                </span>
+              </div>
+              <div class="third-area ">
+                <div class="third-area-a">第三方登录</div>
+                <a class="ta-qq" href="{:url('LoginApi/login',array('oauth'=>'qq'))}" target="_blank" title="QQ"></a>
+                <a class="ta-alipay" href="{:url('LoginApi/login',array('oauth'=>'alipay'))}" target="_blank" title="alipay"></a>
+              </div>
+            </div>			
+          </div>
+		</form>
+	</div>
+<script type="text/javascript">
+
+</script>	
+</body>
+</html>

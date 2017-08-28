@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/sweetalert.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 03 Mar 2016 12:30:04 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>系统提示-{$Think.config.web_site_name}</title>
+    <meta http-equiv="keywords" content="{$Think.config.web_site_keyword}" />
+    <meta name="description" content="{$Think.config.web_site_description}" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <link href="/static/admin/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/static/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="/static/admin/css/animate.min.css" rel="stylesheet">
+    <link href="/static/admin/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row" style="display: none">
+        <div class="col-sm-12">
+            <div class="ibox ">
+                <div class="ibox-content">
+                    <div class="row text-center">
+                        <div class="col-sm-6 h-100 p-lg">
+                            <button class="btn btn-success btn-sm demo2 ">打开示例</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<?php switch ($code) {?>
+<?php case 1:?>
+<input type="hidden" name="result" data-title="操作成功" data-val="<?php echo(strip_tags($msg)); ?>" data-type="success" data-href="<?php echo($url); ?>">
+<?php break;?>
+<?php case 0:?>
+<input type="hidden" name="result" data-title="操作失败" data-val="<?php echo(strip_tags($msg)); ?>" data-type="error" data-href="<?php echo($url); ?>">
+
+<?php break;?>
+<?php } ?>
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/static/admin/js/content.mine.js?v=1.0.0"></script>
+<script src="/static/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var t = $("input[name=result]")
+        $(function(){
+            swal({title: t.attr('data-title'),text: t.attr('data-val'),type: t.attr('data-type')},function(){
+                location.href = t.attr('data-href');
+            })
+        });
+    });
+</script>
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+</html>

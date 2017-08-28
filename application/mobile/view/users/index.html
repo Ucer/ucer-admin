@@ -1,0 +1,44 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop1.2" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>个人中心-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+
+</head>
+<body>
+<div id="tbh5v0">
+    <div class="user_com">
+        {include file="public/user_top" /}
+    </div>
+    <div class="Wallet">
+        <ul>
+            <li class="bain1"><strong>￥{$user['user_money']}元</strong><span>余额</span></li>
+            <li class="bain1"><strong>{$coupon_count}</strong><span>优惠券</span></li>
+            <li><strong>{$user['pay_points']}</strong><span>积分</span></li>
+        </ul>
+        <!--<a href="{:url('mobile/Users/account')}"><em class="Icon Icon1"></em><dl><dt>我的钱包</dt><dd style="color:#aaaaaa;">查看我的钱包</dd></dl></a>-->
+    </div>
+    <div class="Wallet">
+        <a href="{:url('mobile/Users/orderList')}" ><em class="Icon Icon2"></em><dl class="b"><dt>我的订单</dt><dd>查看订单</dd></dl></a>
+        <!--<a href="{:url('mobile/Users/coupon')}"><em class="Icon Icon3"></em><dl class="b"><dt>我的优惠券</dt><dd>&nbsp;</dd></dl></a>-->
+        <!--<a href="{:url('mobile/Users/comment')}"><em class="Icon Icon4"></em><dl class="b"><dt>我的评价</dt><dd>查看评价</dd></dl></a>-->
+        <!--<a href="{:url('mobile/Users/collect_list')}"><em class="Icon Icon10"></em><dl class="b"><dt>我的收藏</dt><dd>&nbsp;</dd></dl></a>-->
+        <!--<a href="{:url('mobile/Users/withdrawals')}"><em class="Icon Icon1"></em><dl><dt>申请提现</dt><dd>&nbsp;</dd></dl></a>-->
+    </div>
+    <div class="Wallet">
+        <a href="{:url('mobile/Users/addressList')}"><em class="Icon Icon5"></em><dl class="b"><dt>收货地址</dt><dd>&nbsp;</dd></dl></a>
+        <!--<a href="{:url('mobile/Users/points')}"><em class="Icon Icon6"></em><dl class="b"><dt>积分余额</dt><dd>&nbsp;</dd></dl></a>-->
+        <!--<a href="{:url('mobile/Users/message_list')}"><em class="Icon Icon7"></em><dl class="b"><dt>我的留言</dt><dd>&nbsp;</dd></dl></a>-->
+        <!--<a href="{:url('mobile/Users/return_goods_list')}"><em class="Icon Icon11"></em><dl class="b"><dt>售后服务</dt><dd>&nbsp;</dd></dl></a>-->
+    </div>
+    <div class="Wallet">
+        <a href="{:url('mobile/Users/logout')}"><em class="Icon Icon8"></em><dl><dt>退出登录</dt></dl></a>
+    </div>
+</div>
+{include file="public/footer_nav" /}
+
+</body>
+</html>

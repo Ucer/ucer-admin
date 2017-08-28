@@ -1,0 +1,462 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>商品列表-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/category_list.css"/>
+
+</head>
+<body>
+<section class="_pre" >
+    <!--筛选框 start-->
+    <header id="head_search_box" style="position: fixed; top: 0px; width: 100%;">
+        <div class="search_header">
+            <a href="{:url('mobile/Goods/CategoryList')}" class="back search_back"></a>
+            <div class="search">
+                <form name="sourch_form" id="sourch_form2" method="post" action="{:url('Goods/search')}">
+                    <div class="text_box" name="list_search_text_box" onClick="return 1;">
+                        <input type="text" class="text" name="keywords" id="keyword" value="{$keywords}"  placeholder="搜索关键字"/>
+                    </div>
+                    <input type="button" value="" class="submit"  onclick="$('#sourch_form2').submit();" />
+                </form>
+            </div>
+            <a class="menu filtrate" name="list_go_filter" style=" color:#1313cc">筛选</a>
+        </div>
+    </header>
+    <!--筛选框 end-->
+
+    <!--筛选条件导航 start-->
+    <div style="height:51px;" class="empty_div">&nbsp;</div>
+    <section class="filtrate_term" id="product_sort" style="width: 100%;background:#FFF;">
+        <ul>
+            <!--//默认最新/is_new时最新-->
+            <li class="{if condition="(strlen($sort) <3) or $sort eq 'is_new'"}on{/if}" ><a href="<?php echo url('mobile/Goods/search',array_merge($filter_param,array('sort'=>'is_new')),'');?>">最新</a></li>
+            <li class="{if condition="$sort eq 'sales_sum'"}on{/if}"><a href="<?php echo url('mobile/Goods/search',array_merge($filter_param,array('sort'=>'sales_sum')),'');?>">销量</a></li>
+            <li class="{if condition="$sort eq 'comment_count'"}on{/if}"><a href="<?php echo url('mobile/Goods/search',array_merge($filter_param,array('sort'=>'comment_count')),'');?>">评论</a></li>
+            <li class="{if condition="$sort eq 'shop_price'"}on{/if}"><a href="<?php echo url('mobile/Goods/search',array_merge($filter_param,array('sort'=>'shop_price','sort_asc'=>$sort_asc)),'');?>">价格&nbsp;
+            {if condition="$sort eq 'shop_price'"}
+            {eq name="sort_asc" value="asc"}<span class="arrow_down"></span>{else/}<span class="arrow_up" ></span>{/eq}
+            {else/}
+            <span class="arrow_down" ></span>
+            {/if}
+        </a></li>
+            <li class=""><a href="javascript:;" class="show_type  show_list">&nbsp;</a></li>
+        </ul>
+    </section>
+    <!--筛选条件导航 end-->
+    <!--筛选结果 start-->
+    <section>
+        <div class="touchweb-com_searchListBox openList" id="goods_list">
+            {empty name="goods_list" value=""}
+            <p class="goods_title">抱歉暂时没有相关结果，换个筛选条件试试吧</p>
+            {else/}
+            {foreach $goods_list as $k=>$vo}
+            <li>
+                <a href="{:url('mobile/Goods/goodsInfo',array('id'=>$vo.id))}" class="item">
+                    <div class="pic_box">
+                        <div class="active_box">
+                            <span style=" background-position:0px -36px">新品</span>
+                        </div>
+                        <img src="{:goodsThumb($vo.id,$vo.original_img,400,400)}">
+                    </div>
+                    <div class="title_box">{$vo.goods_name}</div>
+                    <div class="price_box">
+                        <span class="new_price"><i>￥{$vo.shop_price}元</i></span>
+                    </div>
+                    <div class="comment_box">已售{$vo.sales_sum}</div>
+                </a>
+                <div class="ui-number b">
+                    <a class="decrease" onClick="goods_cut('{$vo.id}');">-</a>
+                    <input class="num" id="number_{$vo.id}" type="text" onBlur="();" value="1" onFocus="if(value=='1') {value=''}" size="4" maxlength="5">
+                    <a class="increase" onClick="goods_add('{$vo.id}');">+</a>
+                </div>
+                <span class="bug_car" onClick="ajaxAddCart('{$vo.id}',1,0);"><i class="icon-shop_cart"></i></span>
+            </li>
+            {/foreach}
+            {/empty}
+        </div>
+        {empty name="goods_list" value=""}
+        {else/}
+        <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+            <a href="javascript:void(0)" onClick="ajaxPage()">点击加载更多</a>
+        </div>
+        {/empty}
+    </section>
+</section>
+<!--分页 js start-->
+<script language="javascript">
+    var  page = 1;
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajaxPage(){
+        page += 1;
+        $.ajax({
+            type : "GET",
+            url:"<?php echo url('mobile/Goods/GoodsList',array_merge($filter_param,array('sort'=>$sort,'sort_asc'=>$sort_ascnow)),'');?>/is_ajax/1/p/"+page,
+            success: function(data) {
+                if(!$.trim(data)){
+                    var h = '<a href="javascript:void(0)">没有更多了</a>'
+                    $("#getmore").html(h);
+                }else{
+                    $("#goods_list").append(data);
+                }
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+</script>
+<!--分页js end-->
+
+    <!--筛选条件 start-->
+    <section class="_next" style="-webkit-transform-origin: 0px 0px 0px; opacity: 1; -webkit-transform: scale(1, 1); display: none;">
+        <header>
+            <div class="new_header_2" id="filter_header" >
+                <a href="javascript:;" class="back" id="list_filter_back" ><span>返回</span></a>
+                <h2>筛选</h2>
+            </div>
+        </header>
+        <section id="filter_content">
+            <div class="filtrate_category">
+                <a href="javascript:;" class="filtrate_category_a" >分类 <span class="up_down">展开</span></a>
+            </div>
+            <!--分类筛选 start-->
+            <ul class="filtrate_list" id="filter_category_list" style="display: block; -webkit-transform-origin: 0px 0px 0px; opacity: 1; -webkit-transform: scale(1, 1);">
+                <li class="filtrate_list_li">
+                    <ul>
+                        {foreach $cateArr as $v}
+                        <li class="filtrate_list_li"><a href="{:url('mobile/Goods/goodsList',array('id'=>$v.id))}" class="filtrate_list_li_a " style="padding-left:25px"><span>{$v.cat_name}</span></a>
+                            <ul>
+                                {empty name="v.sub_menu" value=""}
+                                {else/}
+                                {foreach $v.sub_menu as $vv}
+                                    <li class="filtrate_list_li">
+                                        <a href="{:url('mobile/mobile/goodsList',array('id'=>$vv.id))}" on class="filtrate_list_li_a " style="padding-left:45px;">{$vv.cat_name}</a>
+                                    </li>
+                                {/foreach}
+                                {/empty}
+                            </ul>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </li>
+            </ul>
+            <!--分类筛选 end-->
+            <!--品牌筛选 start-->
+            <form method="post" action="{:url('mobile/Goods/GoodsList')}">
+
+                {empty name="filter_brand" value=""}
+                {else/}
+                <div class="filtrate_category filtrate_category_show" >
+                    <a href="javascript:;" class="filtrate_category_a filtrate_category_show">品牌筛选 <span class="up_down">收起</span></a>
+                </div>
+                <ul class="clearfix filtrate_address filtrate_list att_item"  style="display: block; -webkit-transform-origin: 0px 0px 0px; opacity: 1; -webkit-transform: scale(1, 1);">
+                    {foreach $filter_brand as $v}
+                    <li><a data-href="" href="{$v.href}" data-key='brand' data-val='{$v.id}'><i></i>{$v.name}</a></li>
+                    {/foreach}
+                </ul>
+                {/empty}
+                <!--品牌筛选 end-->
+
+                <!--规格筛选 start-->
+                {foreach $filter_spec as $k=>$v}
+                <div class="filtrate_category " >
+                    <a href="javascript:;" class="filtrate_category_a ">{$v.name}<span class="up_down">展开</span></a>
+                </div>
+                <ul class="clearfix filtrate_address filtrate_list att_item" id="attrs_{$k}">
+                    {foreach $v.item as $kk=>$vv}
+                    <li id="attr_{$kk}">
+                        <a  href="{$vv.href}"  data-key='{$vv.key}' data-val='{$vv.val}' >{$vv.item}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+                {/foreach}
+                <!--规格筛选 end-->
+
+
+                <!--属性筛选 start-->
+                {foreach $filter_attr as $k=>$v}
+                <div class="filtrate_category " >
+                    <a href="javascript:;" class="filtrate_category_a ">{$v.attr_name}<span class="up_down">展开</span></a>
+                </div>
+                <ul class="clearfix filtrate_address filtrate_list att_item" id="attrs_{$k}">
+                    {foreach $v.attr_value as $kk=>$vv}
+                    <li id="attr_{$kk}">
+                        <a  href="{$vv.href}"  >{$vv.attr_value}</a>
+                    </li>
+                    {/foreach}
+                </ul>
+                {/foreach}
+                <!--属性筛选 end-->
+                <!--价格筛选 start-->
+                {empty name="filter_price" value=""}
+                {else/}
+                <div class="filtrate_category filtrate_category_show" >
+                    <a href="javascript:;" class="filtrate_category_a filtrate_category_show"><strong>价格筛选：</strong> <span class="up_down">收起</span></a>
+                </div>
+                <ul class="clearfix filtrate_address filtrate_list att_item" id="brands" style="display: block; -webkit-transform-origin: 0px 0px 0px; opacity: 1; -webkit-transform: scale(1, 1);">
+                    {foreach $filter_price as $v}
+                    <li><a  href="{$v.href}" d>{$v.value}</a></li>
+                    {/foreach}
+                </ul>
+                {/empty}
+                <!--价格筛选 end-->
+                </div>
+                <div class="filtrate_has">
+                    <h2><strong>其他条件：</strong></h2>
+                       <a href="{:url('mobile/Goods/GoodsList')}" >显示全部</a>
+
+                </div>
+                <ul class="filtrate_btn">
+                    <li><a href="{:url('mobile/Goods/search')}" class="reset" id="clear_btn" style="background: #f16533">取消筛选</a></li>
+                    <li> <input class="submit" id="submit_btn" type="submit" value="确定" style="background: #00B83F"></li>
+                </ul>
+            </form>
+        </section>
+        <script>
+            $('.filtrate_has li').click(function(){
+                $(this).find("input").attr("checked","checked");
+                $('.filtrate_has li').removeClass("on");
+                $(this).addClass("on");
+            })
+
+            $('.filtrate_has1 li').click(function(){
+                if($(this).hasClass("on")){
+                    $(this).find("input").attr("checked","");
+                    $(this).removeClass("on");
+                }
+                else
+                {
+                    $(this).find("input").attr("checked","checked");
+                    $(this).addClass("on");
+                }
+            })
+        </script>
+    </section>
+    <!--筛选条件 end-->
+<!--筛选结果 end-->
+
+<section id="mix_search_div" style="display: none;">
+    <header class="con floatsearch">
+        <section class="mix_new_header">
+            <a href="javascript:void(0)" class="mix_back"></a>
+            <form class="set_ip"name="sourch_form" id="sourch_form" method="post" action="{:url('mobile/Goods/search')}">
+                <div class="search">
+                    <div class="text_box">
+                        <input class="keyword text" name="keywords" id="q"  placeholder="请输入关键词"  type="text" value="{$Request.get.keywords}" />
+                    </div>
+                    <span class="mix_submit" onClick="if($.trim($('#q').val()) != '') $('#sourch_form').submit();"></span>
+                    <a href="javascript:void(0)" class="clear_input" id="clear_input" style="display: block;"></a>
+                </div>
+                <input  type="button" onClick="if($.trim($('#q').val()) != '') $('#sourch_form').submit(); else alert('请输入搜索词');" value="搜索" class="mix_filtrate">
+            </form>
+        </section>
+        <section class="mix_search_list"></section>
+        <section class="mix_recently_search"><h3>热门搜索</h3>
+            <ul>
+                {foreach $Think.config.hot_keywords as $k=>$v}
+                <li><a href="{:url('Goods/search',array('keywords'=>$v))}"   {eq name="k" value="0"}{/eq}>{$v}</a></li>
+                {/foreach}
+            </ul>
+        </section>
+        <div class="spacer"></div>
+    </header>
+</section>
+<script type="text/javascript" src="/static/mobile/js/zepto.min.js"></script>
+<script type="text/javascript" src="/static/mobile/js/filter.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        //筛选浮层显示控制
+        var filtrate = $(".filtrate"), submit = $(".submit,.back,.reset");
+        filtrate.bind("click", function () {
+            $("._next").show();
+            $("._pre").hide();
+            window.scrollTo(0, 0);
+        });
+        submit.bind("click", function () {
+            $("._next").hide();
+            $("._pre").show();
+        });
+        //初始化筛选浮层
+        bizFilter.init();
+    });
+    //加减商品数量
+    function goods_cut($val){
+        var num_val=document.getElementById('number_'+$val);
+        var new_num=num_val.value;
+        var Num = parseInt(new_num);
+        if(Num>1)Num=Num-1;
+        num_val.value=Num;
+    }
+    //加减商品数量
+    function goods_add($val){
+        var num_val=document.getElementById('number_'+$val);
+        var new_num=num_val.value;
+        var Num = parseInt(new_num);
+        Num=Num+1;
+        num_val.value=Num;
+    }
+</script>
+<!--列表和详细效果切换 start-->
+<script type="text/javascript">
+
+    $('.show_type').bind("click", function() {
+        if ($('#goods_list').hasClass('openList')){
+            $('#goods_list').removeClass('openList');
+            $(this).removeClass('show_list');
+        }
+        else
+        {
+            $('#goods_list').addClass('openList');
+            $(this).addClass('show_list');
+        }
+    });
+</script>
+<!--列表和详细效果切换 end-->
+<script type="text/javascript">
+    $(function(){
+        //搜索浮层显示逻辑
+        var sbox = $("#head_search_box"),
+                sort = $('#product_sort'),
+                g_list = $("#goods_list"),
+                g_m1 = "0", g_m2 = "96px";
+        var initCss = function (type) {
+            if (type == 1) {
+                sort.css({"position":"static","width":"100%"});
+                g_list.css("margin-top", g_m1);
+            } else {
+                sort.attr("style", "");
+                g_list.css("margin-top", g_m2);
+            }
+        };
+        var m = {
+            input: $("#keyword"),
+            rawAll: '',
+            dd: $(".text_box"),
+            cancel: $(".mix_back"),
+            rawKey: '请输入商品名称 货号',
+            main: function () {
+                this.init();
+                this.be();
+            },
+            init: function () {
+                this.rawAll = this.input.val();
+            },
+            be: function () {
+                var _this = this;
+                this.input.focus(function () {
+                            var mix_search = $("#mix_search_div");
+                            if (mix_search.length > 0) {
+                                $("._pre").hide();
+                                mix_search.show();
+                                $("#keyword1").focus();
+                                return;
+                            }
+                            var newKey = _this.input.val();
+                            if (newKey != _this.rawKey && newKey != _this.rawAll) {
+                                $(this).val(newKey);
+                            } else {
+                                $(this).val(_this.rawKey);
+                            }
+                            if ($(window).scrollTop() > 0) {
+                                initCss(1);
+                                window.scrollTo(0, 0);
+                                _this.dd.trigger("click");  //for ddclick
+                            }
+                        })
+                        .blur(function () {
+                            var newKey = _this.input.val();
+                            if (newKey === _this.rawKey) {
+                                $(this).val(_this.rawAll);
+                            } else {
+                                $(this).val(newKey);
+                            }
+                        });
+                this.cancel.bind("click", function () {
+                    $("#mix_search_div").hide();
+                    $("._pre").show();
+                });
+                document.getElementById("clear_input").onclick = function() {
+                    $("#mix_search_div").hide();
+                    $("._pre").show();
+                }
+            }
+        };
+        m.main();
+        $(window).resize(function () {
+            sbox.css("width", "100%");
+            sort.css("width", "100%");
+        });
+        //顶部sticky效果
+        setTimeout(function () {
+            var sboxH = sbox.height();
+            var sortH = sort.height();
+            var sortStart = sort.offset().top - sboxH;
+            var showEnd = sort.offset().top;
+            var init = function () {
+                sbox.css({"position":"fixed", "top":"0"});
+                window.scrollTo(0, 0);
+            };
+            var rawScroll = 0, nowScroll = 0;
+            var upOrDown = function () {
+                var delta = 30;
+                if (nowScroll > rawScroll + delta) {
+                    return 1;
+                } else if (nowScroll < rawScroll - delta) {
+                    return 2;
+                } else {
+                    return 0;
+                }
+            };
+            var sticky = function () {
+                nowScroll = $(window).scrollTop();
+                if (nowScroll >= sortStart) {
+                    sort.css({"position":"fixed","top":sboxH});
+                    g_list.css({"margin-top":sortH});
+                } else {
+                    sort.attr("style", "");
+                    g_list.attr("style", "");
+                }
+                if (nowScroll > showEnd + sortH) {
+                    var up = upOrDown();
+                    if (up == 1) {
+                        if (sbox.css("display") != "none") {
+                            sbox.hide();
+                            sort.hide();
+                        }
+                        rawScroll = nowScroll;
+                    } else if (up == 2) {
+                        if (sbox.css("display") == "none") {
+                            sbox.show();
+                            sort.show();
+                        }
+                        rawScroll = nowScroll;
+                    }
+                } else {
+                    if (sbox.css("display") == "none") {
+                        sbox.show();
+                        sort.show();
+                    }
+                }
+            };
+            init();
+            $(document).on("touchmove", sticky);
+            $(window).on("scroll", sticky);
+        }, 500);
+
+    });
+</script>
+<!--底部 start-->
+{include file="public/footer_nav" /}
+<script>
+    function goTop(){
+        $('html,body').animate({'scrollTop':0},600);
+    }
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="/static/mobile/images/topup.png"></a>
+</body>
+</html>

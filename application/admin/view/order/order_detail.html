@@ -1,0 +1,286 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单详情</h5>
+                    <div class="ibox-tools">
+                        <a href="{:url('Order/orderList')}"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row ">
+                            <div class="col-sm-2 pull-right">
+                                <a href="{:url('orderEditor',['id'=>$order.id])}" class="btn btn-primary "><i class="fa fa-edit"></i> 修改订单</a>
+                                <a href="javascript:void(0)" class="btn btn-info " ><i class="fa fa-print"></i> 打印</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive m-t">
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 订单基本信息&nbsp;&nbsp;</h3>
+                            </div>
+                                <table class="table invoice-table">
+                                <thead>
+                                    <tr >
+                                        <th>ID</th>
+                                        <th>订单号</th>
+                                        <th>会员</th>
+                                        <th>E-Mail</th>
+                                        <th>电话</th>
+                                        <th>应付</th>
+                                        <th>订单状态</th>
+                                        <th>下单时间</th>
+                                        <th>支付时间</th>
+                                        <th>支付方式</th>
+                                    </tr>
+                                </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{$order.id}</td>
+                                        <td>{$order.order_sn}</td>
+                                        <td><a href="#" target="_blank">{$order.consignee}</a></td>
+                                        <td><a href="#">{$order.email}</a></td>
+                                        <td>{$order.mobile}</td>
+                                        <td>&yen;{$order.order_amount}</td>
+                                        <td id="order-status">
+                                            {$order_status[$order.order_status]} / {$pay_status[$order.pay_status]}
+                                            {eq name="order.pay_code" value="cod"}
+                                            <span style="color: red">(货到付款)</span>
+                                            {/eq} / {$shipping_status[$order.shipping_status]}</td>
+                                        <td>{$order.add_time|date='Y-m-d H:i',###}</td>
+                                        <td>
+                                            {eq name="order.pay_time" value="0"}
+                                            N
+                                            {else/}
+                                            {$order.pay_time|date='Y-m-d H:i',###}
+                                            {/eq}
+                                        </if>
+                                        </td>
+                                        <td id="pay-type">
+                                            {$order.pay_name|default='其他方式'}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="hr-line-dashed"></div>
+                                <div class="col-sm-12    text-center">
+                                    <h3 class="inline "> <i class="fa fa-print"></i> 收货人信息</h3>
+                                </div>
+                                <table class="table invoice-table">
+                                    <thead>
+                                    <tr>
+                                        <th>收货人</th>
+                                        <th>联系方式</th>
+                                        <th>地址</th>
+                                        <th>邮编</th>
+                                        <th>配送方式</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{$order.consignee}</td>
+                                        <td>{$order.mobile}</td>
+                                        <td>{$order.address2}</td>
+                                        <td>
+                                                N
+                                        </td>
+                                        <td>
+                                            {$order.shipping_name}
+                                            {eq name="order.shipping_status" value="1"}
+                                            <a href="{:url('shippingPrint',['order_id'=>$order.id,'code'=>$order.shipping_code])}" target="_blank" class="btn btn-primary input-sm">打印快递单</a>
+                                            {/eq}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                 <div class="hr-line-dashed"></div>
+                                <div class="col-sm-12    text-center">
+                                    <h3 class="inline "> <i class="fa fa-print"></i> 商品信息  </h3>
+                                    <a class="btn btn-primary btn-xs" title="修改费用" title="" data-toggle="tooltip" href="{:url('Order/editPrice',array('order_id'=>$order.id))}">
+                                        <i class="fa fa-pencil"></i></a>
+                                </div>
+                                <table class="table invoice-table">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">商品ID</th>
+                                        <th class="text-left">商品</th>
+                                        <th class="text-left">属性</th>
+                                        <th class="text-right">数量</th>
+                                        <th class="text-right">单品价格</th>
+                                        <th class="text-right">会员折扣价</th>
+                                        <th class="text-right">单品小计</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {foreach $order_goods as $good}
+                                    <tr>
+                                        <td>{$good.goods_id}</td>
+                                        <td class="text-left"><a href="{:url('mobile/Goods/goodsInfo',array('id'=>$good['goods_id']))}" target="_blank">{$good.goods_name}</a>
+                                        </td>
+                                        <td class="text-left">{$good.spec_key_name}</td>
+                                        <td class="text-right">{$good.goods_num}</td>
+                                        <td class="text-right">&yen;{$good.goods_price}</td>
+                                        <td class="text-right">{$good.discount_price}</td>
+                                        <td class="text-right">&yen;{$good.goods_total}</td>
+                                    </tr>
+                                    {/foreach}
+                                    </tbody>
+                                </table>
+                            <table class="table invoice-total">
+                                <tbody>
+                                <tr>
+                                    <td><strong>小计：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;{$order.goods_price}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>运费：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;+{$order.shipping_price}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>优惠券抵扣：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;-{$order.coupon_price}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>余额抵扣：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;-{$order.user_money}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>价格调整：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;减:{$order.discount}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>积分 (-{$order.integral})：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;-{$order.integral_money}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>总计：</strong>
+                                    </td>
+                                    <td>&yen;&nbsp;{$order.order_amount}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="hr-line-dashed"></div>
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 订单操作</h3>
+                            </div>
+                            <table class="table invoice-table">
+                                <form action=""  id="btnForm">
+                                    <div class="form-group avalue">
+                                        <label class="col-sm-3 control-label"><strong>备注信息：</strong></label>
+                                        <div class="input-group col-sm-4">
+                                            <textarea type="text" rows="5" name="note"  class="form-control" placeholder="备注信息" ></textarea>
+                                            <span class="help-block m-b-none"> 256个字符以内</span>
+                                        </div>
+                                        <input type="hidden" name="order_id" value="{$order.id}">
+                                    </div>
+                                </form>
+                                <div class="form-group avalue">
+                                    <label class="col-sm-3 control-label"><strong>操作项：</strong></label>
+                                    {foreach $button as $k=>$vo}
+                                    <div class="input-group col-sm-1 inline">
+                                    {switch name="k"}
+                                    {case value="pay_cancel"}
+                                        <button type="button" class="btn btn-info btn-sm btn-block remark" href="javascript:void(0)" data-url="{:url('Order/payCancel',array('order_id'=>$order.id))}" > 设为未付款</button>
+                                    {/case}
+                                    {case value="delivery"}
+                                    <button type="button" class="btn btn-info btn-sm btn-block" onclick="javascript:location.href='{:url('Order/deliveryInfo',array('order_id'=>$order['id']))}'" >去发货</button>
+                                    {/case}
+                                    {case value="refund"}
+                                    <!--<button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 申请退货</button>-->
+                                    {/case}
+                                    {default/}
+                                        <button type="button" class="btn btn-primary btn-sm btn-block saveBtn" data-url="{:url('Order/orderAction',['type'=>$k])}"> {$vo}</button>
+                                    {/switch}
+                                    </div>
+                                    {/foreach}
+                                </div>
+                            </table>
+                            <div class="hr-line-dashed"></div>
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 操作记录</h3>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div id="vertical-timeline" class="vertical-container light-timeline">
+                                        {empty name="action_log" value=""}
+                                        <div class="vertical-timeline-block">
+                                                <div class="vertical-timeline-icon navy-bg">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
+                                            <div class="vertical-timeline-content">
+                                                <h2>无人操作</h2>
+                                                <p>还没有日志哦......</p>
+                                                <span class="vertical-date "><i class="fa fa-clock-o"></i><small> 今天</small></span>
+                                            </div>
+                                        </div>
+                                        {else/}
+                                        {foreach $action_log as $log}
+                                         <div class="vertical-timeline-block">
+                                                <div class="vertical-timeline-icon navy-bg">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
+                                            <div class="vertical-timeline-content">
+                                                <h2>{$log.status_desc}</h2>
+                                                <p><span style="color: #a61219">备注：</span>{$log.action_note}．．．．．．</p>
+                                                <p><span style="color: #a61219">订单详细：</span>{$order_status[$log.order_status]}、
+                                                    {$pay_status[$log.pay_status]}{eq name="order.pay_code" value="cod"}<span style="color: red">(货到付款)</span>{/eq}、
+                                                    {$shipping_status[$log.shipping_status]}
+                                                </p>
+                                                <span class="vertical-date "><span style="color: #a61219">操作人：</span>{:$log.action_user_name}({:$log.action_user_id})<br>
+                                                <i class="fa fa-clock-o"></i><small>{:d3time($log.log_time)}</small>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        {/foreach}
+                                        {/empty}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+<script type="text/javascript">
+    /*表单提交*/
+    $(".saveBtn").click(function(){
+        if(isEmpty('',$("textarea[name=note]").val(),'请填写备注信息') == false){return false;}
+        ajaxFormBtn($(this).attr('data-url'),'btnForm',1);
+    });
+
+
+    /*订单设置为未付款*/
+    $(".remark").click(function(){
+        layer.open({
+            type: 2,
+            area: ['60%', '80%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'已支付订单置为未支付',
+            content: $(this).attr('data-url'),
+            end: function () {
+                parent.layer.closeAll();
+                location.reload();
+            }
+        });
+    });
+</script>
+</body>

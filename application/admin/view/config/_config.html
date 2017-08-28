@@ -1,0 +1,169 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 配置管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('configHandle',['id'=>$id])}" id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置标识：</label>
+                            <div class="input-group col-sm-4">
+                                <input  type="text" class="form-control" name="name" value="{$info.name}" placeholder="配置标识">
+                                <span class="help-block m-b-none" > 用于config函数调用，只能使用英文且不能重复 <span style="color: #ff0000;">如:system_config_group</span></span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置标题：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="title" value="{$info.title}" placeholder="配置标题">
+                                <span class="help-block m-b-none"> 用于后台显示的配置标题</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置分组：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control m-b chosen-select" name="group" >
+                                    <option value="0">请选择配置分组</option>
+                                    {foreach $group_list as $k=>$v}
+                                    <option value="{$k}" {eq name="$k" value="$info.group"}selected{/eq}>{$v.title}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置类型：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control m-b chosen-select" name="type">
+                                    <option value="0">请选择配置类型</option>
+                                    {foreach $type_list as $k=>$v}
+                                    <option value="{$k}" {eq name="$k" value="$info.type"}selected{/eq}>{$v.title}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置值：</label>
+                            <div class="input-group col-sm-4 " >
+                                <input id="value" type="text" class="form-control" name="value" placeholder="配置值" value="{$info.value}">
+                                <span class="help-block m-b-none"> 数组:key:val,key:val</span>
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">配置项：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="5" name="item"  class="form-control" placeholder="配置项" >{$info.item}</textarea>
+                                <span class="help-block m-b-none"> 一行一个配置项</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed avalue"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">配置描述：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="5" name="desc" class="form-control" placeholder="配置描述" >{$info.desc}</textarea>
+                                <span class="help-block m-b-none"> 配置详细说明</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">状态：</label>
+                            <div class="input-group col-sm-4">
+                                <div class="radio i-checks">
+                                    <input type="radio" name='status' value="0" {if condition="$id gt 0 "}{eq name="info.status" value="0"}checked{/eq}{else /}checked{/if} />开启&nbsp;&nbsp;
+                                    <input type="radio" name='status' value="1" {eq name="info.status" value="1"}checked{/eq} />关闭
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 排序：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="number" name="sort"  {if condition="$info.id gt 0"}value="{$info.sort}" {else /}value="10" {/if}placeholder="排序"  class="form-control" />
+                                <span class="lbl">&nbsp;&nbsp;默认为10</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script>
+    /*枚举类型要显示textarea输入框*/
+    $(function(){
+        $(".avalue").css('display','none');
+        var aa = $("select[name=type]").val();
+        if(aa == 4){
+            $(".avalue").show();
+        }
+    });
+    $("select[name=type]").change(function(){
+        var aa =$(this).val();
+        if(aa ==4){ //枚举类型
+            $(".avalue").show();
+        }else{
+            $(".avalue").hide();
+        }
+        if(aa ==5){ //数组类型
+            var html = '<textarea type="text" rows="5" name="value" class="form-control" placeholder="配置值" >{$info.value}</textarea>'+
+                     '<span class="help-block m-b-none"> 多个以逗号隔开</span>';
+            $("#isarray").empty().append(html);
+        }else{
+            var html = ' <input id="value" type="text" class="form-control" name="value" placeholder="配置值" value="{$info.value}">'
+            $("#isarray").empty().append(html);
+        }
+    });
+    $("select[name=type]").trigger('change');
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var type = $("select[name=type]").val();
+        if(isEmpty('',$("input[name=name]").val(),'配置标识不能为空') == false){return false;};
+        if(prexRule(/^[#a-zA-Z_]{3,300}$/,$("input[name=name]").val(),'配置标识只能是3位以上的英文字母') == false){return false;};
+        if(isEmpty('',$("input[name=title]").val(),'配置标题不能为空') == false){return false;};
+
+        if(type ==4){
+            if(isEmpty('',$("textarea[name=value]").val(),'配置值不能为空') == false){return false;};
+        }else{
+            if(isEmpty('',$("input[name=value]").val(),'配置值不能为空') == false){return false;};
+        }
+
+        if(isEmpty('',$("textarea[name=desc]").val(),'配置描述不能为空') == false){return false;};
+        ajaxFormBtn("{:url('configHandle',['id'=>$id])}",'btnForm');
+    });
+    //IOS开关样式配置
+    var elem = document.querySelector('.js-switch');
+    var switchery = new Switchery(elem, {
+        color: '#1AB394'
+    });
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+</body>
+</html>

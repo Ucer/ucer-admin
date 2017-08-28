@@ -1,0 +1,311 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop v1.1" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>首页-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/index.css"/>
+    <script type="text/javascript" src="/static/mobile/js/TouchSlide.1.1.js"></script>
+
+</head>
+<body>
+<div id="page" class="showpage">
+    <div>
+        <!--头部开始-->
+        <header id="header">
+            <a href="{:url('Goods/categoryList')}" class="top_bt"></a><a href="{:url('Cart/cart')}" class='user_btn'></a>
+            <span href="javascript:void(0)" class="logo">{$Think.config.web_site_name}</span>
+        </header>
+        <!--头部结束-->
+
+        <!--首页banner广告轮播980*400开始-->
+        <div id="scrollimg" class="scrollimg">
+            <div class="bd">
+                <ul>
+                    {zhjaa:adv pid="2" limit="5" item="mm"}
+                    <li><a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}> <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/></a></li>
+                    {/zhjaa:adv}
+                </ul>
+            </div>
+            <div class="hd">
+                <ul></ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            TouchSlide({
+                slideCell:"#scrollimg",
+                titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                mainCell:".bd ul",
+                effect:"leftLoop",
+                autoPage:true,//自动分页
+                autoPlay:true //自动播放
+            });
+        </script>
+        <!--首页banner广告轮播980*400结束-->
+
+        <!--中单导航开始-->
+        <div id="fake-search" class="index_search">
+            <div class="index_search_mid">
+                <span><img src="/static/mobile/images/xin/icosousuo.png"></span>
+                <input  type="text" id="search_text" class="search_text" value="请输入您所搜索的商品"/>
+            </div>
+        </div>
+        <div class="entry-list clearfix">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{:url('Goods/categoryList')}">
+                            <img alt="全部分类" src="/static/mobile/images/1440437165699930301.png" />
+                            <span>全部分类</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:url('mobile/Activity/groupList')}">
+                            <img alt="我的订单" src="/static/mobile/images/1440439318451279676.png" />
+                            <span>团购</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:url('mobile/Cart/cart')}">
+                            <img alt="购物车" src="/static/mobile/images/1440439353048484531.png" />
+                            <span>购物车</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{:url('mobile/Users/index')}">
+                            <img alt="个人中心" src="/static/mobile/images/1440439367001464442.png" />
+                            <span>个人中心</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!--中间导航结束-->
+
+        <!--Index页面自动增加广告位--品牌特卖  start-->
+        <div class="floor_images">
+            <dl>
+                <dt>
+                    {zhjaa:adv pid="3" limit="1" item="mm"}
+                    <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                    <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+                    </a>
+                    {/zhjaa:adv}
+                </dt>
+                <dd>
+        <span class="Edge">
+          {zhjaa:adv pid="5" limit="1" item="mm"}
+              <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                 <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+            </a>
+            {/zhjaa:adv}
+        </span>
+             <span class="Edge">
+		      {zhjaa:adv pid="6" limit="1" item="mm"}
+                  <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                     <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+                 </a>
+                 {/zhjaa:adv}
+            </span>
+                </dd>
+            </dl>
+            <ul>
+                <li class="brom">
+                    {zhjaa:adv pid="7" limit="1" item="mm"}
+                    <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                    <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+                    </a>
+                    {/zhjaa:adv}
+                </li>
+                <li>
+                    {zhjaa:adv pid="8" limit="1" item="mm"}
+                    <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                    <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+                    </a>
+                    {/zhjaa:adv}
+                </li>
+            </ul>
+        </div>
+        <!--限时促销倒计时-->
+        <script type="text/javascript">
+            function countDown(){
+                {zhjaa:flash limit="3" item="mm"}
+                var text{$mm.goods_id} = GetRTime('{$mm.end_time|goodsDate}');
+                if (typeof(text{$mm.goods_id}) == "undefined"){
+                    $("#surplus_text{$mm.goods_id}").text('活动已结束');
+                }else{
+                    $("#surplus_text{$mm.goods_id}").text(text{$mm.goods_id});
+                }
+                {/zhjaa:flash}
+            }
+            setInterval(countDown,1000);
+        </script>
+        <section class="index_floor_lou">
+            <div class="floor_body">
+                <h2>
+                    <em></em>限时秒杀
+                </h2>
+                <div id="scroll_promotion">
+                    <ul>
+                        {zhjaa:flash limit="3" item="mm"}
+                        <li>
+                            <a href="{:url('Goods/goodsInfo',['id'=>$mm.goods_id])}" title="{$mm.goods_name}"></a>
+                            <div class="index_pro">
+                                <a href="{:url('Goods/goodsInfo',['id'=>$mm.goods_id])}" title="{$mm.goods_name}">
+                                    <div class="products_kuang">
+                                        <div class="timerBox" id="surplus_text{$mm.goods_id}">35天1时 59分 59秒</div>
+                                        <img src="{:goodsThumb($mm.goods_id,$mm.original_img,400,400)}" >
+                                    </div>
+                                    <div class="goods_name">{$mm.goods_name}</div>
+                                </a>
+                                <div class="price">
+                                    <a href="javascript:ajaxAddCart('{$mm.goods_id}',1,0)" class="btns">
+                                        <img src="/static/mobile/images/index_flow.png">
+                                    </a>
+                                    <span class="price_pro">￥{$mm.price}元</span>
+                                </div>
+                            </div>
+                        </li>
+                        {/zhjaa:flash}
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--首页底部广告位 start-->
+        <div class="floor_images">
+            <dl>
+                <dt>
+                    {zhjaa:adv pid="9" limit="1" item="mm"}
+                    <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                    <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+                    </a>
+                    {/zhjaa:adv}
+                </dt>
+                <dd>
+        <span class="Edge">
+            {zhjaa:adv pid="10" limit="1" item="mm"}
+        <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+        <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+            </a>
+            {/zhjaa:adv}
+        </span>
+        <span>
+            {zhjaa:adv pid="11" limit="1" item="mm"}
+        <a href="{$mm.ad_link}" {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+        <img src="{$mm.ad_code}" title=""width="100%"  style="max-height: 300px"/>
+            </a>
+            {/zhjaa:adv}
+        </span>
+                </dd>
+            </dl>
+
+        </div>
+
+        <section class="index_floor">
+            <div class="floor_body1">
+                <h2><em></em>精品推荐</h2>
+                <div id="scroll_best" class="scroll_hot">
+                    <div class="bd">
+                        <ul>
+                            {assign name="fl" value="1" /}
+                            {zhjaa:fortable table="goods" order="created_at asc" where="is_recommend=1 and (goods_prom_id = 0) and (is_on_sale=1)" limit="9" item="mm"}
+                            <li>
+                                <a href="{:url('Goods/goodsInfo',['id'=>$mm.id])}" title="{$mm.goods_name}"></a>
+                                <div class="index_pro">
+                                    <a href="{:url('Goods/goodsInfo',['id'=>$mm.id])}" title="{$mm.goods_name}">
+                                        <div class="products_kuang">
+                                            <img src="{:goodsThumb($mm.id,$mm.original_img,400,400)}" >
+                                        </div>
+                                        <div class="goods_name">{$mm.goods_name}</div>
+                                    </a>
+                                    <div class="price">
+                                        <a href="javascript:ajaxAddCart('{$mm.id}',1,0)" class="btns">
+                                            <img src="/static/mobile/images/index_flow.png">
+                                        </a>
+                                        <span class="price_pro">￥{$mm.shop_price}元</span>
+                                    </div>
+                                </div>
+                            </li>
+                            {if condition="($fl++%3 eq 0) && ($fl lt 9)"}
+                        </ul><ul>
+                        {/if}
+                        {/zhjaa:fortable}
+                    </ul>
+                    </div>
+                    <div class="hd">
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script type="text/javascript">
+            TouchSlide({
+                slideCell:"#scroll_best",
+                titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                effect:"leftLoop",
+                autoPage:true, //自动分页
+                //switchLoad:"_src" //切换加载，真实图片路径为"_src"
+            });
+        </script>
+
+        <!--首页底部广告位 end-->
+        {zhjaa:fortable table="goods" order="created_at asc" where="1=1" limit="3" item="mm"}
+        {$mm.goods_name}--
+        {/zhjaa:fortable}
+
+    </div>
+    <div id="J_demo" style="display:none"></div>
+    <div id="search_hide" class="search_hide">
+        <h2> <span class="close"><img src="/static/mobile/images/close.png"></span>关键字搜索</h2>
+        <div id="mallSearch" class="search_mid">
+            <div id="search_tips" style="display:none;"></div>
+            <ul class="search-type">
+                <li  class="cur"  num="0">淘宝贝</li>
+                <!--<li  num="1">店铺</li>-->
+            </ul>
+            <div class="searchdotm">
+                <form class="set_ip"name="sourch_form" id="sourch_form" method="post" action="{:url('Goods/search')}">
+                    <div class="mallSearch-input">
+                        <div id="s-combobox-135">
+                            <input class="s-combobox-input" name="keywords" id="q"  placeholder="请输入关键词"  type="text" value="{$Request.get.keywords}" />
+                        </div>
+                        <input type="button" value="" class="button"  onclick="if($.trim($('#q').val()) != '') $('#sourch_form').submit();" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <section class="mix_recently_search"><h3>热门搜索</h3>
+            <ul>
+             {foreach $Think.config.hot_keywords as $k=>$v}
+                <li><a href="{:url('Goods/search',array('keywords'=>$v))}"   {eq name="k" value="0"}{/eq}>{$v}</a></li>
+                {/foreach}
+            </ul>
+        </section>
+    </div>
+</div>
+
+{include file="public/footer_nav" /}
+
+<script type="text/javascript">
+//    点击搜索框触发 start
+    $(function() {
+        $('#search_text').click(function(){
+            $(".showpage").children('div').hide();
+            $("#search_hide").css('position','fixed').css('top','0px').css('width','100%').css('z-index','999').show();
+        })
+        $('#get_search_box').click(function(){
+            $(".showpage").children('div').hide();
+            $("#search_hide").css('position','fixed').css('top','0px').css('width','100%').css('z-index','999').show();
+        })
+        $("#search_hide .close").click(function(){
+            $(".showpage").children('div').show();
+            $("#search_hide").hide();
+        })
+    });
+//    点击搜索框触发 end
+
+</script>
+</body>
+</html>

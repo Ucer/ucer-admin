@@ -1,0 +1,206 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单详情</h5>
+                    <div class="ibox-tools">
+                        <a href="{:url('Order/deliveryList')}"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row ">
+                            <div class="col-sm-2 pull-right">
+                                <a href="{:url('orderEditor',['id'=>$order.id])}" class="btn btn-primary "><i class="fa fa-edit"></i> 修改订单</a>
+                                <a href="javascript:void(0)" class="btn btn-info " ><i class="fa fa-print"></i> 打印</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <form action=""  id="btnForm">
+                        <div class="table-responsive m-t">
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 订单基本信息&nbsp;&nbsp;</h3>
+                            </div>
+                            <table class="table invoice-table">
+                                <thead>
+                                <tr >
+                                    <th>ID</th>
+                                    <th>订单号</th>
+                                    <th>下单时间</th>
+                                    <th>配送方式</th>
+                                    <th>配送费用</th>
+                                    <th>配送单号</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{$order.id}</td>
+                                    <td>{$order.order_sn}</td>
+                                    <td>{$order.add_time|date='Y-m-d H:i',###}</td>
+                                    <td >{$order.shipping_name}</td>
+                                    <td >{$order.shipping_price}</td>
+                                    <td >
+                                        <input class="input-sm" name="invoice_number" id="invoice_no" value="{$order.invoice_number}" placeholder="请填写发货单号">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="hr-line-dashed"></div>
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 收货人信息</h3>
+                            </div>
+                            <table class="table invoice-table">
+                                <thead>
+                                <tr>
+                                    <th>收货人</th>
+                                    <th>联系方式</th>
+                                    <th>地址</th>
+                                    <th>邮编</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{$order.consignee}</td>
+                                    <td>{$order.mobile}</td>
+                                    <td>{$order.address2}</td>
+                                    <td>
+                                        N
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 商品信息</h3>
+                            </div>
+                            <table class="table invoice-table">
+                                <thead>
+                                <tr>
+                                    <th class="text-left">商品ID</th>
+                                    <th class="text-left">商品</th>
+                                    <th class="text-left">属性</th>
+                                    <th class="text-right">数量</th>
+                                    <th class="text-right">单品价格</th>
+                                    <th class="text-right">会员折扣价</th>
+                                    <th class="text-right">单品小计</th>
+                                    <th class="text-right">选择发货</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foreach $order_goods as $good}
+                                <tr>
+                                    <td>{$good.goods_id}</td>
+                                    <td class="text-left"><a href="{:url('Goods/handle',array('id'=>$good['goods_id']))}" target="_blank">{$good.goods_name}</a>
+                                    </td>
+                                    <td class="text-left">{$good.spec_key_name}</td>
+                                    <td class="text-right">{$good.goods_num}</td>
+                                    <td class="text-right">&yen;{$good.goods_price}</td>
+                                    <td class="text-right">{$good.discount_price}</td>
+                                    <td class="text-right">&yen;{$good.goods_total}</td>
+                                    <td>
+                                        {eq name="good.is_send" value="1"}
+                                        <button type="button" class="btn btn-primary btn-xs">已经发货</button>
+                                        {else/}
+                                        <input type="checkbox"  class="check-code-img" name="goods[]" value="{$good.goods_id}" checked="checked">
+                                        {/eq}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                </tbody>
+                            </table>
+                            <div class="hr-line-dashed"></div>
+                               {neq name="order.shipping_status" value="1"}
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 发货信息</h3>
+                            </div>
+                            <table class="table invoice-table">
+                                    <div class="form-group avalue">
+                                        <label class="col-sm-3 control-label"><strong>发货单备注：</strong></label>
+                                        <div class="input-group col-sm-4">
+                                            <textarea type="text" rows="5" name="note"  class="form-control" placeholder="备注信息" ></textarea>
+                                            <span class="help-block m-b-none"> 256个字符以内</span>
+                                        </div>
+                                        <input type="hidden" name="order_id" value="{$order.id}">
+                                    </div>
+                                    <div class="form-group avalue">
+                                        <label class="col-sm-3 control-label"><strong>操作项：</strong></label>
+                                        <div class="input-group col-sm-1 inline">
+                                            <button type="button"  class="btn btn-info btn-sm btn-block saveBtn" href="javascript:void(0)" data-url="{:url('Order/deliveryHandle')}" > 确认发货</button>
+                                            <a href="http://www.kuaidi100.com/" target="_blank">查看物流</a>
+                                        </div>
+                                    </div>
+                            </table>
+                            <div class="hr-line-dashed"></div>
+                            {/neq}
+                            <div class="col-sm-12    text-center">
+                                <h3 class="inline "> <i class="fa fa-print"></i> 发货记录</h3>
+                            </div>
+                            <div id="vertical-timeline" class="vertical-container light-timeline">
+                                {empty name="delivery_record" value=""}
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon navy-bg">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="vertical-timeline-content">
+                                        <h2>无人操作</h2>
+                                        <p>还没有日志哦......</p>
+                                        <span class="vertical-date "><i class="fa fa-clock-o"></i><small> 今天</small></span>
+                                    </div>
+                                </div>
+                                {else/}
+                                {foreach $delivery_record as $log}
+                                <div class="vertical-timeline-block">
+                                    <div class="vertical-timeline-icon navy-bg">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="vertical-timeline-content">
+                                        <h2>{$log.invoice_number}</h2>
+                                        <p><span style="color: #a61219">备注：</span>{$log.note}．．．．．．</p>
+                                        <p><span style="color: #a61219">详细信息：</span>{$log.shipping_name}、{$order.mobile}、{$order.address2}</p>
+                                        <span class="vertical-date "><span style="color: #a61219">操作人：</span>{:$log.admin_user}<br>
+                                        <i class="fa fa-clock-o"></i><small>{:d3time($log.create_time)}</small>
+                                        </span>
+                                    </div>
+                                </div>
+                                {/foreach}
+                                {/empty}
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+<script type="text/javascript">
+    /*表单提交*/
+    $(".saveBtn").click(function(){
+        if(isEmpty('',$("input[name=invoice_number]").val(),'请填写发货单号') == false){return false;}
+        if(isEmpty('',$("textarea[name=note]").val(),'请填写备注信息') == false){return false;}
+        var a = [];
+        $('input[name*=goods]').each(function(i,o){
+            if($(o).is(':checked')){
+                a.push($(o).val());
+            }
+        });
+        if(a.length == 0){
+            layer.msg('请选择发货商品', {icon: 5, time: 2000}, function (index) {
+                layer.close(index);
+                return;
+            });
+        }
+        ajaxFormBtn($(this).attr('data-url'),'btnForm');
+    });
+</script>
+</body>

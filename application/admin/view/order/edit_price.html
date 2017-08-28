@@ -1,0 +1,89 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 订单修改价格</h5>
+                    <div class="ibox-tools">
+                        <a href="{:url('Order/orderDetail',['id'=>$order.id])}" title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('Order/editPrice',['order_id'=>$order.id])}" id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">商品总价：</label>
+                            <div class="input-group col-sm-2">
+                                <p class="text-info form-control">&yen; {$order.goods_price}</p>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">物流运费：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="text" name="shipping_price" class="form-control" value="{$order.shipping_price}" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单价格微调：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="text" name="discount" class="form-control" value="{$order.discount}" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" onpaste="this.value=this.value.replace(/[^\d.]/g,'')">
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>直接输入金额(可负数)</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">订单总金额：</label>
+                            <div class="input-group col-sm-2">
+                                <p class="text-info form-control">&yen; {$order.total_amount}</p>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用余额：</label>
+                            <div class="input-group col-sm-2">
+                                <p class="text-info form-control">&yen; {$order.user_money}</p>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">使用积分：</label>
+                            <div class="input-group col-sm-2">
+                                <p class="text-info form-control">&yen; {$order.integral}</p>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">应付金额：</label>
+                            <div class="input-group col-sm-2">
+                                <p class="text-info form-control">&yen; {$order.order_amount}</p>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-danger" href="javascript:location.href='{:url('Order/orderDetail',['id'=>$order.id])}'"><i class="fa fa-close"></i> 取消</a>
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        ajaxFormBtn("{:url('editPrice',['order_id'=>$order.id])}",'btnForm');
+    });
+
+</script>
+</body>
+</html>

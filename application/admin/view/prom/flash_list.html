@@ -1,0 +1,81 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>限时抢购列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                    <a href="{:url('flashHandle',['id'=>0])}" class="btn btn-primary "><i class="fa fa-plus"></i> 添加活动</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table class="table table-responsive table-bordered table-hover">
+                                <thead>
+                                <tr class="long-tr">
+                                    <th width="5%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th >活动名称</th>
+                                    <th >限购总量</th>
+                                    <th >活动商品</th>
+                                    <th >订单数量</th>
+                                    <th >开始时间</th>
+                                    <th >结束时间</th>
+                                    <th >已购买</th>
+                                    <th width="5%">排序</th>
+                                    <th >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="list"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $list as $v}
+                                <tr class="long-td">
+                                    <td><input type="checkbox" name="ids[]">{$v.id}</td>
+                                    <td>{$v.title}</td>
+                                    <td>{$v.buy_limit}</td>
+                                    <td>
+                                    {foreach $goods_list as $vv}
+                                    {eq name="vv.id" value="$v.goods_id"}{$vv.goods_name}{/eq}
+                                    {/foreach}
+                                    </td>
+                                    <td>{$v.order_num}</td>
+                                    <td>{$v.start_time}</td>
+                                    <td>{$v.end_time}</td>
+                                    <td>{$v.buy_num}</td>
+                                    <td style="padding: 3px">
+                                        <div>
+                                            <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="flash_sale" data-msg="排序修改成功" onchange="updateSort(this)" width="50%" style="text-align:center;" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{:url('flashHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.title}" data-url="{:url('delFlash')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

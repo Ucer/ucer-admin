@@ -1,0 +1,121 @@
+
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 限时抢购处理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">抢购标题：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="title"  value="{$info.title}" placeholder="抢购标题">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">描述：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="5" name="desc"  class="form-control" placeholder="描述" >{$info.desc}</textarea>
+                                <span class="help-block m-b-none"> <i class="fa fa-info-circle"></i> 256个字符以内</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed avalue"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">选择抢购商品：</label>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <select class="form-control m-b chosen-select" name="goods_id" >
+                                        <option value="">选择商品</option>
+                                        {foreach $goods_list as $k=>$v}
+                                        <option value="{$k}" {eq name="info.goods_id" value="$k"}selected{/eq}>{$v.goods_name}({$v.id})</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">抢购时间段：</label>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="抢购开始时间" name="start_time" time_plugin="start_time" data-min="input"  {gt name="$id" value="0"} value="{$info.start_time}" {/gt} >
+                                    <label class="laydate-icon"></label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="抢购结束时间" name="end_time" time_plugin="end_time" data-min="start_time"  {gt name="$id" value="0"} value="{$info.end_time}" {/gt}>
+                                    <label class="laydate-icon"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">限时抢购价格：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="number" class="form-control" name="price"  value="{$info.price}" placeholder="抢购价格">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">限时抢购数量：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="number" class="form-control" name="goods_num"  value="{$info.goods_num}" placeholder="限时抢购数量">
+                                <span class="lbl"><i class="fa fa-info-circle"></i> 限时抢购商品的总数量！</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">每人限时抢购数量：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="number" class="form-control" name="buy_limit"  value="{$info.buy_limit}" placeholder="限时抢购数量">
+                                <span class="lbl"><i class="fa fa-info-circle"></i> 限时抢购每人能购买的数量！</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        if(isEmpty('',$("input[name=title]").val(),'抢购标题不能为空') == false){return false;}
+        if(isEmpty('',$("select[name=goods_id]").val(),'请选择活动商品') == false){return false;}
+        if(isEmpty('',$("input[name=start_time]").val(),'请选择抢购开始时间') == false){return false;}
+        if(isEmpty('',$("input[name=end_time]").val(),'请选择抢购结束时间') == false){return false;}
+        if(isEmpty('',$("input[name=price]").val(),'请填写价格') == false){return false;}
+        if(isEmpty('',$("input[name=goods_num]").val(),'请填写商品数量') == false){return false;}
+        if(isEmpty('',$("input[name=buy_limit]").val(),'请填写每人限购数量') == false){return false;}
+        ajaxFormBtn("{:url('flashHandle',['id'=>$id])}",'btnForm');
+    });
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+</body>
+</html>

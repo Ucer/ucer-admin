@@ -1,0 +1,48 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+        <th>商品类型</th>
+        <th>创建时间</th>
+        <th>更新时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr>
+        <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+        <td>{$v.type_name}</td>
+        <td>{$v.created_at}</td>
+        <td>{$v.update_at}</td>
+        <td>
+            <a href="{:url('goodsTypeHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                <i class="fa fa-pencil-square-o"></i> 编辑
+            </a>&nbsp;&nbsp;
+            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.type_name}" data-url="{:url('delGoodsType')}">
+                <i class="fa fa-trash-o"></i> 删除
+            </a>
+        </td>
+    </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+<div class="pull-right">
+    {$page}
+</div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pagination a').click(function () {
+        form = '';//表单id 全局变量
+        p = $(this).data('p');//当前分页
+        turl = "/admin/Goods/ajaxTypeList/page/"+p;//url
+        ajaxList(form,turl);
+    });
+</script>

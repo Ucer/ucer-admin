@@ -1,0 +1,94 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+        <th>商品名称</th>
+        <th>商品货号</th>
+        <th>商品分类</th>
+        <th>商品品牌</th>
+        <th>价格</th>
+        <th width="5%">库存</th>
+        <th>上价</th>
+        <th>推荐</th>
+        <th>新品</th>
+        <th>热卖</th>
+        <th width="5%">排序</th>
+        <th>上架时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr>
+        <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+        <td>{$v.goods_name}</td>
+        <td>{$v.goods_sn}</td>
+        <td>{$v.goods_category_id}</td>
+        <td>{$v.goods_brand_id}</td>
+        <td>{$v.shop_price}</td>
+        <td>
+            <input type="number" value="{$v.store_count}" data-id="{$v.id}" data-column="store_count" data-table="goods" data-msg="库存修改成功" onchange="updateSort(this)"  style="text-align:center;" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" class="form-control">
+        </td>
+        <td>
+            {eq name='v.is_on_sale' value='2'}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="1" data-cv="2" data-id="{$v.id}" data-column="is_on_sale" data-table="goods" data-msg="上架中" data-todo="1" data-cur="已下架" onclick="changeStatus(this)" > 已下架</i>
+            {else/}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="2" data-cv="1" data-id="{$v.id}" data-column="is_on_sale" data-table="goods" data-msg="已下架" data-todo="0" data-cur="上架中" onclick="changeStatus(this)" > 上架中</i>
+            {/eq}
+        </td>
+        <td>
+            {eq name='v.is_recommend' value='0'}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_recommend" data-table="goods" data-msg="推荐" data-todo="1" data-cur="不推荐" onclick="changeStatus(this)" > 不推荐</i>
+            {else/}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_recommend" data-table="goods" data-msg="不推荐" data-todo="0" data-cur="推荐" onclick="changeStatus(this)" > 推荐</i>
+            {/eq}
+        </td>
+        <td>
+            {eq name='v.is_new' value='1'}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_new" data-table="goods" data-msg="新品" data-todo="1" data-cur="非新品" onclick="changeStatus(this)" > 非新品</i>
+            {else/}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_new" data-table="goods" data-msg="非新品" data-todo="0" data-cur="新品" onclick="changeStatus(this)" > 新品</i>
+            {/eq}
+        </td>
+        <td>
+            {eq name='v.is_hot' value='0'}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_hot" data-table="goods" data-msg="热卖" data-todo="1" data-cur="非热卖" onclick="changeStatus(this)" > 非热卖</i>
+            {else/}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_hot" data-table="goods" data-msg="非热卖" data-todo="0" data-cur="热卖" onclick="changeStatus(this)" > 热卖</i>
+            {/eq}
+        </td>
+        <td>
+            <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="goods" data-msg="排序修改成功" onchange="updateSort(this)"  style="text-align:center;" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" class="form-control">
+        </td>
+        <td>{$v.created_at}</td>
+        <td>
+            <a href="{:url('goodsHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                <i class="fa fa-pencil-square-o"></i> 编辑
+            </a>&nbsp;&nbsp;
+            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.goods_name}" data-url="{:url('delGoods')}">
+                <i class="fa fa-trash-o"></i> 删除
+            </a>
+        </td>
+    </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+<div class="pull-right">
+    {$page}
+</div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pagination a').click(function () {
+        form = '';//表单id 全局变量
+        p = $(this).data('p');//当前分页
+        turl = "/admin/Goods/ajaxGoodsList/page/"+p;//url
+        ajaxList(form,turl);
+    });
+</script>

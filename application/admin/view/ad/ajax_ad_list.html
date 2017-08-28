@@ -1,0 +1,80 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr class="long-tr">
+        <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+        <th>广告名称</th>
+        <th>广告位位置</th>
+        <th>广告位图片</th>
+        <th>广告链接</th>
+        <th >新窗口</th>
+        <th >状态</th>
+        <th width="5%">排序</th>
+        <th>广告结束时间</th>
+        <th>创建时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr class="long-td">
+        <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+        <td>{$v.ad_name}</td>
+        <td>
+        {foreach $p_list as $vv}
+        {eq name="v.ad_position_id" value="$vv.id"}{$vv.name}{/eq}
+        {/foreach}
+        </td>
+        <td>
+            <a href="{$v.ad_code}" target="_blank"> <img src="{$v.ad_code}" style="width: 50px;height: 30px"  ></a>
+        </td>
+        <td>{$v.ad_link}</td>
+        <td>
+            {eq name='v.is_target' value='1'}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_target" data-table="ad" data-msg="否" data-todo="0" data-cur="是" onclick="changeStatus(this)" > 是</i>
+            {else/}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_target" data-table="ad" data-msg="是" data-todo="1" data-cur="否" onclick="changeStatus(this)" > 否</i>
+            {/eq}
+        </td>
+        <td>
+            {eq name='v.is_show' value='0'}
+            <i class="fa fa-check text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_show" data-table="ad" data-msg="隐藏" data-todo="0" data-cur="显示" onclick="changeStatus(this)" > 显示</i>
+            {else/}
+            <i class="fa fa-close text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_show" data-table="ad" data-msg="显示" data-todo="1" data-cur="隐藏" onclick="changeStatus(this)" > 隐藏</i>
+            {/eq}
+        </td>
+        <td>
+            <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="ad" data-msg="排序修改成功" onchange="updateSort(this)"  style="text-align:center;" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" class="form-control">
+        </td>
+        <td>{$v.end_time}</td>
+        <td>{$v.created_at}</td>
+        <td>
+            <a href="{:url('adHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                <i class="fa fa-pencil-square-o"></i> 编辑
+            </a>&nbsp;&nbsp;
+            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.ad_name}" data-url="{:url('delAd')}">
+                <i class="fa fa-trash-o"></i> 删除
+            </a>
+        </td>
+    </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+<div class="pull-right">
+    {$page}
+</div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pagination a').click(function () {
+        form = '';//表单id 全局变量
+        p = $(this).data('p');//当前分页
+        turl = "/admin/Ad/ajaxAdList/page/"+p;//url
+        ajaxList(form,turl);
+    });
+</script>

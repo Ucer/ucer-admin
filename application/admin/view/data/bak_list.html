@@ -1,0 +1,70 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>数据库备份记录</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3" >
+                                <span class="inline" style="">总共{$num}个备份文件,占空间大小{$total}</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="table-responsive ">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th><input class="i-checks checkbox check-all"  type="checkbox" >ID</th>
+                                    <th>文件名称</th>
+                                    <th>文件大小</th>
+                                    <th>卷号</th>
+                                    <th>备份时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $lists as $v}
+                                <tr>
+                                    <td><input class="ids i-checks"  type="checkbox" name="ids[]" value="{$v.name}"></td>
+                                    <td>{$v.name}</td>
+                                    <td>{$v.size|formatBytes}</td>
+                                    <td>{$v.number}</td>
+                                    <td>{:date('Y-m-d H:i:s',$v.time)}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-xs btn-outline" href="{:url('restoreData',['sqlfile'=>$v.pre])}" >还原</a>
+                                        <a class="btn btn-default btn-xs btn-outline" href="{:url('downFile',['file'=>$v.name])}" >下载</a>
+                                        <a class="btn btn-danger btn-xs btn-outline" onclick="delBtn(this)" data-id="{$v.pre}" data-name="{$v.name}所有卷" data-url="{:url('delSqlFile')}">删除</a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script>
+    //全选的实现
+    $('.check-all').on('ifChecked', function (event) {
+        $('input[name="ids[]"]').iCheck('check');
+    });
+    $('.check-all').on('ifUnchecked', function (event) {
+        $('input[name="ids[]"]').iCheck('uncheck');
+    });
+
+</script>
+</body>

@@ -1,0 +1,85 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 关键词管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('imagesHandle',['id'=>$id])}" id="btnForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">关键词：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="keyword"  value="{$info.keyword}" placeholder="关键词">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标题：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="title"  value="{$info.title}" placeholder="标题">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">图片：</label>
+                            <div class="input-group col-sm-4">
+                                <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="pic" data-url="{:url('Uploadify/jqUpload')}" data-path="wechat" >+ 浏览文件
+                                    <input type="hidden" name="pic" id="pic" value="{$info.pic}">
+                                </a>
+                                <img   id="pic_img" style="float:left;margin-left: 120px;margin-top: -10px; max-width: 150px;max-height: 150px"  onerror="this.src='/static/admin/images/no_img.jpg'" src="{$info.pic}"/>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">url：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="url"  value="{$info.url}" placeholder="url">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">描述：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea name="desc"  cols="50" rows="5">{$info.desc}</textarea>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script type="text/javascript">
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var keyword = $("input[name=keyword]").val();
+        var title = $("input[name=title]").val();
+        var pic = $("input[name=pic]").val();
+        var url = $("input[name=url]").val();
+        var content = $("textarea[name=desc]").val();
+        if(isEmpty('',keyword,'关键词不能为空') == false){return false;}
+        if(isEmpty('',title,'标题不能为空') == false){return false;}
+        if(isEmpty('',pic,'请上传封面图片') == false){return false;}
+        if(prexRule( /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,url,'url不合法') == false){return false;}
+        if(isEmpty('',content,'描述不能为空') == false){return false;}
+        $("#btnForm").submit()
+    })
+</script>
+</body>
+</html>

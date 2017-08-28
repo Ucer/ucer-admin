@@ -1,0 +1,71 @@
+{include file="public/header" /}
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 添加物流</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="tab-content">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">物流编码：</label>
+                                <div class="input-group col-sm-3">
+                                    <input type="text" class="form-control" name="code"  value="" placeholder="物流编码">
+                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 一般为物流公司拼音组成,不得含有英文以外的字符</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">物流公司名字：</label>
+                                <div class="input-group col-sm-3">
+                                    <input type="text" class="form-control" name="name"  value="" placeholder="物流公司名字">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">简单描述：</label>
+                                <div class="input-group col-sm-3">
+                                    <input type="text" class="form-control" name="desc"  value="" placeholder="简单描述">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">物流图标：</label>
+                                <div class="input-group col-sm-1">
+                                    <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="shipping_img" data-url="{:url('Uploadify/jqUpload')}" data-path="plugin" >+ 浏览文件
+                                        <input type="hidden" name="shipping_img" id="shipping_img" value="">
+                                    </a>
+                                    <img  width="300px" height="200px" id="shipping_img_img" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/no_img.jpg'" src=""/>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script type="text/javascript">
+
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        ajaxFormBtn("{:url('addShipping')}",'btnForm');
+    });
+</script>
+</body>
+</html>

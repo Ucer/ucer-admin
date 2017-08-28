@@ -1,0 +1,162 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop1.2" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>编辑地址-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" href="/static/mobile/css/user.css">
+
+</head>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+            <div class="h-mid">编辑收货地址</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+{include file="public/right_menu" /}
+<div id="tbh5v0">
+    <div class="addressmone">
+        <form  onSubmit="return false" id="btnForm">
+            <ul>
+            <li>
+                <span>收货人姓名</span>
+                <input name="consignee" id="consignee" type="text" value="{$address.consignee}" maxlength="12" placeholder="收货人姓名"/>
+            </li>
+            <li>
+                <span>地区</span>
+                <select class="province_select"  name="province_id" onchange="getCity(this)">
+                    <option value="">请选择省份</option>
+                   {foreach $province as $k=>$v}
+                        <option  value="{$v.id}" {eq name="address.province_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                    {/foreach}
+                </select>
+                <select name="city_id" id="city" onChange="getArea(this)">
+                    <option  value="">请选择城市</option>
+                    {foreach $city as $k=>$v}
+                    <option  value="{$v.id}" {eq name="address.city_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                    {/foreach}
+                </select>
+                <select name="area_id" id="district" onChange="getTown(this)">
+                    <option  value="">请选择区域</option>
+                    {foreach $area as $k=>$v}
+                    <option  value="{$v.id}" {eq name="address.area_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                    {/foreach}
+                </select>
+
+                <select class="di-bl fl seauii" name="twon_id" id="twon" {eq name="address.twon_id" value="0"}style="display:none;"{/eq} >
+                {gt name="address.twon_id" value="0"}
+                    {foreach $twon as $k=>$v}
+                    <option  value="{$v.id}" {eq name="address.twon_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                    {/foreach}
+                {/gt}
+
+                </select>
+            </li>
+            <li>
+                <span>详细地址</span> <input type="text"  name="address"  placeholder="详细地址" maxlength="100" value="{$address.address}"/>
+            </li>
+            <li>
+                <span>手机</span>
+                <input type="text" name="mobile" value="{$address.mobile}" onpaste="this.value=this.value.replace(/[^\d-]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d-]/g,'')" maxlength="15" placeholder="手机号码"/>
+            </li>
+            </ul>
+            <div style=" height:50px"></div>
+            <div class="dotm_btn">
+                {if condition="$source eq 'cart2' "}
+                <input type="submit" value="保存并使用该地址" class="dotm_btn1 beett" id="saveBtn" style="background:#00B83F" />
+                <input type="hidden" name="source" value="{$source}" />
+                {else /}
+                <a href="javascript:void(0);" onClick="delAddr('{$address.id}')" class="dotm_btn2" style="color:#666;">删除</a>
+                {eq name="address.is_default" value="1"}
+                <a href="javascript:void(0)" class="dotm_btn1" style=" color:#FFF;font-size:14px;background: grey">设置为默认地址</a>
+                {else/}
+                <a href="{:url('/mobile/Users/setDefault',array('id'=>$address.id))}" class="dotm_btn3" style=" background:#00B83F;color:#FFF;font-size:14px;">设置为默认地址</a>
+                {/eq}
+                <input type="submit" value="保存" class="dotm_btn1" id="saveBtn" style="background:#00B83F"/>
+                {/if}
+            </div>
+            {:token()}
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var name = $("input[name=consignee]").val();
+        var province_id = $("select[name=province_id]").val();
+        var city_id = $("select[name=city_id]").val();
+        var area_id = $("select[name=area_id]").val();
+        var address = $("input[name=address]").val();
+        var mobile =$("input[name=mobile]").val();
+
+        if( name == ''){
+            layer.open({content:'收货人不能为空',time: 1});
+            return false;
+        }
+        if(province_id == ''){
+            layer.open({content:'请选择省份',time: 1});
+            return false;
+        }
+        if(city_id ==''){
+            layer.open({content:'请选择城市',time: 1});
+            return false;
+        }
+        if(area_id == ''){
+            layer.open({content:'请选择区域',time: 1});
+            return false;
+        }
+        if(address == ''){
+            layer.open({content:'详细地址不能为空',time: 1});
+            return false;
+        }
+        var reg =  /(^1[3|4|5|7|8][0-9]{9}$)/;
+        if(!reg.test(mobile)){
+            layer.open({content:'请输入正确的手机号',time: 1});
+            return false;
+        }
+        mobileAjaxFormBtn("{:url('mobile/Users/editAddress',['id'=>$address.id])}",'btnForm');
+    });
+    /**
+     * 删除收货地址
+     */
+    function delAddr(id){
+        layer.open({
+            content: '温馨提示！',
+            btn: ['手滑点错了', '删除'],
+            shadeClose: false,
+            yes: function(){
+                layer.closeAll();
+            }, no: function(){
+                $.ajax({
+                    type: 'post',
+                    url: "{:url('mobile/Users/delAddress')}",
+                    data: {id:id},
+                    success: function(data) {
+                        if(data.code ==1){
+                            window.location = data.url;
+                        }else{
+                            layer.open({content:data.msg,time: 1});
+                            return false;
+                        }
+                    },
+                    error:function(){
+                        layer.open({content:'网络错误,请稍后再试',time: 1});
+                        return false;
+                    }
+                });
+            }
+        });
+    }
+</script>
+</body>
+</html>

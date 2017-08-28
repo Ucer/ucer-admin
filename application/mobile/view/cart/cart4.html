@@ -1,0 +1,83 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>购物流程-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" href="/static/mobile/css/flow.css">
+    <link rel="stylesheet" href="/static/mobile/css/style_jm.css">
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+    <div class="header">
+        <div class="h-left"> <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a> </div>
+        <div class="h-mid"> 提交订单 </div>
+    </div>
+</div>
+<!--表单 start-->
+<div class="screen-wrap fullscreen login">
+    <form action="{:url('mobile/Payment/getCode')}" method="post" name="cart4_form" id="cart4_form">
+        <div class="content_success " >
+            <div class="con-ct   fo-con">
+                <h4 class="successtijiao" style="color:#00B83F;">订单已经提交成功！</h4>
+                <ul class="ct-list">
+                    <li style="color:#00B83F;">请您在<span>{$pay_date}</span>前完成支付，否则订单将自动取消！：</li>
+                    <li >订单号：<em>{$order.order_sn}</em></li>
+                    <li>支付金额：<em style="color: #ff2222">￥  {$order.order_amount}元</em></li>
+                </ul>
+            </div>
+            <section class="order-info">
+                <div class="order-list">
+                    <div class="content ptop0">
+                        <div class="panel panel-default info-box">
+                            <div class="panel-body" id="pay_div"  >
+                                <div class="title" id="zhifutitle" style="border-bottom:1px solid #eeeeee;"> <span class="i-icon-arrow-down i-icon-arrow-up" id="zhifuip"></span> <span class="text">支付方式</span> <a href="javascript:void(0)" title="修改商品列表" class="link">必选</a> <em class="qxz" id="emzhifu">请选择支付方式</em> </div>
+                                <ul class="nav nav-list-sidenav" id="zhifu68" style="display:block; border-bottom:none;">
+                                        {empty name="paymentList" value=""}
+                                        暂不能支付
+                                        {else/}
+                                        {foreach $paymentList as $k=>$v}
+                                        <li class="clearfix" name="payment_name">
+                                            <label>
+                                                <input type="radio"   value="pay_code={$v['code']}" class="c_checkbox_t" name="pay_radio" />
+                                                <div class="fl shipping_title">
+                                                    <img src="/plugins/{$v['type']}/{$v['code']}/{$v['icon']}" onClick="changePay(this);" width="110" height="40" />
+                                                    {$v.name}
+                                                </div>
+                                            </label>
+                                        </li>
+                                        {/foreach}
+                                        {/empty}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="pay-btn">
+                <input type="hidden" name="order_id" value="{$order.id}" />
+                <a href="javascript:void(0);" onClick="goPay()" class="sub-btn btnRadius" style="background:#00B83F;">马上支付</a>
+            </div>
+        </div>
+        {:token()}
+    </form>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("input[name='pay_radio']").first().trigger('click');
+    });
+    // 切换支付方式
+    function changePay(obj)
+    {
+        $(obj).parent().siblings('input[name="pay_radio"]').trigger('click');
+    }
+    function goPay(){
+        $('#cart4_form').submit();
+        return;
+        //微信JS支付
+    }
+</script>
+</body>
+</html>

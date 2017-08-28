@@ -1,0 +1,135 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+        <th>优惠券名称</th>
+        <th>优惠券类型</th>
+        <th>面额</th>
+        <th>使用条件</th>
+        <th>发放总量</th>
+        <th>已发放数	</th>
+        <th>已使用数</th>
+        <th>状态</th>
+        <th>发放截止日期</th>
+        <th>使用截止日期</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr>
+        <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+        <td>{$v.name}</td>
+        <td>
+        {foreach $coupon_type as $kk=>$vv}
+            {eq name="v.type" value="$kk"}{$vv}{/eq}
+        {/foreach}
+        </td>
+        <td>{$v.money}￥</td>
+        <td>
+            {eq name="v.type" value="0"}
+            -- --
+            {else/}
+            {$v.condition}￥
+            {/eq}
+        </td>
+        <td>
+            {eq name="v.create_num" value="0"}
+                无限制
+            {else/}
+                {$v.create_num}
+            {/eq}
+        </td>
+        <td>{$v.send_num}</td>
+        <td>{$v.use_num}</td>
+        <td>{$v.msg}</td>
+        <td>
+            {eq name="v.type" value="0"}
+            -- --
+            {else/}
+            {:date('Y-m-d H:i:s',$v.send_end_time)}
+            {/eq}
+        </td>
+        <td>
+            {eq name="v.type" value="0"}
+            -- --
+            {else/}
+            {:date('Y-m-d H:i:s',$v.use_end_time)}
+            {/eq}
+        </td>
+        <td>
+            {eq name="v.status" value="1"}
+                {switch name="v.type"}
+                    {case value="1"}
+                        <a href="javascript:void(0);" class="btn btn-info btn-xs send_coupon" data-url="{:url('sendUserCoupon',['id'=>$v.id])}">
+                            <i class="fa fa-paper-plane"></i> 发放
+                        </a>&nbsp;&nbsp;
+                    {/case}
+                    {case value="4"}
+                        <a href="javascript:void(0);" class="btn btn-info btn-xs send_coupon" data-url="{:url('sendCoupon',['id'=>$v.id])}">
+                            <i class="fa fa-paper-plane"></i> 发放
+                        </a>&nbsp;&nbsp;
+                    {/case}
+                {/switch}
+            {/eq}
+            <a href="{:url('couponHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                <i class="fa fa-pencil-square-o"></i> 编辑
+            </a>&nbsp;&nbsp;
+            <a href="javascript:void(0);" class="btn btn-warning btn-xs show_coupon" data-url="{:url('showCoupon',['id'=>$v.id])}">
+                <i class="fa fa-eye"></i>查看
+            </a>&nbsp;&nbsp;
+            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delCoupon')}">
+                <i class="fa fa-trash-o"></i> 删除
+            </a>
+        </td>
+    </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+<div class="pull-right">
+    {$page}
+</div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pagination a').click(function () {
+        form = '';//表单id 全局变量
+        p = $(this).data('p');//当前分页
+        turl = "/admin/Coupon/ajaxCouponList/page/"+p;//url
+        ajaxList(form,turl);
+    });
+
+    /*发放优惠券弹窗*/
+    $(".send_coupon").click(function(){
+        layer.open({
+            type: 2,
+            area: ['40%', '55%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'发放优惠券',
+            content: $(this).attr('data-url'),
+            end: function () {
+                location.reload();
+            }
+        });
+    });
+    /*发放优惠券弹窗*/
+    $(".show_coupon").click(function(){
+        layer.open({
+            type: 2,
+            area: ['60%', '85%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'优惠券详细',
+            content: $(this).attr('data-url'),
+        });
+    });
+</script>

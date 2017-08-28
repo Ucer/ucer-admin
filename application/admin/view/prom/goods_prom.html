@@ -1,0 +1,71 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>商品促销活动列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                    <a href="{:url('goodsPromHandle',['id'=>0])}" class="btn btn-primary "><i class="fa fa-plus"></i> 添加活动</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table class="table table-responsive table-bordered table-hover">
+                                <thead>
+                                <tr class="long-tr">
+                                    <th width="5%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th >活动名称</th>
+                                    <th >活动类型</th>
+                                    <th >优惠体现</th>
+                                    <th >开始时间</th>
+                                    <th >结束时间</th>
+                                    <th >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="list"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $list as $v}
+                                <tr class="long-td">
+                                    <td><input type="checkbox" name="ids[]">{$v.id}</td>
+                                    <td>{$v.name}</td>
+                                    <td>
+                                    {foreach $type as $kk=>$vv}
+                                    {eq name="kk" value="$v.type"}{$vv}{/eq}
+                                    {/foreach}
+                                    </td>
+                                    <td>{$v.expression}</td>
+                                    <td>{$v.start_time}</td>
+                                    <td>{$v.end_time}</td>
+                                    <td>
+                                        <a href="{:url('goodsPromHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delGoodsProm')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

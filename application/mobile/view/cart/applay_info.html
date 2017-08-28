@@ -1,0 +1,258 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>购物流程-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" href="/static/mobile/css/flow.css">
+    <link rel="stylesheet" href="/static/mobile/css/style_jm.css">
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<div class="tab_nav">
+    <div class="header">
+        <div class="h-left"> <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a> </div>
+        <div class="h-mid"> 订单确认 </div>
+    </div>
+</div>
+<!--表单 start-->
+<div class="screen-wrap fullscreen login">
+    <form name="cart2_form" id="cart2_form" method="post">
+        <section class="content" style="min-height: 294px;">
+            <div class="wrap">
+                <div class="active" style="min-height: 294px;">
+                    <div class="content-buy">
+                        <div class="wrap order-buy">
+                            <!--收货地址 start-->
+                            <a href="{:url('/mobile/Users/addressList',array('source'=>'cart2'))}">
+                                <section class="address">
+                                    <div class="address-info" >收货人:
+                                        <p class="address-name">{$address.consignee}</p>
+                                        <p class="address-phone">{$address.mobile}</p>
+                                    </div>
+                                    <div class="address-details">收货地址：{$address.address}</div>
+                                    <input type="hidden" value="{$address.id}" name="address_id" />
+                                </section>
+                            </a>
+                            <!--收货地址 end-->
+                            <section class="order " id="order4">
+                                <div  class="order-info" style="margin-top:0;">
+
+                                </div>
+                                <section class="order-info" style=" margin-top:0px;">
+                                    <div class="order-list">
+                                        <div class="goods-list-title"> {$Think.config.web_site_name}</div>
+                                        <ul class="order-list-info">
+                                           {foreach $cart_list.cartList as $v}
+                                              {eq name="v.selected" value="1"}
+                                                    <li class="item" >
+                                                        <div class="itemPay list-price-nums" id="itemPay17">
+                                                            <p class="price">￥{$v.discount_price}元</p>
+                                                            <p class="nums">x{$v.goods_num}</p>
+                                                        </div>
+                                                        <div class="itemInfo list-info" id="itemInfo12">
+                                                            <div class="list-img"> <a href="{:url('mobile/Goods/goodsInfo',array('id'=>$v.goods_id))}"> <img src="{$v.goods_img}"></a> </div>
+                                                            <div class="list-cont">
+                                                                <h5 class="goods-title">{$v.goods_name} </h5>
+                                                                <p class="godds-specification">{$v.spec_key_name}</p>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                            {/eq}
+                                            {/foreach}
+                                            <li class="flow_youhui_no">您是<font color=red>{$user_info.level_name}</font>，已享受会员折扣价 <font color="red">{:round($user_info.level_discount/100,2)*10}</font>折优惠</li>
+                                            <li class="flow_youhui_no">
+                                                <div class="checkout_other">
+                                                    <div class="jmbag" href="javascript:void(0);" onClick="showCheckoutOther(this);"><span class="right_arrow_flow"></span>使用优惠券</div>
+                                                    <table class="subbox_other sub_bonus" width="100%">
+                                                        <tr>
+                                                            <td  colspan="2">
+                                                                <input type="radio" class="radio vam ma-ri-10" name="couponTypeSelect" checked value="1"  onClick="ajaxOrderPrice();" />
+                                                                <select id="coupon_id" name="coupon_id" class="vam ou-no" onChange="ajaxOrderPrice();">
+                                                                    <option value="0">选择优惠券</option>
+                                                                        {foreach $coupon_list as $v}
+                                                                        <option value="{$v.id}">{$v.name}</option>
+                                                                        {/foreach}
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </li>
+                                            <li class="flow_youhui_no">
+                                                <label >
+                                                    使用余额：
+                                                    <input id="user_money" name="user_money"  type="text"   placeholder="输入余额" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" class="txt1" style="width:100px;"/>
+                                                    <input name="validate_bonus" type="button" value="使用" onClick="ajaxOrderPrice();" class="BonusButton" style="background:#00B83F" />
+                                                    您的可用余额<em style="color: #00B83F">  {$user_info.user_money} ￥</em>
+                                                </label>
+                                            </li>
+                                            <li class="flow_youhui_no">
+                                                <label >
+                                                    使用积分：
+                                                    <input id="pay_points" name="pay_points"  type="text"   placeholder="输入积分" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')" class="txt1" style="width:100px;"/>
+                                                    <input name="validate_bonus" type="button" value="使用" onClick="ajaxOrderPrice();" class="BonusButton" style="background:#00B83F" />
+                                                    您的可用余额<em style="color: #00B83F">  {$user_info.pay_points}</em>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </section>
+                            <section class="order-info">
+                                <div class="order-list">
+                                    <div class="content ptop0">
+                                        <div class="panel panel-default info-box">
+                                            <div class="panel-body" id="pay_div"  >
+                                                <div class="title" id="zhifutitle" style="border-bottom:1px solid #eeeeee;">
+                                                    <span class="i-icon-arrow-down i-icon-arrow-up" id="zhifuip"></span>
+                                                    <span class="text">配送方式</span>
+                                                    <em class="qxz" id="emzhifu">请在下面选择、没有请联系客服</em>
+                                                </div>
+                                                <ul class="nav nav-list-sidenav" id="zhifu68" style="display:block; border-bottom:none;">
+                                                        {foreach $shippingList as $k=>$v}
+                                                        <li class="clearfix" name="payment_name">
+                                                            <label>
+                                                                <input type="radio" id="{$v.code}" name="shipping_code" id="{$v.code}" value="{$v.code}"  onclick="ajaxOrderPrice()" class="c_checkbox_t" {eq name="k" value="0"}checked{/eq}/>
+                                                                <div class="fl shipping_title"> {$v.name} <em>({$v.desc})</em></div>
+                                                            </label>
+                                                        </li>
+                                                    {/foreach}
+                                                    <li class="clearfix" name="payment_name">
+                                                        <label>
+                                                            <input type="radio" name="shipping_code" value="" onclick="ajaxOrderPrice()" class="c_checkbox_t"/>
+                                                            <div class="fl shipping_title"> 其它 <em>(其它物流)</em></div>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="order-info">
+                                <div class="order-list">
+                                    <div class="content ptop0">
+                                        <div class="panel panel-default info-box">
+                                            <div class="con-ct fo-con">
+                                                <ul class="ct-list order_total_ul" id="ECS_ORDERTOTAL" >
+                                                    <li class="order_total_li" >
+                                                       <span class="price"> *</span>该订单完成后，您将获得 <span class="price">相应的</span> 积分<br/>
+                                                    </li>
+                                                    <li>
+                                                        <div class="subtotal">
+                                                            <span class="total-text">商品总额：</span><em class="price">￥{$total_price.total_fee}元</em><br/>
+                                                            <span class="total-text">配送费用：</span>￥<em class="price" id="postFee">0</em>元<br/>
+                                                            <span class="total-text">使用优惠券：</span>-&nbsp;¥&nbsp;<em class="price" id="couponFee">0</em>元<br/>
+                                                            <span class="total-text">使用积分：</span>-&nbsp;¥&nbsp;<em class="price" id="pointsFee">0</em>元<br/>
+                                                            <span class="total-text">使用余额：</span>-&nbsp;¥&nbsp;<em class="price" id="balance">0</em>元<br/>
+                                                            <span class="total-text">优惠活动：</span>-&nbsp;¥&nbsp;<em class="price" id="order_prom_amount">0</em>元<br/>
+                                                            <span class="total-text">应付金额：</span>￥<strong class="price_total" id="payables">0</strong>元
+                                                            <span class="total-text" style=""></span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="panel panel-default info-box">
+                                                <div class="pay-btn">
+                                                    <input onClick="submitOrder();" type="button" class="sub-btn btnRadius" value="提交订单" style="background:#00B83F" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+<!--表单 end-->
+<script type="text/javascript">
+    $(document).ready(function(){
+        ajaxOrderPrice(); // 计算订单价钱
+    });
+    /**
+     * 获取订单价格
+     *@param
+     */
+    function ajaxOrderPrice(){
+        $.ajax({
+            type: 'post',
+            url: '/mobile/Cart/cart3/act/order_price/t/'+Math.random(),
+            data: $("#cart2_form").serialize(),
+            success: function(data) {
+                if(data.code ==1){
+//                    window.location = data.url;
+                    $("#postFee").text(data.data.postFee); // 物流费
+                    $("#couponFee").text(data.data.couponFee);// 优惠券
+                    $("#balance").text(data.data.balance);// 余额
+                    $("#pointsFee").text(data.data.pointsFee);// 积分支付
+                    $("#payables").text(data.data.payables);// 应付
+                    $("#order_prom_amount").text(data.data.order_prom_amount);// 订单 优惠活动
+                }else{
+                    if(data.code ==-10){ //登录失效
+                        layer.open({content:data.msg,time: 1,end:function(){
+                            location.href = "{:url('mobile/Users/index')}"
+                        },
+                        });
+                    }
+                    layer.open({content:data.msg,time: 1});
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+    /**
+     * 提交订单
+     */
+    ajax_return_status = 1; // 标识ajax 请求是否已经回来 可以进行下一次请求
+    function submitOrder(){
+        if(ajax_return_status == 0){
+            return false;
+        }
+        ajax_return_status = 0;
+        $.ajax({
+            type: 'post',
+            url: '/mobile/Cart/cart3/act/submit_order/t/'+Math.random(),
+            data: $("#cart2_form").serialize(),
+            success: function(data) {
+                if(data.code ==1){
+//                    window.location = data.url;
+                    $("#postFee").text(data.data.postFee); // 物流费
+                    $("#couponFee").text(data.data.couponFee);// 优惠券
+                    $("#balance").text(data.data.balance);// 余额
+                    $("#pointsFee").text(data.data.pointsFee);// 积分支付
+                    $("#payables").text(data.data.payables);// 应付
+                    $("#order_prom_amount").text(data.data.order_prom_amount);// 订单 优惠活动
+                    layer.open({content:data.msg,time: 1,end:function(){
+                        location.href = "/mobile/Cart/cart4/order_id/"+data.data;
+                    },
+                    });
+                }else{
+                    if(data.code ==-10){ //登录失效
+                        layer.open({content:data.msg,time: 1,end:function(){
+                            location.href = "{:url('mobile/Users/index')}"
+                        },
+                        });
+                    }
+                    layer.open({content:data.msg,time: 1});
+                    return false;
+                }
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+</script>
+</body>
+</html>

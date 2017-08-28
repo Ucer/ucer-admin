@@ -1,0 +1,237 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>微信菜单列表</h5>
+                    <div class="ibox-content">
+                        <div class="table-responsive ">
+                            <form action="{:url('menuList')}" method="post">
+                            <table class="table  table-responsive table-hover table-bordered ">
+                                <thead>
+                                <tr >
+                                    <th width="30%">菜单名称</th>
+                                    <th width="20%">菜单类型</th>
+                                    <th width="5%">排序</th>
+                                    <th width="45%">类型值</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                {empty name="p_lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">没有数据</td></tr>
+                                {else/}
+                                {foreach p_lists as $v}
+                                <!--父级菜单-->
+                                <tr  role="row" class="odd  pmenu{$v.id} menu{$v.id}">
+                                    <td>
+                                        <div class="input-group ">
+                                            <input type="text" name="menu[{$v.id}][name]" value="{$v.name}"  class="form-control topmenu " id="tpa{$v.id}" placeholder="一级菜单名称">
+                                            <div class="input-group-btn">
+                                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">操作 <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu pull-right" >
+                                                    <li><a href="javascript:void(0);" onclick="addSun('{$v.id}')" class="addBtn" data-id="{$v.id}">添加</a>
+                                                    </li>
+                                                    <li><a href="javascript:void(0);"class="delBtn" data-id="{$v.id}" onclick="delMenu('{$v.id}')">删除</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <select name="menu[{$v.id}][type]" class="form-control">
+                                            <option value="0" {eq name="v.type" value="0"}selected{/eq}>{:getWxType(0,1)}</option>
+                                            <option value="1" {eq name="v.type" value="1"}selected{/eq}>{:getWxType(1,1)}</option>
+                                            <option value="2" {eq name="v.type" value="2"}selected{/eq}>{:getWxType(2,1)}</option>
+                                            <option value="3" {eq name="v.type" value="3"}selected{/eq}>{:getWxType(3,1)}</option>
+                                            <option value="4" {eq name="v.type" value="4"}selected{/eq}>{:getWxType(4,1)}</option>
+                                            <option value="5" {eq name="v.type" value="5"}selected{/eq}>{:getWxType(5,1)}</option>
+                                            <option value="6" {eq name="v.type" value="6"}selected{/eq}>{:getWxType(6,1)}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="text-center" value="{$v.sort}" name="menu[{$v.id}][sort]" style="color: #ff090e">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="menu[{$v.id}][value]" value="{$v.value}" class="form-control " placeholder="一级菜单值" >
+                                    </td>
+                                    <input type="hidden" name="menu[{$v.id}][pid]" value="0" class="form-control " >
+                                </tr>
+
+                                <!--子菜单-->
+                                {foreach s_lists as $vv}
+                                {if condition="$vv.pid eq $v.id "}
+                                <tr role="row" class="odd  pmenu{$v.id} menu{$vv.id}">
+                                    <td>
+                                        <div class="input-group " style="margin-left: 20%">
+                                            <input type="text" name="menu[{$vv.id}][name]" value="{$vv.name}" class="form-control " placeholder="二级菜单名称">
+                                            <div class="input-group-btn">
+                                                <button  class="btn btn-danger delBtn" type="button" onclick="delMenu('{$vv.id}')"data-id="{$vv.id}"><i class="fa fa-trash-o"></i></span></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <select name="menu[{$vv.id}][type]" class="form-control">
+                                            <option value="0" {eq name="vv.type" value="0"}selected{/eq}>{:getWxType(0,1)}</option>
+                                            <option value="1" {eq name="vv.type" value="1"}selected{/eq}>{:getWxType(1,1)}</option>
+                                            <option value="2" {eq name="vv.type" value="2"}selected{/eq}>{:getWxType(2,1)}</option>
+                                            <option value="3" {eq name="vv.type" value="3"}selected{/eq}>{:getWxType(3,1)}</option>
+                                            <option value="4" {eq name="vv.type" value="4"}selected{/eq}>{:getWxType(4,1)}</option>
+                                            <option value="5" {eq name="vv.type" value="5"}selected{/eq}>{:getWxType(5,1)}</option>
+                                            <option value="6" {eq name="vv.type" value="6"}selected{/eq}>{:getWxType(6,1)}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" class="text-center" value="{$vv.sort}" name="menu[{$vv.id}][sort]" >
+                                    </td>
+                                    <td>
+                                        <input type="text" name="menu[{$vv.id}][value]" value="{$vv.value}" class="form-control " placeholder="二级菜单值">
+                                    </td>
+                                    <input type="hidden" name="menu[{$vv.id}][pid]" value="{$vv.pid}" class="form-control " >
+                                </tr>
+                                {/if}
+                                {/foreach}
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                            <button class="btn btn-info " type="button" id="addTop" onclick="addTopMenu();">
+                                添加一级菜单<i class="fa fa-plus"></i>
+                            </button>
+                            <button class="btn btn-primary" type="submit">
+                                保存
+                            </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<script type="text/javascript">
+    var i ="{$max_id}";
+    /*添加子菜单*/
+    function addSun(pid){
+        var smenu = $('.pmenu'+pid);
+        if(smenu.length >= 6){
+            layer.msg('一级菜单下最多5个二级菜单',{icon:5,time:2000});
+            return;
+        }
+        var html = '';
+        i++;
+        var id = i;
+        if(isEmpty('',$("#tpa"+pid).val(),'请先填写菜单名称') == false){return false;}
+        html += '<tr role="row" class="odd  pmenu__pid__ menu__id__">'+
+                '<td>'+
+                    '<div class="input-group " style="margin-left: 20%">'+
+                    '<input type="text" name="menu[__id__][name]" value="" class="form-control " placeholder="二级菜单名称">'+
+                    '<div class="input-group-btn">'+
+                    '<button  class="btn btn-danger delBtn" onclick="delMenu(__id__)" type="button" data-id="__id__" ><i class="fa fa-trash-o"></i></span></button>'+
+                    '</div>'+
+                    '</div>'+
+                '</td>'+
+                '<td>'+
+                    '<select name="menu[__id__][type]" class="form-control">'+
+                        '<option value="0">{:getWxType(0,1)}</option>'+
+                        '<option value="1">{:getWxType(1,1)}</option>'+
+                        '<option value="2">{:getWxType(2,1)}</option>'+
+                        '<option value="3">{:getWxType(3,1)}</option>'+
+                        '<option value="4">{:getWxType(4,1)}</option>'+
+                        '<option value="5">{:getWxType(5,1)}</option>'+
+                        '<option value="6">{:getWxType(6,1)}</option>'+
+                    '</select>'+
+                '</td>'+
+                 '<td>'+
+                    '<input type="number" class="text-center" value="0" name="menu[__id__][sort]" >'+
+                '</td>'+
+                '<td>'+
+                    '<input type="text" name="menu[__id__][value]" value="" class="form-control " placeholder="二级菜单值">'+
+                '</td>'+
+                    '<input type="hidden" name="menu[__id__][pid]" value="" class="form-control " >'+
+        '</tr>';
+        html = html.replace(/__id__/g,id);
+        html = html.replace(/__pid__/g,pid);
+        $(smenu.last()).after(html);
+    };
+    /*添加一级菜单*/
+    function addTopMenu(){
+        var pmenu = $('.topmenu');
+        if(pmenu.length >=3){
+            layer.msg('最多3个一级菜单',{icon:5,time:2000});
+            return;
+        }
+        var html = '';
+        i++;
+        var id = i;
+        html +='<tr  role="row" class="odd  pmenu__id__ menu__id__">'+
+                '<td>'+
+                '<div class="input-group ">'+
+                '<input type="text" name="menu[__id__][name]" value="" class="form-control topmenu " id="tpa__id__" placeholder="一级菜单名称">'+
+                '<div class="input-group-btn">'+
+                '<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">操作 <span class="caret"></span>'+
+                '</button>'+
+                '<ul class="dropdown-menu pull-right" >'+
+                '<li><a href="javascript:void(0);" onclick="addSun(__id__);" class="addBtn" data-id="__id__">添加</a>'+
+                '</li>'+
+                '<li><a href="javascript:void(0);" onclick="delMenu(__id__)" class="delBtn" data-id="__id__">删除</a>'+
+                '</li>'+
+                '</ul>'+
+                '</div>'+
+                '</div>'+
+                '</td>'+
+                '<td>'+
+                '<select name="menu[__id__][type]" class="form-control">'+
+                '<option value="0">{:getWxType(0,1)}</option>'+
+                '<option value="1">{:getWxType(1,1)}</option>'+
+                '<option value="2">{:getWxType(2,1)}</option>'+
+                '<option value="3">{:getWxType(3,1)}</option>'+
+                '<option value="4">{:getWxType(4,1)}</option>'+
+                '<option value="5">{:getWxType(5,1)}</option>'+
+                '<option value="6">{:getWxType(6,1)}</option>'+
+                '</select>'+
+                '</td>'+
+                '<td>'+
+                '<input type="number" class="text-center" value="0" name="menu[__id__][sort]" style="color: #ff090e">'+
+                '</td>'+
+                '<td>'+
+                '<input type="text" name="menu[__id__][value]" value="" class="form-control " placeholder="一级菜单值" >'+
+                '</td>'+
+                '<input type="hidden" name="menu[__id__][pid]" value="0" class="form-control " >'+
+                '</tr>';
+        html = html.replace(/__id__/g,id);
+        $("#tbody").append(html);
+    };
+    /*删除菜单*/
+    function delMenu(id){
+        layer.confirm('确定要删除该菜单吗?',{icon:3},function(){
+            $.ajax({
+                type: 'POST',
+                url: "{:url('delWxMenu')}",
+                data:{id:id},
+                dataType:"json",
+                beforeSend:function(){
+                    layer.closeAll();
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        //删除子分类
+                        $('.pmenu'+id).remove();
+                        $('.menu'+id).remove();
+                    }else{
+                        layer.msg(data.msg, {icon: 5,time:2000}, function(index){
+                            layer.close(index);
+                        });
+                    }
+                },
+            });
+        });
+    };
+
+</script>
+</body>

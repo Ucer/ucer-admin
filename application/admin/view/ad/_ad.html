@@ -1,0 +1,112 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 广告处理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广告名称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="ad_name"  value="{$info.ad_name}" placeholder="广告名称">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所属广告位：</label>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <select class="form-control m-b chosen-select" name="ad_position_id" >
+                                        <option value="">选择广告位</option>
+                                        {foreach $p_list as $k=>$v}
+                                        <option value="{$v.id}" {eq name="info.ad_position_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广告图片：</label>
+                            <div class="input-group col-sm-1">
+                                <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="ad_code" data-url="{:url('Uploadify/jqUpload')}" data-path="ad" >+ 浏览文件
+                                    <input type="hidden" name="ad_code" id="ad_code" value="{$info.ad_code}">
+                                </a>
+                                <img  height="100px" id="ad_code_img" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/no_img.jpg'" src="{$info.ad_code}"/>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">广告时间段：</label>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="广告开始时间" name="start_time" time_plugin="start_time" data-min="input"  {gt name="$id" value="0"} value="{$info.start_time}" {/gt} >
+                                    <label class="laydate-icon"></label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="广告结束时间" name="end_time" time_plugin="end_time" data-min="start_time"  {gt name="$id" value="0"} value="{$info.end_time}" {/gt}>
+                                    <label class="laydate-icon"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">广告链接：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="ad_link"   {eq name="id" value="0"}value="javascript:void(0)"{else/} value="{$info.ad_link}"{/eq}>
+                                <span class="help-block m-b-none"> 没有链接请填写 javascript:void(0)</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">背景颜色：</label>
+                            <div class="input-group col-sm-1">
+                                <input type="color" class="form-control" name="bgcolor"  value="{$info.bgcolor}" placeholder="背景颜色">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        if(isEmpty('',$("input[name=ad_name]").val(),'广告名称不能为空') == false){return false;}
+        if(isEmpty('',$("select[name=ad_position_id]").val(),'请选择所属广告位') == false){return false;}
+        if(isEmpty('',$("input[name=ad_code]").val(),'请上传广告图片') == false){return false;}
+        if(isEmpty('',$("input[name=start_time]").val(),'请上选择广告开始时间') == false){return false;}
+        if(isEmpty('',$("input[name=end_time]").val(),'请上选择广告结束时间') == false){return false;}
+        if(isEmpty('',$("input[name=ad_link]").val(),'请填写广告链接') == false){return false;}
+        ajaxFormBtn("{:url('adHandle',['id'=>$id])}",'btnForm');
+    });
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+</body>
+</html>

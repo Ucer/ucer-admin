@@ -1,0 +1,158 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 权限菜单管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('rightMenuHandle',['id'=>$id])}" id="btnForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">权限名称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="name"  value="{$info.name}" placeholder="权限名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所属分组：</label>
+                            <div class="input-group col-sm-4">
+                                <select name="group_id" class="form-control">
+                                    <option value="">--选择分组--</option>
+                                    {foreach $group as $v}
+                                    <option value="{$v.id}" {eq name="v.id" value="$info.group_id"}selected{/eq}>{$v.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 状&nbsp;态：</label>
+                            <input type="checkbox" class="js-switch"  name="delete_at" {if condition="$id lt 1"}{/if} {if condition="$info.delete_at eq 0"}checked{/if} />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">权限码：</label>
+                            <div class="form-group">
+                                <div class="col-md-1">
+                                    <select class="form-control" id="ctrol">
+                                        <option value="">选择控制器</option>
+                                        {foreach $cList as $v}
+                                        <option value="{$v}">{$v}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="lbl" style="color: #ff0000;">权限控制器</span>
+                                </div>
+                                <div class="col-sm-1" style="width: 10px">
+                                    @
+                                </div>
+                                <div class="col-md-2">
+                                    <select class="form-control" id="act">
+                                    </select>
+                                    <span class="lbl" style="color: #ff0000;">权限方法</span>
+                                </div>
+                                <div class="col-sm-1" style="width: 10px">
+                                    <a class="btn btn-info" href="javascript:void(0)" id="addRight"><i class="fa fa-plus"></i> 添加</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 权限列表：</label>
+                            <div class="input-group col-sm-4">
+                                <table class="table table-bordered table-hover">
+                                    <tr><th>权限码</th><th style="width: 20%">操作</th></tr>
+                                    <tbody id="rightList">
+                                    {empty name="info.right"}
+                                    {else/}
+                                    {foreach $info.right as $v}
+                                    <tr>
+                                        <td><input name="right[]" type="text" value="{$v}" class="form-control" style="width:400px;"></td>
+                                        <td><a href="javascript:;" onclick="$(this).parent().parent().remove();">删除</a></td>
+                                    </tr>
+                                    {/foreach}
+                                    {/empty}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        if(isEmpty('',$("input[name=name]").val(),'权限名称不能为空') == false){return false;}
+        if(isEmpty('',$("select[name=group_id]").val(),'请选择所属分组') == false){return false;}
+        if(isEmpty('',$("input[name *= right]").val(),'请添加权限码') == false){return false;}
+        $("#btnForm").submit()
+    });
+
+    /*添加权限码*/
+    $("#addRight").click(function(){
+        //已有的权限菜单
+        var a = [];
+        $('#rightList .form-control').each(function(i,o){
+            if($(o).val() != ''){
+                a.push($(o).val());
+            }
+        });
+        //要添加的权限菜单
+        var ncode = $("#ctrol").val();
+        if(isEmpty('',ncode,'请选择权限控制器') == false){
+            return false;
+        }else{
+            console.log(a);
+            var temp = ncode+'@'+$("#act").val();
+            if($.inArray(temp,a) != -1){
+                layer.msg('此权限码已经添加', {icon: 5,time:2000}, function(index){
+                    layer.close(index);
+                });
+                return false;
+            }
+        }
+        var htm = "<tr>";
+        htm += '<td><input name="right[]" type="text" value="'+ncode+'@'+$("#act").val()+'" class="form-control" style="width:400px;"></td>';
+        htm += '<td><a href="javascript:;" onclick="$(this).parent().parent().remove();">删除</a></td>';
+        htm +="</tr>";
+        $("#rightList").append(htm);
+    });
+    /*异步获取权限方法*/
+    $("#ctrol").on('change',function(){
+        $.ajax({
+            url:"{:url('ajaxAction')}",
+            type:'post',
+            data:{ctrol:$("#ctrol").val()},
+            dataType:'html',
+            success:function(res){
+                $("#act").empty().append(res);
+            },
+        });
+    });
+    //IOS开关样式配置
+    var elem = document.querySelector('.js-switch');
+    var switchery = new Switchery(elem, {
+        color: '#1AB394'
+    });
+    var config = {
+        '.chosen-select': {},
+    };
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    };
+</script>
+</body>
+</html>

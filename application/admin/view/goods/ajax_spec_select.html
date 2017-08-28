@@ -1,0 +1,113 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover" id="showInput">
+    <thead>
+    <tr>
+        <th>规格名:</th>
+        <th>规格值:</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">还没有规格项哦</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr>
+        <td width="10%">{$v.name}</td>
+        <td>
+            {foreach $v.spec_item as $kk=>$vv}
+            {gt name="goods_id" value="0"}
+            <button type="button" data-spec_id='{$v.id}' data-item_id='{$kk}' class="btn
+{php} if(in_array($kk,$item_ids)){ {/php} btn-primary {php} }{/php} {php} if(!in_array($kk,$item_ids)){ {/php} btn-default {php} }{/php}
+            ">{$vv}</button>
+            {else/}
+            <button type="button" data-spec_id='{$v.id}' data-item_id='{$kk}' class="btn btn-default ">{$vv}</button>
+            {/gt}
+            {if condition="isset($spec_images[$kk]) gt 0"}
+            <input type="hidden" name="spec_img_{$kk}" id="spec_img_{$kk}" value="{$spec_images[$kk]}">
+            <img width="35" height="35" src="{$spec_images[$kk]}" uploader="spec_img_{$kk}" data-url="{:url('Uploadify/jqUpload')}" data-path="goods/spec" id="spec_img_{$kk}_img" />
+            {else /}
+            <input type="hidden" name="spec_img_{$kk}" id="spec_img_{$kk}" value="">
+            <img width="35" height="35" src="/static/admin/images/add-button.jpg" uploader="spec_img_{$kk}" data-url="{:url('Uploadify/jqUpload')}" data-path="goods/spec" id="spec_img_{$kk}_img" />
+            {/if}
+
+            {/foreach}
+        </td>
+   </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+
+</div>
+<div id="ajax_spec_data2"></div>
+
+<script type="text/javascript">
+    /*按钮样式切换*/
+    $("#ajax_spec_data button").click(function(){
+        if($(this).hasClass('btn-primary')){
+            $(this).removeClass('btn-primary').addClass('btn-default');
+        }else{
+            $(this).removeClass('btn-default').addClass('btn-primary');
+        }
+        ajaxGetSpecInput();//触发详情显示
+    });
+    /*点击按钮显示输入框*/
+    function ajaxGetSpecInput(){
+        var spec_arr = {};//用户选择的数组
+        $("#showInput button").each(function(){ //遍历button组
+            if($(this).hasClass('btn-primary')){
+              var spec_id = $(this).attr('data-spec_id');//规格表id
+              var spec_item_id = $(this).attr('data-item_id');//规格详情id
+                if(!spec_arr.hasOwnProperty(spec_id)){ //hasOwnProperty() 方法会返回一个布尔值,其用来判断某个对象是否含有指定的属性。
+                    spec_arr[spec_id] = [];
+                }
+                spec_arr[spec_id].push(spec_item_id);
+            };
+        });
+        ajaxGetSpecInput2(spec_arr); // 显示下面的输入框
+    };
+    /*用户选择不同的规格 项，显示对应的的输入框 */
+    function ajaxGetSpecInput2(spec_arr){
+        var id = "{$goods_id}";
+        $.post("{:url('ajaxGetSpecInput')}",{goods_id:id,spec_arr:spec_arr},function(res){
+            $("#ajax_spec_data2").empty().append(res);
+            margeTable();  // 九九归一
+        });
+    };
+    // 合并单元格
+    function margeTable() {
+        var tab = document.getElementById("spec_input_tab"); //要合并的tableID
+        var maxCol = 2, val, count, start;  //maxCol：合并单元格作用到多少列
+        if (tab != null) {
+            for (var col = maxCol - 1; col >= 0; col--) {
+                count = 1;
+                val = "";
+                for (var i = 0; i < tab.rows.length; i++) {
+                    if (val == tab.rows[i].cells[col].innerHTML) {
+                        count++;
+                    } else {
+                        if (count > 1) { //合并
+                            start = i - count;
+                            tab.rows[start].cells[col].rowSpan = count;
+                            for (var j = start + 1; j < i; j++) {
+                                tab.rows[j].cells[col].style.display = "none";
+                            }
+                            count = 1;
+                        }
+                        val = tab.rows[i].cells[col].innerHTML;
+                    }
+                }
+                if (count > 1) { //合并，最后几行相同的情况下
+                    start = i - count;
+                    tab.rows[start].cells[col].rowSpan = count;
+                    for (var j = start + 1; j < i; j++) {
+                        tab.rows[j].cells[col].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+    /*上传规格图片*/
+
+</script>

@@ -1,0 +1,88 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>文章分类列表</h5>
+                    <div class="ibox-content">
+                        <!--搜索框开始-->
+                        <div class="row">
+                            <div class="col-sm-2 pull-right">
+                                <div class="btn-group pull-right"  role="group" style="clear: both">
+                                    <a href="{:url('categoryHandle',['id'=>0])}" class="btn btn-outline btn-default "><i class="fa fa-plus"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--搜索框结束-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table id="list-table" class="table table-bordered table-hover">
+                                <thead>
+                                <tr >
+                                    <th width="4%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th>分类名称</th>
+                                    <th>分类别名</th>
+                                    <th>描述</th>
+                                    <th>关键词</th>
+                                    <th>状态</th>
+                                    <th width="5%">排序</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $lists as $v}
+                                <tr>
+                                    <td><input type="checkbox" name="ids[]">{$v.id}</td>
+                                    <td style="text-align: left;padding-left:0px">
+                                        — — {:str_repeat('— — ',$v.lev)}{if condition="$v.lev eq 0 "}<span style="color: #ff0000">{$v.cat_name}</span>{else /}{$v.cat_name}{/if}
+                                    </td>
+                                    <td>{$v.alias_name}</td>
+                                    <td>{$v.desc|handleStr=###,0,66,true}</td>
+                                    <td>{$v.keywords|handleStr=###,0,66,true}</td>
+                                    <td>
+                                        {eq name='v.is_show' value='0'}
+                                        <i class="fa fa-check text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_show" data-table="article_category" data-msg="隐藏" data-todo="0" data-cur="显示" onclick="changeStatus(this)" > 显示</i>
+                                        {else/}
+                                        <i class="fa fa-close text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_show" data-table="article_category" data-msg="显示" data-todo="1" data-cur="隐藏" onclick="changeStatus(this)" > 隐藏</i>
+                                        {/eq}
+                                    </td>
+                                    <td>
+                                        <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="goods_category" data-msg="排序修改成功" onchange="updateSort(this)"  style="text-align:center;" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" class="form-control">
+                                    </td>
+                                    <td>{$v.created_at}</td>
+                                    <td>{$v.update_at}</td>
+                                    <td>
+                                        <a href="{:url('categoryHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.cat_name}" data-url="{:url('delCategory')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+</script>
+</body>

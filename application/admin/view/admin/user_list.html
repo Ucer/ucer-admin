@@ -1,0 +1,118 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>管理员列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <a href="{:url('userHandle',['id'=>0])}" class="btn btn-primary "><i class="fa fa-plus"></i> 添加管理员</a>
+                                <a href="javascript:void(0)" class="btn btn-danger " onclick="getIds(this)" data-url="{:url('delUser')}"><i class="fa fa-trash-o"></i> 批量删除</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="table-responsive ">
+                            <table class="table   table-hover">
+                                <thead>
+                                <tr>
+                                    <th><input class="i-checks checkbox check-all" type="checkbox" >ID</th>
+                                    <th>用户名</th>
+                                    <th>所属角色</th>
+                                    <th>最近一次ip</th>
+                                    <th>最近一次登录</th>
+                                    <th>状态</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $lists as $v}
+                                <tr>
+                                    <td>
+                                        <input class="ids i-checks"  type="checkbox" name="ids[]" value="{$v.id}">{$v.id}
+                                    </td>
+                                    <td>{$v.user_name}</td>
+                                    <td>{$v.role_name}</td>
+                                    <td>{$v.last_ip}</td>
+                                    <td>{$v.last_login}</td>
+                                    {if condition="$v.id eq 1 "}
+                                    <td>启用</td>
+                                    {else /}
+                                    <td>
+                                        {if condition="$v.is_del eq 0 "}
+                                        <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="1" data-url="{:url('powerSwitch')}">
+                                            <div id="zt{$v.id}"><span class="label label-info">启用</span></div>
+                                        </a>
+                                        {else /}
+                                        <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="0" data-url="{:url('powerSwitch')}">
+                                            <div id="zt{$v.id}"><span class="label label-danger">冻结</span></div>
+                                        </a>
+                                        {/if}
+                                    </td>
+                                    {/if}
+                                    <td>{$v.created_at}</td>
+                                    <td>{$v.update_at}</td>
+                                    {if condition="$v.id eq 1 "}
+                                    <td></td>
+                                    {else /}
+                                    <td>
+                                        <a href="{:url('userHandle',['id'=>$v.id])}" title="编辑"><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a>&nbsp;&nbsp;
+                                        <a onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.user_name}" data-url="{:url('delUser')}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>&nbsp;&nbsp;
+                                    </td>
+                                    {/if}
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+    //全选的实现
+    $('.check-all').on('ifChecked', function (event) {
+        $('input[name="ids[]"]').iCheck('check');
+    });
+    $('.check-all').on('ifUnchecked', function (event) {
+        $('input[name="ids[]"]').iCheck('uncheck');
+    });
+    /*节点显示隐藏切换*/
+    $(function(){
+        $(".updt").click(function(){
+            var id = $(this).attr('data-id')
+            var val = $(this).attr('data-val')
+            var url = $(this).attr('data-url')
+            $.post(url,{id:id,val:val},function(res){
+                if(res.code==1){
+                    var stu2='<span class="label label-info">启用</span>';
+                    $('#zt'+id).html(stu2);
+                    layer.msg(res.msg,{icon:1,time:1500,shade: 0.1},function(){
+                        location.href = location.href;
+                    });
+                }else{
+                    var stu1='<span class="label label-danger">冻结</span>';
+                    $('#zt'+id).html(stu1);
+                    layer.msg(res.msg,{icon:2,time:1500,shade: 0.1},function(){
+                        location.href = location.href;
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>

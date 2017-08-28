@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>漂过太平洋-后台管理系统</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/static/admin/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Sweet Alert -->
+    <link href="/static/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+    <link href="/static/admin/css/animate.min.css" rel="stylesheet">
+    <link href="/static/admin/css/style.min.css" rel="stylesheet">
+
+</head>
+<body class=" stop-scrolling">
+<div class="sweet-overlay" tabindex="-1" style="opacity: 1.51; display: block;"></div>
+<div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false" data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="false" data-animation="pop" data-timer="null" style="display: block; margin-top: -174px;">
+    <?php switch ($code) {?>
+    <?php case 1:?>
+    <div class="sa-icon sa-success animate" style="display: block;">
+        <span class="sa-line sa-tip animateSuccessTip"></span>
+        <span class="sa-line sa-long animateSuccessLong"></span>
+
+        <div class="sa-placeholder"></div>
+        <div class="sa-fix"></div>
+    </div>
+    <?php break;?>
+    <?php case 0:?>
+    <!--处理失败-->
+    <div class="sa-icon sa-error animateErrorIcon" style="display: block;">
+      <span class="sa-x-mark animateXMark">
+        <span class="sa-line sa-left"></span>
+        <span class="sa-line sa-right"></span>
+      </span>
+    </div>
+    <?php break;?>
+    <?php } ?>
+<p><?php echo(strip_tags($msg)); ?></p>
+    <p style="display: block;">        <span href="javascript:void(0);">页面自动<a id="href" href="<?php echo($url); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($wait); ?></b></span><br /><br /></p>
+    <div class="sa-button-container">
+        <span>  2017-{:date('Y')} &copy; <a href="http://www.zhjaa.online" style="color: #504dcc;text-decoration:none">漂过太平洋</a> <span style="color: black" >-后台管理系统 v1.0.0</span>
+                <br/>
+                <a href="http://www.zhjaa.online" style="color: #2acc13;text-decoration:none">漂过太平洋</a>出品</span>
+    </div>
+</div>
+</body>
+</html>
+<script src="/static/admin/js/jquery.min.js"></script>
+<script src="/static/admin/js/bootstrap.min.js"></script>
+<script src="/static/admin/js/content.min.js"></script><div class="gohome"><a class="animated bounceInUp" href="<?php echo($url); ?>" title="返回首页"><i class="fa fa-home"></i></a></div>
+<script src="/static/admin/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript">
+    (function(){
+        var wait = document.getElementById('wait'),
+                href = document.getElementById('href').href;
+        var interval = setInterval(function(){
+            var time = --wait.innerHTML;
+            if(time <= 0) {
+                location.href = href;
+                clearInterval(interval);
+            };
+        }, 1000);
+    })();
+</script>

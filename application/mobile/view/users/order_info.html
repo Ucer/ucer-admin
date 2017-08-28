@@ -1,0 +1,121 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop1.2" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>订单详情-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+</head>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="{:url('Users/orderList')}" title="返回"></a></div>
+            <div class="h-mid">订单详情</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+{include file="public/right_menu" /}
+
+<div id="tbh5v0">
+    <div class="order">
+        <!--头部信息 start-->
+        <div class="detail_top">
+            <div class="lan">
+                <dl>
+                    <dt class="dingdan_1"></dt>
+                    <dd><span>订单状态：&nbsp;&nbsp;&nbsp;&nbsp;{$order_info.order_status_desc}</span><br>
+                        <span class="dingdanhao">订单号&nbsp;:&nbsp;{$order_info.order_sn}</span><br>
+                        <span>配送费用&nbsp;:￥{$order_info.shipping_price}元</span>
+                    </dd>
+                </dl>
+            </div>
+
+            <dl style="border-bottom:1px solid #eeeeee">
+                <dt style=" position:absolute;" class="dingdan_2"></dt>
+                <dd style=" margin-left:30px;"><span class="zhif">所选支付方式&nbsp;:&nbsp;<span style="color: #00B83F">{$order_info.pay_name}</span></span>
+                    <span class="zhif" >应付款金额&nbsp;:&nbsp;￥ <span style="color: #00B83F">{$order_info.order_amount}</span>元</span>
+                        {eq name="$order_info.pay_btn" value="1"} <a href="{:url('mobile/Cart/cart4',array('order_id'=>$order_info.id))}" class="zhifu" style=" color:#fff; font-size:16px;background: #00B83F">去支付</a>{/eq}
+                </dd>
+            </dl>
+
+            <dl>
+                <dt class="dingdan_3"></dt>
+                <dd><h3>收货人姓名&nbsp;:&nbsp;{$order_info.consignee}<em>{$order_info.mobile}</em></h3>
+                    <div class="adss">详细地址&nbsp;:&nbsp;{$region_list[$order_info.province_id]['name']},{$region_list[$order_info['city_id']]['name']},{$region_list[$order_info['area_id']]['name']},{$order_info.address}</div>
+                </dd>
+            </dl>
+            {gt name="order_info.shipping_time" value="0"}
+                <dl style="border-top:1px solid #eeeeee; margin-top:10px; height:70px; padding-bottom:0px;">
+                    <dt class="dingdan_4"><img src="/static/mobile/images/wuliuimg.png" width="30" height="70"></dt>
+                    <dd><h3>快递单号:{$order_info.invoice_number}</h3>
+                        <p><a href="{:url('mobile/Users/express',array('order_id'=>$order_info.id))}" target="_blank">查看物流状态</a></p>
+                    </dd>
+                </dl>
+            {/gt}
+        </div>
+        <!--头部信息 end-->
+
+        <!--订单主题信息  start-->
+        <div class="ord_list1">
+            <h2><img src="/static/mobile/images/dianpu.png">{$Think.config.web_site_name}</h2>
+            {foreach $order_info.goods_list as $good}
+            <div class="order_list">
+                <a href="{:url('/mobile/Goods/goodsInfo',array('id'=>$good.goods_id))}">
+                    <dl>
+                        <dt><img src="{:goodsThumb($good.goods_id,$good.goods_img,100,100)}"></dt>
+                        <dd class="name" class="pice" style=" width:55%;height: 55%">
+                            <strong>{$good.goods_name}</strong><span>{$good.spec_key_name}</span>
+                        </dd>
+                        <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">￥{$good.discount_price}元<em>x{$good.goods_num}</em></dd>
+                        <dd class="pice" style=" font-size:13px; color:#F60; width:25%;">
+                            <em>
+                                {if condition="($order_info.return_btn eq 1) and ($good.is_send eq 1)"}
+                                <a style="color:#999;">售后服务</a>
+                                {/if}
+                            </em>
+                        </dd>
+                    </dl>
+                </a>
+                <div class="pic" style=" border:0;"><span>小计：</span><strong>￥{$good['discount_price'] * $good['goods_num']}元</strong></div>
+            </div>
+            {/foreach}
+        </div>
+        <!--订单主题信息  end-->
+        <div class="jiage">
+            <p>商品总价&nbsp;:&nbsp;<span class="price">￥{$order_info.goods_price}元</span></p>
+            <p>配送费用&nbsp;:&nbsp;<span class="price">￥{$order_info.shipping_price}元</span></p>
+            <p>使用优惠券抵&nbsp;:&nbsp;<span class="price">￥{$order_info.coupon_price}元</span></p>
+            <p>积分&nbsp;:&nbsp;<span class="price">￥{$order_info.integral_money}元</span></p>
+            <p>使用余额&nbsp;:&nbsp;<span class="price">￥{$order_info.user_money}元</span></p>
+            <p>活动优惠&nbsp;:&nbsp;<span class="price">￥{$order_info.order_prom_amount}元</span></p>
+            <p>应付款金额&nbsp;:&nbsp;<span class="price1">￥{$order_info.order_amount}元</span></p>
+        </div>
+    </div>
+    <section class="qita">
+        <div class="navContent">
+            <ul>
+                <li class="first">配送方式&nbsp;:&nbsp;{$order_info.shipping_name}</li>
+                <li>支付方式&nbsp;:&nbsp;{$order_info.pay_name}</li>
+            </ul>
+        </div>
+    </section>
+    <div class="detail_dowm">
+        <div class="anniu" style="width:100%">
+            {eq name="order_info.cancel_btn" value="1"}<span onClick="cancelOrder('{$order_info.id}')" style="background:#ede8f8;margin-right: 1%">取消订单</span>{/eq}
+            {eq name="order_info.pay_btn" value="1"}<a href="{:url('mobile/Cart/cart4',array('order_id'=>$order_info.id))}" style="background:#00B83F">立即付款</a>{/eq}
+            {eq name="order_info.receive_btn" value="1"}<a href="{:url('mobile/Cart/orderConfirm',array('order_id'=>$order_info.id))}" style="background:#00B83F">收货确认</a>{/eq}
+            {eq name="order_info.comment_btn" value="1"}<a href="{:url('mobile/Users/comment',array('order_id'=>$order_info.id))}" style="background:#00B83F">评价</a>{/eq}
+            {eq name="order_info.shipping_btn" value="1"}<a href="{:url('mobile/Users/express',array('order_id'=>$order_info.id))}" style="background:#00B83F">查看物流</a>{/eq}
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

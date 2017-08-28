@@ -1,0 +1,64 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop1.2" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>收货地址列表-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" href="/static/mobile/css/user.css">
+</head>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+            <div class="h-mid">收货地址列表</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+{include file="public/right_menu" /}
+<div id="tbh5v0">
+    {empty name="user_address" value=""}
+        <h3>您还没添加收获地址</h3>
+    {else/}
+    {foreach $user_address as $list}
+    <div class="address_add  "  {eq name="list.is_default" value="1"}style="background: #00B83F"{/eq}>
+        {if condition="$source eq 'cart2' "}
+            <a href="{:url('/mobile/Cart/aplayInfo',['address_id'=>$list.id])}">
+                {eq name="list.is_default" value="1"}<h2><img src="/static/mobile/images/right.png"></h2>{/eq}
+                <dl>
+                    <dt><span>{$list.consignee}</span><em>电话:{$list.mobile}</em></dt>
+                    <dd>{$region_list[$list.province_id]['name']},{$region_list[$list.city_id]['name']},{$region_list[$list.area_id]['name']},{$list.address}</dd>
+                </dl>
+            </a>
+        {else /}
+            {eq name="list.is_default" value="1"}<h2><img src="/static/mobile/images/right.png"></h2>{/eq}
+            <dl>
+                <dt><span>{$list.consignee}</span><em>电话:{$list.mobile}</em></dt>
+                <dd>{$region_list[$list.province_id]['name']},{$region_list[$list.city_id]['name']},{$region_list[$list.area_id]['name']},{$list.address}</dd>
+            </dl>
+        {/if}
+        <a href="{:url('/mobile/Users/editAddress',array('id'=>$list.id,'source'=>$source))}"><img id="amend" src="/static/mobile/images/amend.png"/></a>
+    </div>
+    {/foreach}
+    {/empty}
+
+</div>
+<div style=" width:100%; height:50px;"></div>
+<div class="list_footer">
+    <a href="{:url('/mobile/Users/addAddress',array('source'=>$source))}" style="background:#00B83F">添加新地址</a>
+</div>
+<script>
+    function goTop(){
+        $('html,body').animate({'scrollTop':0},600);
+    }
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="/static/mobile/images/topup.png"></a>
+</body>
+</html>

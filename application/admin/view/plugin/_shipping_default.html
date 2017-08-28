@@ -1,0 +1,81 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> {$row.name}配送区域配置</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_tongyong">
+
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td width="20%">配送区域名称：</td>
+                                        <td>
+                                            <input readonly type="text" value="{$info.shipping_area_name}" name="shipping_area_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            首&nbsp;&nbsp;重
+                                            <select name="config[first_weight]">
+                                                {for start="500" end="8000"  step="500" }
+                                                <option value="{$i}"{eq name="info.config.first_weight" value="$i"}selected{/eq}>{$i}</option>
+                                                {/for}
+                                            </select>
+                                            克以内费用：
+                                        </td>
+                                        <td>
+                                            <input class="col-sm-1" type="number" value="{$info.config.money}" name="config[money]" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            续重每
+                                            <select name="config[second_weight]">
+                                                {for start="500" end="8000"  step="500"}
+                                                <option value="{$i}"{eq name="info.config.second_weight" value="$i"}selected{/eq}>{$i}</option>
+                                                {/for}
+                                            </select>
+                                            克或其零数的费用：
+                                        </td>
+                                        <td>
+                                            <input type="text" class="col-sm-1" value="{$info.config.add_money}" name="config[add_money]" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script type="text/javascript">
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        ajaxFormBtn("{:url('shippingHandle',['id'=>$id,'type'=>$row.type,'code'=>$row.code])}",'btnForm');
+    });
+</script>
+</body>
+</html>

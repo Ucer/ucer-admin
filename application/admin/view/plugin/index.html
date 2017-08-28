@@ -1,0 +1,246 @@
+{include file="public/header" /}
+<style type="text/css">
+    .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th { border: 1px solid #e7e7e7; } #imgPicker div:first-child{ position: absolute;  width: 85px; height: 40px; } .goods_xc{ width: 100px; text-align:center; margin: 5px; display:inline-block; }
+</style>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>网站配置</h5>
+                    <div class="ibox-tools">
+                        <div class="ibox-tools">
+                            <a href="javascript:history.go(-1)"  title="返回">
+                                <i class="fa fa-reply"> 返回</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <form  method="post" action="{:url('xxx')}" id="btnForm">
+                    <div class="ibox-content">
+                        <!--<div class="clients-list">-->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#tab_login"><i class="fa fa-book"></i> 登录插件</a></li>
+                            <li ><a data-toggle="tab" href="#tab_shipping"><i class="fa fa-truck"></i> 物流插件</a></li>
+                            <li ><a data-toggle="tab" href="#tab_payment"><i class="fa fa-photo"></i> 支付插件</a></li>
+                            <li ><a data-toggle="tab" href="#tab_function"><i class="fa fa-info"></i> 功能插件</a></li>
+                            <li ><a data-toggle="tab" href="#tab-shipping"><i class="fa fa-truck"></i> 云插件</a></li>
+                        </ul>
+                        <div class="tab-content" >
+                            <!--登录插件    start-->
+                            <div id="tab_login" class="tab-pane active">
+                                <div class="hr-line-dashed"></div>
+                                <div class="full-height-scroll">
+                                    <div class="tab_login">
+                                        <div class="row">
+                                            {empty name="login" value=""}
+                                            开发哥哥正在加班开发中
+                                            {else/}
+                                            {foreach $login as $v}
+                                                <div class="col-sm-2">
+                                                    <div class="thumbnail">
+                                                        <img style="width:150px; height:150px;" src="/plugins/login/{$v.code}/{$v.icon}">
+                                                        <div class="caption">
+                                                            <h4>{$v.name}</h4>
+                                                            <p><span style="color: #00B83F">简介:</span>{$v.desc} </p>
+                                                            <p> <span style="color: #00B83F">作者:</span>{$v.author}</p>
+                                                            {eq name="v.status" value="0"}
+                                                            <p><a onclick="installPlugin('{$v.type}','{$v.code}',1)" href="javascript:void(0)" class="btn btn-primary" role="button">一键安装</a> </p>
+                                                            {else/}
+                                                            <p><a onclick="installPlugin('{$v.type}','{$v.code}',0)" href="javascript:void(0)" class="btn btn-danger" role="button">卸载</a> <a href="javascript:void(0);" class="btn btn-primary plugin_setting" role="button" data-url="{:url('Plugin/setting',['type'=>$v.type,'code'=>$v.code])}">配置</a></p>
+                                                            {/eq}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {/foreach}
+                                            {/empty}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--登录插件    end-->
+
+                            <!--物流插件    start-->
+                            <div id="tab_shipping" class="tab-pane">
+                                <div class="hr-line-dashed"></div>
+                                <div class="full-height-scroll">
+                                    <div class="tab_shipping">
+                                        <div class="row">
+                                            {empty name="shipping" value=""}
+                                            开发哥哥正在加班开发中
+                                            {else/}
+                                            {foreach $shipping as $v}
+                                            <div class="col-sm-2">
+                                                <div class="thumbnail">
+                                                    <img style="width:200px; height:100px;" src="/plugins/shipping/{$v.code}/{$v.icon}">
+                                                    <div class="caption">
+                                                        <h4>{$v.name}</h4>
+                                                        <p><span style="color: #00B83F">简介:</span>{$v.desc} </p>
+                                                        <p> <span style="color: #00B83F">作者:</span>{$v.author}</p>
+                                                        {eq name="v.status" value="0"}
+                                                        <p><a onclick="installPlugin('{$v.type}','{$v.code}',1)" href="javascript:void(0)" class="btn btn-primary" role="button">一键安装</a>
+                                                            <a onclick="delShipping('{$v.code}')" href="javascript:void(0)" class="btn btn-danger" role="button">删除</a>
+                                                        </p>
+                                                        {else/}
+                                                        <p><a onclick="installPlugin('{$v.type}','{$v.code}',0)" href="javascript:void(0)" class="btn btn-danger" role="button">卸载</a> <a href="javascript:void(0);" class="btn btn-primary shipping_setting" role="button" data-url="{:url('Plugin/shippingList',['type'=>'shipping','code'=>$v.code])}">配置</a></p>
+                                                        {/eq}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/foreach}
+                                            {/empty}
+                                            <div style="width:260px;" class="col-sm-2">
+                                                <div class="thumbnail" style="height:203px;">
+                                                    <img src="/static/admin/images/wuliu.png" style="width:150px; height:100px;">
+                                                    <div class="caption">
+                                                        <p></p>
+                                                        <p></p>
+                                                        <p align="center">
+                                                            <a href="javascript:void(0);"  id="plugin_shipping" class="btn btn-primary" role="button" data-url="{:url('Plugin/addShipping')}">添加物流</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--物流插件    end-->
+
+                            <!--支付插件    start-->
+                            <div id="tab_payment" class="tab-pane">
+                                <div class="hr-line-dashed"></div>
+                                <div class="full-height-scroll">
+                                    <div class="tab_payment">
+                                        <div class="row">
+                                            {empty name="payment" value=""}
+                                            开发哥哥正在加班开发中
+                                            {else/}
+                                            {foreach $payment as $v}
+                                            <div class="col-sm-2">
+                                                <div class="thumbnail">
+                                                    <img style="width:150px; height:150px;" src="/plugins/payment/{$v.code}/{$v.icon}">
+                                                    <div class="caption">
+                                                        <h4>{$v.name}</h4>
+                                                        <p><span style="color: #00B83F">简介:</span>{$v.desc} </p>
+                                                        <p> <span style="color: #00B83F">作者:</span>{$v.author}</p>
+                                                        {eq name="v.status" value="0"}
+                                                        <p><a onclick="installPlugin('{$v.type}','{$v.code}',1)" href="javascript:void(0)" class="btn btn-primary" role="button">一键安装</a> </p>
+                                                        {else/}
+                                                        <p><a onclick="installPlugin('{$v.type}','{$v.code}',0)" href="javascript:void(0)" class="btn btn-danger" role="button">卸载</a> <a href="javascript:void(0);" class="btn btn-primary plugin_setting" role="button" data-url="{:url('Plugin/setting',['type'=>$v.type,'code'=>$v.code])}">配置</a></p>
+                                                        {/eq}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {/foreach}
+                                            {/empty}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--支付插件    end-->
+
+                        </div>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{include file="public/footer" /}
+
+</body>
+</html>
+
+<script type="text/javascript">
+    //插件安装(卸载)
+    function installPlugin(type,code,type2){
+        var url = "/admin/Plugin/pluginHandle/type/"+type+'/code/'+code+'/install/'+type2;
+        $.post(url,function(data){
+            var obj = eval(data);
+            if(obj.status == 1){
+                layer.msg(obj.msg,{icon:1,time:1000},function(){
+                    location.reload();
+                });
+            }else{
+                layer.msg(obj.msg,{icon:5,time:1000});
+            }
+        })
+    }
+    /*插件配置*/
+    $(".plugin_setting").click(function(){
+        layer.open({
+            type: 2,
+            area: ['50%', '80%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'插件配置',
+            content: $(this).attr('data-url'),
+            end: function (){
+                parent.layer.closeAll();
+            }
+        });
+    });
+    /*物流插件配置*/
+    $(".shipping_setting").click(function(){
+        layer.open({
+            type: 2,
+            area: ['80%', '80%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'插件配置',
+            content: $(this).attr('data-url'),
+            end: function (){
+                parent.layer.closeAll();
+            }
+        });
+    });
+    /*添加物流*/
+    $("#plugin_shipping").click(function(){
+        layer.open({
+            type: 2,
+            area: ['68%', '80%'],
+            fix: true, //不固定
+            skin:'layui-layer-molv',
+            maxmin: false,
+            title:'插件配置',
+            content: $(this).attr('data-url'),
+            end: function (){
+               layer.closeAll();
+            }
+        });
+    });
+    /*删除物流插件*/
+    function delShipping(code,url){
+        layer.confirm('确定要删除'+'<span style="color:#ff0000">'+code+'</span>'+'吗?',{icon:3},function(){
+            $.ajax({
+                type: 'POST',
+                url: "{:url('Plugin/delPlugin')}",
+                data:{
+                    code:code
+                },
+                dataType:"json",
+                beforeSend:function(){
+                    layer.closeAll();
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data.code == 1){
+                        layer.msg(data.msg, {icon: 1,time:2000}, function(){
+                            location.href=location.href;
+                        });
+                    }else{
+                        layer.msg(data.msg, {icon: 5,time:2000}, function(index){
+                            layer.close(index);
+                        });
+                    }
+                }
+            });
+        });
+    }
+</script>

@@ -1,0 +1,357 @@
+<!DOCTYPE html >
+<html>
+<head>
+  <meta name="Generator" content="tpshop" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>{$goods.goods_name}-{$Think.config.web_site_name}</title>
+  {include file="public/head" /}
+  <link rel="stylesheet" type="text/css" href="/static/mobile/css/goods.css"/>
+</head>
+<body>
+<div class="main">
+  <div class="tab_nav">
+    <div class="header">
+      <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+      <div class="h-mid">
+        <ul>
+          <li><a href="javascript:;" class="tab_head on"   id="goods_ka1" onClick="setGoodsTab('goods_ka',1,3)">商品</a></li>
+          <li><a href="javascript:;" class="tab_head" id="goods_ka2" onClick="setGoodsTab('goods_ka',2,3)">详情</a></li>
+          <li><a href="javascript:;" class="tab_head" id="goods_ka3" onClick="setGoodsTab('goods_ka',3,3)">评价</a></li>
+        </ul>
+      </div>
+      <div class="h-right">
+        <aside class="top_bar">
+          <div onClick="show_menu();('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+          <a href="{:url('mobile/Cart/cart')}" class="show_cart"><em class="global-nav__nav-shop-cart-num" id="tp_cart_info"></em></a>
+        </aside>
+      </div>
+    </div>
+  </div>
+  {include file="public/right_menu" /}
+  <div class="main" id="user_goods_ka_1" style="display:block;">
+    <div class="banner">
+      <!--图片轮播 start-->
+      <div id="slider" class="slider" style="overflow: hidden; visibility: visible; list-style: none; position: relative;">
+        <ul id="sliderlist" class="sliderlist" style="position: relative; overflow: hidden; transition: left 600ms ease; -webkit-transition: left 600ms ease;">
+          {foreach $imgList as $v}
+          <li style="float: left; display: block; width: 100%;"><span><a  href="javascript:void(0)">
+            <img title="" width="100%" src="{$v.url}"></a></span></li>
+          {/foreach}
+        </ul>
+        <div id="pagenavi">
+          {foreach $imgList as $k=>$v}
+          <a href="javascript:void(0);" {eq name="k" value="0"}class="active"{/eq}></a>
+          {/foreach}
+        </div>
+      </div>
+    </div>
+
+    <div class="s_bottom"></div>
+    <script type="text/javascript">
+      $(function(){
+        $("div.module_special .wrap .major ul.list li:last-child").addClass("remove_bottom_line");
+      });
+      var active=0, as=document.getElementById('pagenavi').getElementsByTagName('a');
+
+      for(var i=0;i<as.length;i++){
+        (function(){
+          var j=i;
+          as[i].onclick=function(){
+            t2.slide(j);
+            return false;
+          }
+        })();
+      };
+
+      var t2=new TouchSlider({id:'sliderlist', speed:600, timeout:6000, before:function(index){
+        as[active].className='';
+        active=index;
+        as[active].className='active';
+      }
+      });
+    </script>
+    <!--图片轮播 end-->
+
+    <form name="buy_goods_form" method="post" id="buy_goods_form">
+      <div class="product_info">
+        <div class="info_dottm">
+          <h3 class="name">{$goods.goods_name}</h3>
+          <!--分享 start-->
+          <div class="right" style="float: right;clear: both;margin-top: -50px">
+            <!-- JiaThis Button BEGIN -->
+            <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt" target="_blank">
+              <div id="pro_share" class="share"></div>
+            </a>
+            <!--<script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js" charset="utf-8"></script>-->
+
+          </div>
+          <!--分享 end-->
+        </div>
+        <!--价格部分 start-->
+        <dl class="goods_price">
+          <script type="text/javascript" src="/static/mobile/js/lefttime.js"></script>
+          <dt> <span id="goods_price">￥{$goods.shop_price}元</span><font>价格：￥{$goods.market_price}元</font> </dt>
+        </dl>
+        <ul class="price_dottm">
+          <li style=" text-align:left" id="discount">折扣：{$goods.discount}折</li>
+          <li>{commentStatistics.c0}个评价</li>
+          <li style=" text-align:right">{goods}人已付款</li>
+        </ul>
+        <!--价格部分 end-->
+      </div>
+      <!--秒杀活动 start-->
+      {notempty name="goods.flash_sale.price" value="0"}
+      <section id="search_ka" class="huodong">
+        <div class="subNav">
+          <div class="att_title"> <span>限</span>
+            <p>限时秒杀</p>
+          </div>
+        </div>
+        <div class="navContent">
+          <ul class="youhui_list1">
+            <li>
+              <a href="javascript:void(0);" title="{$goods.flash_sale.title}"><img src="/static/mobile/images/hui.png"></a>
+              <a href="javascript:void(0);" >{$goods.flash_sale.title}&nbsp;&nbsp;(活动时间：{:goodsDate($goods.flash_sale.start_time,1)} - {:goodsDate($goods.flash_sale.end_time,1)})</a>
+              <p>{eq name="goods.flash_sale.goods_num" value="0"}不限量秒杀{else/}放出({$goods.flash_sale.goods_num})件{/eq}/每人限购({$goods.flash_sale.buy_limit})件</p>
+            </li>
+          </ul>
+          <div class="blank10"></div>
+        </div>
+      </section>
+      {/notempty}
+      <!--秒杀活动 end-->
+      <!--促销活动 start-->
+      {notempty name="prom_goods" value=""}
+      <section id="search_ka" class="huodong">
+        <div class="subNav">
+          <div class="att_title"> <span>惠</span>
+            <p>促销活动</p>
+          </div>
+        </div>
+        <div class="navContent">
+            <ul class="youhui_list1">
+              <li>
+                <a href="javascript:void(0);" title="{$prom_goods.name}"><img src="/static/mobile/images/hui.png"></a>
+                <a href="javascript:void(0);" >{$prom_goods.name}&nbsp;&nbsp;(活动时间：{:goodsDate($prom_goods.start_time,1)} - {:goodsDate($prom_goods.end_time,1)})</a>
+              </li>
+            </ul>
+            <ul class="youhui_list1" style="margin-top:0px;">
+              <li><img src="/static/mobile/images/hui.png">{name]}&nbsp;&nbsp;(活动时间：{xxxx} - {xxxx})</li>
+            </ul>
+          <div class="blank10"></div>
+        </div>
+      </section>
+      {/notempty}
+      <!--促销活动 end-->
+
+      <!--商品属性 start-->
+      {empty name="filter_spec" value=""}
+      还没有规格哦
+      {else/}
+      <section id="search_ka">
+        <!---属性---->
+        <div class="ui-sx bian1">
+          <div class="subNavBox">
+            <div class="subNav" ><strong>选择商品规格</strong></div>
+            <ul class="navContent">
+              {foreach $filter_spec as $k=>$v}
+              <li>
+                <div class="title">{$k}</div>
+                <div class="item">
+                  {foreach $v as $kk=>$vv}
+                  <a href="javascript:;" onclick="switchSpec(this)" title="{$vv.item}" {eq name="kk" value="0"}class="hover"{/eq}>
+                  <input type="radio" style="display:none;" name="goods_spec[{$k}]" value="{$vv.item_id}" {eq name="kk" value="0"} checked="checked"{/eq}/>
+                  {$vv.item}
+                  </a>
+                  {/foreach}
+                </div>
+              </li>
+              {/foreach}
+            </ul>
+          </div>
+        </div>
+      </section>
+      {/empty}
+      <section id="search_ka">
+        <div class="ui-sx bian1">
+          <div class="subNavBox">
+            <div class="subNav on"><strong>购买数量</strong></div>
+            <ul class="navContent" style="display: block;">
+              <li style=" border-bottom:1px solid #eeeeee">
+                <div class="item1">
+                  <span class="ui-number">
+                  <button type="button" class="decrease" onClick="goods_cut();">-</button>
+                    <input type="text" class="num" id="number" name="goods_num" value="1" min="1" max="1000" onblur="getGoodsPrice()"/>
+                    <input type="hidden" name="goods_id" value="{$goods.id}"/>
+                  <button type="button" class="increase" onClick="goods_add();">+</button>
+                  </span> </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <section id="search_ka">
+        <div class="ui-sx bian1">
+          <div class="subNavBox" >
+            <div class="subNav"><strong>会员专享价</strong></a></div>
+            <ul class="navContent" >
+              <li  class="user_price">
+                <p> <span class="key">英勇铜牌会员：</span> <b class="p-price-v">9.8折</b> </p>
+                <p> <span class="key">不屈白银会员：</span> <b class="p-price-v">9.5折</b> </p>
+                <p> <span class="key">璀璨钻石会员：</span> <b class="p-price-v">9折</b> </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      <!--商品属性 end-->
+      {:token()}
+    </form>
+  </div>
+  <div class="main" id="user_goods_ka_2" style="display:none">
+    <div class="product_main" style=" margin-top:40px;"> <!-- 产品图片 -->
+      <div class="product_images product_desc" id="product_desc"> {$goods.goods_content|htmlspecialchars_decode} </div>
+    </div>
+    <section class="index_floor">
+      <h2 style=" border-bottom:1px solid #ddd "> <span></span> 商品信息 </h2>
+      <ul class="xiangq">
+        {foreach $goods_attr_list as $v}
+        <li><p>{$goods_attribute[$v.goods_attribute_id]}:</p><span>{$v.value}</span></li>
+        {/foreach}
+        <li><p>上架时间：</p><span>{$goods.created_at}</span></li>
+        <li></li>
+      </ul>
+    </section>
+  </div>
+  <div class="tab_attrs tab_item hide" id="user_goods_ka_3" style="display:none;">
+
+    <div id="ECS_COMMENT">
+      <link href="/static/mobile/css/photoswipe.css" rel="stylesheet" type="text/css">
+      <script src="/static/mobile/js/klass.min.js"></script>
+      <script src="/static/mobile/js/photoswipe.js"></script>
+      <div class="my_comment_list" id="ECS_MYCOMMENTS"> </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  //前行页面顶部
+  function goTop(){
+    $('html,body').animate({'scrollTop':0},600);
+  }
+</script>
+<a href="javascript:goTop();" class="gotop"><img src="/static/mobile/images/topup.png"></a>
+<div style=" height:60px;"></div>
+<!--底部菜单 start-->
+<div class="footer_nav">
+  <ul>
+    <li class="bian"><a href="{:url('Index/index')}"><em class="goods_nav1"></em><span>首页</span></a> </li>
+    <li class="bian"><a href="tel:{$Think.config.web_site_phone}"><em class="goods_nav2"></em><span>客服</span></a> </li>
+    <li><a href="javascript:collectGoods('{$goods.id}')" id="favorite_add"><em class="goods_nav3"></em><span>收藏</span></a></li>
+  </ul>
+  <dl>
+    <dd class="flow"><a class="button active_button" href="javascript:void(0);" onClick="ajaxAddCart('{$goods.id}',1,0);">加入购物车</a> </dd>
+    <dd class="goumai"><a style="display:block;" href="javascript:void(0);"  onclick="ajaxAddCart('{$goods.id}',1,1);">立即购买</a> </dd>
+  </dl>
+</div>
+<!--底部菜单 end-->
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    // 更新商品价格
+    getGoodsPrice();
+  });
+  /*点开列出商品属性、数量、等*/
+  $(function(){
+    $(".subNav").click(function(){
+      $(this).next(".navContent").slideToggle(300).siblings(".navContent").slideUp(500);
+      $(this).toggleClass("on").siblings(".subNav").removeClass("on");
+      if($(".is_scroll").length <= 0)
+      {
+        $('html,body').animate({'scrollTop':$('body')[0].scrollHeight},600);
+      }
+    });
+    commentType = 1; // 评论类型
+//            ajaxComment(1,1);// ajax 加载评价列表
+  });
+  /*切换商品属性时触发*/
+  function switchSpec(spec){
+    $(spec).siblings().removeClass('hover');
+    $(spec).addClass('hover');
+    $(spec).siblings().children('input').prop('checked',false);
+    $(spec).children('input').prop('checked',true);
+    //更新商品价格
+    getGoodsPrice();
+  }
+  /*更新商品价格*/
+  function getGoodsPrice(){
+    var store_count = "{$goods.store_count}";//起始库存
+    var spec_goods_price = eval({$spec_goods_price});  // 规格 对应 价格 库存表
+    // 如果有属性选择项
+    if(spec_goods_price !=false) {
+      goods_spec_arr = new Array();
+      $("input[name^='goods_spec']:checked").each(function(){
+        goods_spec_arr.push($(this).val());
+      });
+      var spec_key = goods_spec_arr.sort(sortNumber).join('_');  //排序后组合成 key
+      var goods_price = spec_goods_price[spec_key]['price']; // 找到对应规格的价格
+      store_count = spec_goods_price[spec_key]['store_num']; // 找到对应规格的库存
+    }
+    var goods_num = parseInt($("input[name=goods_num]").val());//要购买的商品数量
+// 库存不足的情况
+    if(goods_num > store_count) {
+      goods_num = store_count;
+      layer.open({content:'库存仅剩 '+store_count+'件',time: 1});
+      $("input[name=goods_num]").val(goods_num);
+    }
+    var flash_sale_price = parseFloat("{$goods['flash_sale']['price']}");
+    (flash_sale_price > 0) && (goods_price = flash_sale_price);//如果是秒杀商品
+    $("#goods_price").html('￥'+goods_price+'元'); // 变动价格显示
+//    var discount = goods_price/"{$goods.market_price}";
+//    $("#discount").html('折扣：'+discount.toFixed(2)*10+'折')
+
+
+  }
+  /*排序*/
+  function sortNumber(a,b)
+  {
+    return a - b;
+  }
+  /*购买商品点击-时*/
+  function goods_cut(){
+    var num_val=document.getElementById('number');
+    var new_num=num_val.value;
+    var Num = parseInt(new_num);
+    if(Num>1)Num=Num-1;
+    num_val.value=Num;
+    getGoodsPrice();
+  }
+  /*购买商品点击+时*/
+  function goods_add(){
+    var num_val=document.getElementById('number');
+    var new_num=num_val.value;
+    var Num = parseInt(new_num);
+    Num=Num+1;  num_val.value=Num;
+    getGoodsPrice();
+  }
+  /*初始化购物车数量*/
+  $(document).ready(function(){
+    var cart_cn = getCookie('cn');
+    if(cart_cn == ''){
+      $.ajax({
+        type : "POST",
+        url:"/mobile/Cart/headerCartList",//+tab,
+        success: function(data){
+          cart_cn = getCookie('cn');
+        }
+      });
+    }
+    $('#tp_cart_info').html(cart_cn);
+  });
+</script>
+<!-- 微信浏览器 调用微信 分享js-->
+<!---->
+<!-- 微信浏览器 调用微信 分享js end-->
+</body>
+</html>

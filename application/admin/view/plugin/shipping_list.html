@@ -1,0 +1,70 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>物流配送列表</h5>
+                    <div class="ibox-content">
+                        <form action="" id="subForm" onsubmit="return false">
+                            <div class="row">
+                                <div class="col-sm-2 pull-right">
+                                    <div class="btn-group pull-right"  role="group" style="clear: both">
+                                        <a href="{:url('shippingHandle',['id'=>0,'type'=>$shipping_info.type,'code'=>$shipping_info.code])}" class="btn btn-outline btn-default "><i class="fa fa-plus"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="hr-line-dashed"></div>
+                        <div id="ajax_return">
+                            <div class="table-responsive ">
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th width="3%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                        <th width="15%">配送区名称</th>
+                                        <th>配送区域</th>
+                                        <th width="10%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {empty name="lists"}
+                                    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                    <input type="hidden" name="test" value="1">
+                                    {else/}
+                                    {foreach $lists as $v}
+                                    <tr>
+                                        <td><input type="checkbox" name="ids[]" value="{$v.sa_id}">{$v.sa_id}</td>
+                                        <td>{$v.shipping_area_name}</td>
+                                        <td>{$v.region_ist}{eq name="v.is_default" value="1"}全国其它地区{/eq}</td>
+                                        <td>
+                                            <a href="{:url('shippingHandle',['id'=>$v.sa_id,'default'=>$v.is_default,'type'=>$shipping_info.type,'code'=>$shipping_info.code])}" class="btn btn-primary btn-xs">
+                                                <i class="fa fa-pencil-square-o"></i> 编辑
+                                            </a>&nbsp;&nbsp;
+                                            {neq name="v.is_default" value="1"}
+                                            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.sa_id}" data-name="{$v.shipping_area_name}" data-url="{:url('delShipping',['id'=>$v.sa_id,'default'=>$v.is_default,'type'=>$shipping_info.type,'code'=>$shipping_info.code])}">
+                                                <i class="fa fa-trash-o"></i> 删除
+                                            </a>
+                                            {/neq}
+
+                                        </td>
+                                    </tr>
+                                    {/foreach}
+                                    {/empty}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+</body>

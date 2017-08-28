@@ -1,0 +1,194 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>商品分类列表</h5>
+                    <div class="ibox-content">
+                        <!--搜索框开始-->
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <a href="javascript:void(0);" class="btn btn-primary " onclick="treeOpen(this)"><i class="fa fa-angle-double-down"></i> 展开</a>
+                            </div>
+                            <div class="col-sm-2 pull-right">
+                                <div class="btn-group pull-right"  role="group" style="clear: both">
+                                    <a href="{:url('categoryHandle',['id'=>0])}" class="btn btn-outline btn-default "><i class="fa fa-plus"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--搜索框结束-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table id="list-table" class="table table-bordered table-hover">
+                                <thead>
+                                <tr >
+                                    <th width="4%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th>分类名称(pc)</th>
+                                    <th>分类名称(手机)</th>
+                                    <th>是否推荐</th>
+                                    <th>状态</th>
+                                    <th width="5%">排序</th>
+                                    <th>创建时间</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $lists as $v}
+                                <tr class="{$v.level} " id="{$v.level}_{$v.id}" {gt name="v.level" value="0"}style="display:none"{/gt}>
+                                    <td>{$v.id}</td>
+                                    <td style="padding-left:<?php echo (1+$v['level'] * 3); ?>em">
+                                        {eq name="v.has_son" value="1"}
+                                        <span class="fa fa-folder color-info"  style="padding:2px; font-size:16px;"  id="icon_{$v.level}_{$v.id}" aria-hidden="false" onclick="rowClicked(this)" ></span>&nbsp;
+                                        {else/}
+                                        <span class="fa fa-file color-info"  style="padding:2px; font-size:16px;"  id="icon_{$v.level}_{$v.id}" aria-hidden="false" onclick="rowClicked(this)" ></span>&nbsp;
+                                        {/eq}
+                                        {$v.cat_name}</td>
+                                    <td>{$v.mobile_cat_name}</td>
+                                    <td >
+                                        {eq name='v.is_hot' value='1'}
+                                        <i class="fa fa-check text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_hot" data-table="goods_category" data-msg="不推荐" data-todo="0" data-cur="推荐" onclick="changeStatus(this)" > 推荐</i>
+                                        {else/}
+                                        <i class="fa fa-close text-navy change-status pointer" data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_hot" data-table="goods_category" data-msg="推荐" data-todo="1" data-cur="不推荐" onclick="changeStatus(this)" > 不推荐</i>
+                                        {/eq}
+                                    </td>
+                                    <td>
+                                        {eq name='v.is_show' value='0'}
+                                        <i class="fa fa-check text-navy change-status hover-point"  data-value="1" data-cv="0" data-id="{$v.id}" data-column="is_show" data-table="goods_category" data-msg="隐藏" data-todo="0" data-cur="显示" onclick="changeStatus(this)" > 显示</i>
+                                        {else/}
+                                        <i class="fa fa-close text-navy change-status hover-point"  data-value="0" data-cv="1" data-id="{$v.id}" data-column="is_show" data-table="goods_category" data-msg="显示" data-todo="1" data-cur="隐藏" onclick="changeStatus(this)" > 隐藏</i>
+                                        {/eq}
+                                    </td>
+                                    <td>
+                                        <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="goods_category" data-msg="排序修改成功" onchange="updateSort(this)"  style="text-align:center;" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" class="form-control">
+                                    </td>
+                                    <td>{$v.created_at}</td>
+                                    <td>{$v.update_at}</td>
+                                    <td>
+                                        <a href="{:url('categoryHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.cat_name}" data-url="{:url('delCategory')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+    // 展开收缩
+    function  treeOpen(obj)
+    {
+        var tree = $('#list-table tr[id^="1_"], #list-table tr[id^="2_"], #list-table tr[id^="3_"], #list-table tr[id^="4_"]   '); //,'table-row'
+        if(tree.css('display')  == 'table-row')
+        {
+            $(obj).html("<i class='fa fa-angle-double-down'></i>展开");
+            tree.css('display','none');
+            $("span[id^='icon_']").removeClass('fa-folder-open');
+            $("span[id^='icon_']").addClass('fa-folder');
+        }else
+        {
+            $(obj).html("<i class='fa fa-angle-double-up'></i>收缩");
+            tree.css('display','table-row');
+            $("span[id^='icon_']").addClass('fa-folder-open');
+            $("span[id^='icon_']").removeClass('fa-folder');
+        }
+    }
+
+
+    // 以下是 bootstrap 自带的  js
+    function rowClicked(obj)
+    {
+        span = obj;
+
+        obj = obj.parentNode.parentNode;
+
+        var tbl = document.getElementById("list-table");
+
+        var lvl = parseInt(obj.className);
+
+        var fnd = false;
+
+        var sub_display = $(span).hasClass('fa-folder-open') ? 'none' : '' ? 'block' : 'table-row' ;
+        //console.log(sub_display);
+        if(sub_display == 'none'){
+            $(span).removeClass('fa-folder-open');
+            $(span).addClass('fa-folder');
+        }else{
+            $(span).removeClass('fa-folder');
+            $(span).addClass('fa-folder-open');
+        }
+
+        for (i = 0; i < tbl.rows.length; i++)
+        {
+            var row = tbl.rows[i];
+
+            if (row == obj)
+            {
+                fnd = true;
+            }
+            else
+            {
+                if (fnd == true)
+                {
+                    var cur = parseInt(row.className);
+                    var icon = 'icon_' + row.id;
+                    if (cur > lvl)
+                    {
+                        row.style.display = sub_display;
+                        if (sub_display != 'none')
+                        {
+                            var iconimg = document.getElementById(icon);
+                            $(iconimg).removeClass('fa-folder ');
+                            $(iconimg).addClass('fa-folder-open');
+                        }else{
+                            $(iconimg).removeClass('fa-folder-open ');
+                            $(iconimg).addClass('fa-folder');
+                        }
+                    }
+                    else
+                    {
+                        fnd = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (i = 0; i < obj.cells[0].childNodes.length; i++)
+        {
+            var imgObj = obj.cells[0].childNodes[i];
+            if (imgObj.tagName == "IMG")
+            {
+                if($(imgObj).hasClass('fa-folder')){
+                    $(imgObj).removeClass('fa-folder');
+                    $(imgObj).addClass('fa-folder-open');
+                }else{
+                    $(imgObj).removeClass('fa-folder-open');
+                    $(imgObj).addClass('fa-folder');
+                }
+            }
+        }
+
+    }
+</script>
+</body>

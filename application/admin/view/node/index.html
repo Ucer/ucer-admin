@@ -1,0 +1,108 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>菜单列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                    <a href="{:url('nodeHandle',['id'=>0])}" class="btn btn-primary "><i class="fa fa-plus"></i> 添加节点</a>
+                                    <a href="javascript:;" onclick="refresh()" class="btn btn-info btn-restore" ><i class="fa fa-refresh"></i> 更新排序</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table class="table table-responsive table-bordered table-hover">
+                                <thead>
+                                <tr class="long-tr">
+                                    <th width="5%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th width="20%">节点名称</th>
+                                    <th width="10%">控制器</th>
+                                    <th width="10%">方法</th>
+                                    <th width="10%">状态</th>
+                                    <th width="20%">添加时间</th>
+                                    <th width="10%">排序</th>
+                                    <th width="15%">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="node_list"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $node_list as $v}
+                                <tr class="long-td">
+                                    <td><input type="checkbox" name="ids[]">{$v.id}</td>
+                                    <td style="text-align: left;padding-left:0px">
+                                        — — {:str_repeat('— — ',$v.lev)}{if condition="$v.lev eq 0 "}<span style="color: #ff0000">{$v.name}</span>{else /}{$v.name}{/if}
+                                    </td>
+                                    <td>{$v.control}</td>
+                                    <td>{$v.action}</td>
+                                    <td>
+                                        {if condition="$v.is_menu eq 1 "}
+                                        <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="2" data-url="{:url('powerSwitch')}">
+                                            <div id="zt{$v.id}"><span class="label label-info">显示</span></div>
+                                        </a>
+                                        {else /}
+                                        <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="1" data-url="{:url('powerSwitch')}">
+                                            <div id="zt{$v.id}"><span class="label label-danger">隐藏</span></div>
+                                        </a>
+                                        {/if}
+                                    </td>
+                                    <td>{$v.created_at}</td>
+                                    <td style="padding: 3px">
+                                        <div>
+                                            <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="admin_all_menu" data-msg="排序修改成功" onchange="updateSort(this)" width="50%" style="text-align:center;{eq name="v.lev" value="0"}color: #ff0000;{/eq}{eq name="v.lev" value="1"}color: #22bdcc;{/eq}" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{:url('nodeHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delNode')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<script type="text/javascript">
+    /*节点显示隐藏切换*/
+    $(function(){
+       $(".updt").click(function(){
+           var id = $(this).attr('data-id')
+           var val = $(this).attr('data-val')
+           var url = $(this).attr('data-url')
+           $.post(url,{id:id,val:val},function(res){
+               if(res.code==1){
+                   var stu2='<span class="label label-info">显示</span>';
+                   $('#zt'+id).html(stu2);
+                   layer.msg(res.msg,{icon:1,time:1500,shade: 0.1},function(){
+                       location.href = location.href;
+                   });
+               }else{
+                   var stu1='<span class="label label-danger">隐藏</span>';
+                   $('#zt'+id).html(stu1);
+                   layer.msg(res.msg,{icon:2,time:1500,shade: 0.1},function(){
+                       location.href = location.href;
+                   });
+               }
+           });
+       });
+    });
+</script>
+</body>
+</html>

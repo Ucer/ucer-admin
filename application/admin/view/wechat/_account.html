@@ -1,0 +1,120 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 公众号管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form  class="form-horizontal m-t"  method="post" action="{:url('accountHandle',['id'=>$id])}" id="btnForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">URL：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" readonly class="form-control"  value="{$url}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Token：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="token"   value="{$info.token}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公众号名称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="name"   value="{$info.name}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公众号原始id：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="wxid"   value="{$info.wxid}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">微信号：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="weixin"   value="{$info.weixin}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">微信头像：</label>
+                            <div class="input-group col-sm-1">
+                                <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="header_pic" data-url="{:url('Uploadify/jqUpload')}" data-path="wechat" >+ 浏览文件
+                                    <input type="hidden" name="header_pic" id="header_pic" value="{$info.header_pic}">
+                                </a>
+                                <img  height="100px" id="header_pic_img" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/no_img.jpg'" src="{$info.header_pic}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">AppID：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="appid"   value="{$info.appid}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">AppSecret：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="appsecret"   value="{$info.appsecret}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公众号二维码：</label>
+                            <div class="input-group col-sm-1">
+                                    <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="qr" data-url="{:url('Uploadify/jqUpload')}" data-path="wechat" >+ 浏览文件
+                                        <input type="hidden" name="qr" id="qr" value="{$info.qr}">
+                                    </a>
+                                <img  height="100px" id="qr_img" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/no_img.jpg'" src="{$info.qr}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公众号类型：</label>
+                            <div class="input-group col-sm-2">
+                                <select name="type" class="form-control">
+                                    <option  value="1" {eq name="info.type" value="1"}selected{/eq}>订阅号</option>
+                                    <option  value="2" {eq name="info.type" value="2"}selected{/eq}>认证订阅号</option>
+                                    <option  value="3" {eq name="info.type" value="3"}selected{/eq}>服务号</option>
+                                    <option value="4" {eq name="info.type" value="4"}selected{/eq}>认证服务号</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">接入状态：</label>
+                            <div class="input-group col-sm-4">
+                                <div class="radio i-checks">
+                                    <input type="radio" name='status' value="0" {if condition="$id gt 0 "}{eq name="info.status" value="0"}checked{/eq}{else /}checked{/if} />待接入&nbsp;&nbsp;
+                                    <input type="radio" name='status' value="1" {eq name="info.status" value="1"}checked{/eq} />已接入
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<script type="text/javascript">
+   /*表单提交*/
+    $("#saveBtn").click(function(){
+        var rname = $("input[name=name]").val();
+        if(isEmpty('',rname,'公众号名称不能为空') == false){return false;}
+        $("#btnForm").submit()
+    })
+</script>
+</body>
+</html>

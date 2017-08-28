@@ -1,0 +1,113 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>购物流程-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" href="/static/mobile/css/flow.css">
+    <link rel="stylesheet" href="/static/mobile/css/style_jm.css">
+</head>
+<body style="background: rgb(235, 236, 237);position:relative;">
+<!--购物车头部 start-->
+<div class="tab_nav">
+    <div class="header">
+        <div class="h-left">
+            <a class="sb-back" href="javascript:history.back(-1)" title="返回"></a>
+        </div>
+        <div class="h-mid">购物车   </div>
+    </div>
+</div>
+<!--购物车头部 end-->
+
+<!--购物车商品列表 start-->
+<div class="screen-wrap fullscreen login">
+    <div class="page-shopping ">
+        <div class="cart_list">
+            <form id="cart_form" name="formCart" action="{:url('Mobile/Cart/ajaxCartList')}" method="post">
+
+            </form>
+        </div>
+    </div>
+    <div style="height:72px;"></div>
+</div>
+<!--购物车商品列表 end-->
+
+<div class="f_block" id="pop" style="position: fixed; bottom: 0px; left: 0px; height: 0px; z-index: 99999999; overflow: hidden; width: 100%; background: rgb(255, 255, 255);">
+    <p class="f_title"><span>选择自提点</span><a class="c_close" href="javascript:void(0)" onClick="close_pop()"></a></p>
+    <div id="pickcontent"></div>
+</div>
+<script type="text/javascript">
+    // ajax 请求获取购物车列表
+    $(document).ready(function(){
+        ajaxCartList();
+    });
+    // ajax 提交购物车
+    var before_request = 1; // 上一次请求是否已经有返回来, 有才可以进行下一次请求
+    function ajaxCartList(){
+        if(before_request ==0){ // 上一次请求没回来 不进行下一次请求
+            return false;
+        }
+        before_request = 0;
+        $.ajax({
+            type : "POST",
+            url:"{:url('mobile/Cart/ajaxCartList')}",//+tab,
+            data : $('#cart_form').serialize(),// 你的formid
+            success: function(data){
+                $("#cart_form").html('');
+                $("#cart_form").append(data);
+                before_request = 1;
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+    /**
+     * 购物车加减商品
+     *@param num 加减数量
+     *@param cart_id 购物车表id
+     *@param store_count 库存数量
+     */
+    function switchNum(num,cart_id,store_count){
+        var num2 = parseInt($("input[name='goods_num["+cart_id+"]']").val());//购物车中对应的商品数量
+        num2 += num;
+        if(num2 < 1) num2 = 1; // 购买数量不能少于 1
+        if(num2 > store_count)
+        {
+            layer.open({content:"库存只有 "+store_count+" 件, 您最多只能购买 "+store_count+" 件",time: 1});
+            num2 = store_count; // 购买数量不能多余库存数量
+        }
+        $("input[name='goods_num["+cart_id+"]']").val(num2);//动态赋值
+        ajaxCartList(); // ajax 更新商品价格 和数量
+    }
+    /**
+     * ajax 删除购物车的商品--单个
+     *@param num 加减数量
+     *@param cart_id 购物车表id
+     *@param store_count 库存数量
+     */
+    function ajaxDelCart(ids)
+    {
+        $.ajax({
+            type : "POST",
+            url:"{:url('mobile/Cart/ajaxDelCart')}",
+            data:{ids:ids},
+            dataType:'json',
+            success: function(data){
+                if(data.code == 1)
+                {
+                    ajaxCartList(); //ajax 请求获取购物车列表
+                }
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+</script>
+</body>
+</html>

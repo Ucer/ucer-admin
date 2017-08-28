@@ -1,0 +1,42 @@
+
+{foreach $list as $v}
+<div class="order_list">
+    <h2>
+        <a href="javascript:void(0);">
+            <img src="/static/mobile/images/dianpu.png"><span>订单号:{$v.order_sn}</span>
+            <strong>
+                {eq name="v.order_status" value="5"}<b>已作废</b>{/eq}
+                <img src="/static/mobile/images/icojiantou1.png">
+            </strong>
+        </a>
+    </h2>
+    <a href="{:url('/mobile/Users/orderInfo',array('order_id'=>$v.id))}">
+            {foreach $v.goods_list as $good}
+            <dl style="position: relative">
+                <dt><img src="{:goodsThumb($good.goods_id,$good.goods_img,200,200)}"></dt>
+                <dd class="name"><strong>{$good.goods_name}</strong>
+                    <span style="position: absolute;">{$good.spec_key_name} </span></dd>
+                <dd class="pice">￥{$good.discount_price}元<em>x{$good['goods_num']}</em></dd>
+                <dd class="pice">
+                    <em>
+                        {if condition="($v.return_btn eq 1) and ($good.is_send eq 1)"}
+                        <a style="color:#999;">售后服务</a>
+                        {/if}
+                    </em>
+                </dd>
+                <dd>
+                    <strong>状态：</strong><span style="color: #00B83F">{$v.order_status_desc}</span>
+                </dd>
+            </dl>
+        {/foreach}
+    </a>
+    <div class="pic">共{:count($v.goods_list)}件商品<span>&nbsp;&nbsp;实付：</span><strong>￥{$v.order_amount}元</strong></div>
+    <div class="anniu" style="width:100%">
+        {eq name="v.cancel_btn" value="1"}<span onClick="cancelOrder('{$v.id}')" style="background:#ede8f8;margin-right: 1%">取消订单</span>{/eq}
+        {eq name="v.pay_btn" value="1"}<a href="{:url('mobile/Cart/cart4',array('order_id'=>$v.id))}" style="background:#00B83F">立即付款</a>{/eq}
+        {eq name="v.receive_btn" value="1"}<a href="{:url('mobile/Cart/orderConfirm',array('order_id'=>$v.id))}" style="background:#00B83F">收货确认</a>{/eq}
+        {eq name="v.comment_btn" value="1"}<a href="{:url('mobile/Users/comment',array('order_id'=>$v.id))}" style="background:#00B83F">评价</a>{/eq}
+        {eq name="v.shipping_btn" value="1"}<a href="{:url('mobile/Users/express',array('order_id'=>$v.id))}" style="background:#00B83F">查看物流</a>{/eq}
+    </div>
+</div>
+{/foreach}

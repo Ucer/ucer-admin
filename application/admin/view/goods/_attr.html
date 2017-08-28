@@ -1,0 +1,129 @@
+{include file="public/header" /}
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 商品属性管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('goodsAttrHandle',['id'=>$id])}" id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">属性名称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="name"  value="{$info.name}" placeholder="属性名称">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">所属商品类型：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control m-b chosen-select" name="goods_type_id" >
+                                    <option value="">所属商品类型</option>
+                                    {foreach $type_list as $k=>$v}
+                                    <option value="{$k}" {eq name="info.goods_type_id" value="$k"}selected{/eq}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否检索：</label>
+                            <div class="input-group col-sm-4">
+                                <div class="radio i-checks">
+                                    <input type="radio" name='search_type' value="0" {if condition="$id gt 0 "}{eq name="info.search_type" value="0"}checked{/eq}{else /}checked{/if} />不需要检索&nbsp;&nbsp;
+                                    <input type="radio" name='search_type' value="1" {eq name="info.search_type" value="1"}checked{/eq} />关键字检索
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">属性值录入方式：</label>
+                            <div class="input-group col-sm-4">
+                                <select class="form-control " name="in_type" >
+                                    <option value="0" {eq name="info.in_type" value="0"}selected{/eq}>手工录入</option>
+                                    <option value="1" {eq name="info.in_type" value="1"}selected{/eq}>从列表中选择</option>
+                                    <option value="2" {eq name="info.in_type" value="2"}selected{/eq}>多行文本框</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">属性值：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea name="value"  cols="30" rows="5">{$info.value}</textarea>
+                                <span class="lbl">&nbsp;&nbsp;tps:每一行为一个项</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed avalue"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 排序：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="number" name="sort"  {if condition="$info.id gt 0"}value="{$info.sort}" {else /}value="10" {/if}placeholder="排序"  class="form-control" />
+                                <span class="lbl">&nbsp;&nbsp;默认为10</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script>
+    $(function(){
+        $(".avalue").css('display','none');
+        var aa = $("select[name=in_type]").val();
+        if(aa == 1){
+            $(".avalue").show();
+        }
+    });
+    $("select[name=in_type]").change(function(){
+        var aa =$(this).val();
+        if(aa ==1){
+            $(".avalue").show();
+        }else{
+            $(".avalue").hide();
+        }
+    });
+
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        if(isEmpty('',$("input[name=name]").val(),'属性名称不能为空') == false){return false;}
+        if(isEmpty('',$("select[name=goods_type_id]").val(),'请选择商品类型') == false){return false;}
+        if($("select[name=in_type]").val()==1){
+            if(isEmpty('',$("textarea[name=value]").val(),'请填写属性值') == false){return false;}
+        }
+        $("#btnForm").submit()
+    });
+
+    //IOS开关样式配置
+    var elem = document.querySelector('.js-switch');
+    var switchery = new Switchery(elem, {
+        color: '#1AB394'
+    });
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+</body>
+</html>

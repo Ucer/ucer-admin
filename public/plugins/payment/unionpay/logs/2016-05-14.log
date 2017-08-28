@@ -1,0 +1,64 @@
+﻿2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://222.222.222.222/upacp_demo_b2c/demo/api_01_gateway/BackReceive.php&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://localhost:8085/upacp_demo_b2c/demo/api_01_gateway/FrontReceive.php&merId=777290058130619&orderId=201605141720483714&signMethod=01&txnAmt=220000&txnSubType=01&txnTime=20160514172048&txnType=01&version=5.0.0 
+2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >05e7ab065b2061be60d8108644b02b0a5f0e1979 
+2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >d8dPK7C7kKXOK5TxpUCelx2X/w+RLQQB3AHUnpEJHvYne8cI2XhRro4cGV6EhtEL94X5eU/0KkQdhItsBb7ZvMs3SXick6nGSzlR+zGt5Z+/S9zmZgzrBiy7rD5OKgsODeU+aMVTzDooDcXGr0YnrF0bjaZAH8IVbFvUya7qII8= 
+2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-14 17:52:02, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" target="_blank" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://localhost:8085/upacp_demo_b2c/demo/api_01_gateway/FrontReceive.php" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://222.222.222.222/upacp_demo_b2c/demo/api_01_gateway/BackReceive.php" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605141720483714" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160514172048" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="220000" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="d8dPK7C7kKXOK5TxpUCelx2X/w+RLQQB3AHUnpEJHvYne8cI2XhRro4cGV6EhtEL94X5eU/0KkQdhItsBb7ZvMs3SXick6nGSzlR+zGt5Z+/S9zmZgzrBiy7rD5OKgsODeU+aMVTzDooDcXGr0YnrF0bjaZAH8IVbFvUya7qII8=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[15]------ =====签名报文开始====== 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[21]------ 签名key=val&...串 >accessType=0&backUrl=http://222.222.222.222/upacp_demo_b2c/demo/api_01_gateway/BackReceive.php&bizType=000201&certId=40220995861346480087409489142384722381&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://localhost:8085/upacp_demo_b2c/demo/api_01_gateway/FrontReceive.php&merId=777290058130619&orderId=201605141720483714&signMethod=01&txnAmt=220000&txnSubType=01&txnTime=20160514172048&txnType=01&version=5.0.0 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[24]------ 摘要sha1x16 >05e7ab065b2061be60d8108644b02b0a5f0e1979 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[31]------ 签名串为 >d8dPK7C7kKXOK5TxpUCelx2X/w+RLQQB3AHUnpEJHvYne8cI2XhRro4cGV6EhtEL94X5eU/0KkQdhItsBb7ZvMs3SXick6nGSzlR+zGt5Z+/S9zmZgzrBiy7rD5OKgsODeU+aMVTzDooDcXGr0YnrF0bjaZAH8IVbFvUya7qII8= 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\secureUtil.php ], Line[36]------ =====签名报文结束====== 
+2016-05-14 17:52:23, INFO, 127.0.0.1, File[ D:\tpshop\plugins\payment\unionpay\sdk\acp_service.php ], Line[163]------ 自动跳转html><html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" target="_blank" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://localhost:8085/upacp_demo_b2c/demo/api_01_gateway/FrontReceive.php" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://222.222.222.222/upacp_demo_b2c/demo/api_01_gateway/BackReceive.php" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="merId" id="merId" value="777290058130619" />
+    <input type="hidden" name="orderId" id="orderId" value="201605141720483714" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20160514172048" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="220000" />
+    <input type="hidden" name="certId" id="certId" value="40220995861346480087409489142384722381" />
+    <input type="hidden" name="signature" id="signature" value="d8dPK7C7kKXOK5TxpUCelx2X/w+RLQQB3AHUnpEJHvYne8cI2XhRro4cGV6EhtEL94X5eU/0KkQdhItsBb7ZvMs3SXick6nGSzlR+zGt5Z+/S9zmZgzrBiy7rD5OKgsODeU+aMVTzDooDcXGr0YnrF0bjaZAH8IVbFvUya7qII8=" />
+   <!-- <input type="submit" type="hidden">-->
+    </form>
+</body>
+</html> 

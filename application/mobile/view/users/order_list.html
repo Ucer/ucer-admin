@@ -1,0 +1,123 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="TPshop1.2" />
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>我的订单-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+</head>
+<body>
+<header>
+    <div class="tab_nav">
+        <div class="header">
+            <div class="h-left"><a class="sb-back" href="{:url('mobile/Users/index')}" title="返回"></a></div>
+            <div class="h-mid">我的订单</div>
+            <div class="h-right">
+                <aside class="top_bar">
+                    <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</header>
+{include file="public/right_menu" /}
+<div id="tbh5v0">
+    <!--------筛选 form 表单 开始-------------->
+    <form  name="filter_form" id="filter_form">
+        <!--筛选条件 start-->
+        <div class="Evaluation2">
+            <ul>
+                <li><a href="{:url('mobile/Users/orderList')}" class="tab_head {eq name="type" value=""}on{/eq}"  >全部</a></li>
+                <li><a href="{:url('mobile/Users/orderList',array('type'=>'WAITPAY'))}"      class="tab_head {eq name="type" value="WAITPAY"}on{/eq}">待付款</a></li>
+                <li><a href="{:url('mobile/Users/orderList',array('type'=>'WAITSEND'))}"     class="tab_head {eq name="type" value="WAITSEND"}on{/eq}">待发货</a></li>
+                <li><a href="{:url('mobile/Users/orderList',array('type'=>'WAITRECEIVE'))}"  class="tab_head {eq name="type" value="WAITRECEIVE"}on{/eq}">待收货</a></li>
+                <li><a href="{:url('mobile/Users/orderList',array('type'=>'WAITCCOMMENT'))}" class="tab_head {eq name="type" value="WAITCCOMMENT"}on{/eq}">已完成</a></li>
+            </ul>
+        </div>
+        <!--筛选条件 end-->
+        <!--ajax返回结果 start-->
+        <div class="order ajax_return">
+            {empty name="list" value=""}
+            还没有订单哦
+            {else/}
+                {foreach $list as $v}
+                <div class="order_list">
+                    <h2>
+                        <a href="javascript:void(0);">
+                            <img src="/static/mobile/images/dianpu.png"><span>订单号:{$v.order_sn}</span>
+                            <strong>
+                                {eq name="v.order_status" value="5"}<b>已作废</b>{/eq}
+                                <img src="/static/mobile/images/icojiantou1.png">
+                            </strong>
+                        </a>
+                    </h2>
+                    <a href="{:url('/mobile/Users/orderInfo',array('order_id'=>$v.id))}">
+                            {foreach $v.goods_list as $good}
+                            <dl style="position: relative">
+                                <dt><img src="{:goodsThumb($good.goods_id,$good.goods_img,200,200)}"></dt>
+                                <dd class="name"><strong>{$good.goods_name}</strong>
+                                    <span style="position: absolute;">{$good.spec_key_name} </span></dd>
+                                <dd class="pice">￥{$good.discount_price}元<em>x{$good['goods_num']}</em></dd>
+                                <dd class="pice">
+                                    <em>
+                                        {if condition="($v.return_btn eq 1) and ($good.is_send eq 1)"}
+                                        <a style="color:#999;">售后服务</a>
+                                        {/if}
+                                    </em>
+                                </dd>
+                                <dd>
+                                    <strong>状态：</strong><span style="color: #00B83F">{$v.order_status_desc}</span>
+                                </dd>
+                            </dl>
+                        {/foreach}
+                    </a>
+                    <div class="pic">共{:count($v.goods_list)}件商品<span>&nbsp;&nbsp;实付：</span><strong>￥{$v.order_amount}元</strong></div>
+                    <div class="anniu" style="width:100%">
+                        {eq name="v.cancel_btn" value="1"}<span onClick="cancelOrder('{$v.id}')" style="background:#ede8f8;margin-right: 1%">取消订单</span>{/eq}
+                        {eq name="v.pay_btn" value="1"}<a href="{:url('mobile/Cart/cart4',array('order_id'=>$v.id))}" style="background:#00B83F">立即付款</a>{/eq}
+                        {eq name="v.receive_btn" value="1"}<a href="{:url('mobile/Cart/orderConfirm',array('order_id'=>$v.id))}" style="background:#00B83F">收货确认</a>{/eq}
+                        {eq name="v.comment_btn" value="1"}<a href="{:url('mobile/Users/comment',array('order_id'=>$v.id))}" style="background:#00B83F">评价</a>{/eq}
+                        {eq name="v.shipping_btn" value="1"}<a href="{:url('mobile/Users/express',array('order_id'=>$v.id))}" style="background:#00B83F">查看物流</a>{/eq}
+                    </div>
+                </div>
+            {/foreach}
+        {/empty}
+        </div>
+        <!--ajax返回结果 end-->
+    </form>
+    {empty name="list" value=""}
+    {else/}
+    <div id="getmore" style="font-size:.24rem;text-align: center;color:#888;padding:.25rem .24rem .4rem; clear:both">
+        <a href="javascript:void(0)" onClick="ajaxPage()">点击加载更多</a>
+    </div>
+    {/empty}
+</div>
+<script language="javascript">
+    var  page = 1;
+
+    /*** ajax 提交表单 查询订单列表结果*/
+    function ajaxPage(){
+        page += 1;
+        $.ajax({
+            type : "POST",
+            url:"{:url('mobile/Users/orderList')}",
+            data:{p:page,type:'{$type}',is_ajax:1},
+            success: function(data) {
+                if(!$.trim(data)){
+                    var h = '<a href="javascript:void(0)">没有更多了</a>'
+                    $("#getmore").html(h);
+                }else{
+                    $(".ajax_return").append(data);
+                    $(".m_loading").hide();
+                }
+            },
+            error:function(){
+                layer.open({content:'网络错误,请稍后再试',time: 1});
+                return false;
+            }
+        });
+    }
+</script>
+</body>
+</html>

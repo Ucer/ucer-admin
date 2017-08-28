@@ -1,0 +1,57 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> {$info.name}插件配置</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm" method="post">
+                        <div class="hr-line-dashed"></div>
+                        {foreach $info.config as $k=>$v}
+                        <div class="form-group">
+                        <label class="col-sm-3 control-label">{$v.name}：</label>
+                            <div class="input-group col-sm-4">
+                        {switch name="v.type"}
+                        {case value="text"}
+                            <input type="text" class="form-control" name="config[{$v.name}]"  value="{$config_value[$v.name]}" placeholder="{$v.name}">
+                        {/case}
+                        {case value="select"}
+                            <select class="form-control m-b chosen-select" name="config[{$info.name}]" >
+                                {foreach $v.option as $kk=>$vv}
+                                <option value="{$kk}" {eq name="config_value[$v.name]" value="$kk"}selected{/eq}>{$vv}</option>
+                                {/foreach}
+                            </select>
+                        {/case}
+                        {case value="textarea"}
+                                <textarea type="text" rows="5" name="config[{$v.name}]"  class="form-control" placeholder="描述" >{$config_value[$v.name]}</textarea>
+                        {/case}
+                        {default/}
+                                <input type="text" class="form-control" name="config[{$v.name}]"  value="{$config_value[$v.name]}" placeholder="{$v.name}">
+                        {/switch}
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        {/foreach}
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        ajaxFormBtn("{:url('setting',['code'=>$code,'type'=>$type])}",'btnForm',1);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+
+{include file="public/header" /}
+<link href="/static/admin/js/chosen/chosen.css" type="text/css" rel="stylesheet"/>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 促销活动处理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">促销活动名称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="name"  value="{$info.name}" placeholder="促销活动名称">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">促销活动类型：</label>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <select class="form-control m-b chosen-select" name="type" >
+                                        {foreach $type as $k=>$v}
+                                        <option value="{$k}" {eq name="info.type" value="$k"}selected{/eq}>{$v}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group" id="expression">
+                            <label class="col-sm-3 control-label">折扣：</label>
+                            <div class="input-group col-sm-2">
+                                <input type="number" class="form-control" name="expression"  value="{$info.expression}" placeholder="折扣">
+                                <span class="help-block m-b-none"> 折扣值(1-100 如果打9折，请输入90)</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">选择促销活动商品：</label>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <select class="form-control m-b chosen-select" name="goods_id" multiple id="goods_id" data-placeholder="可以多选">
+                                        {foreach $goods_list as $v}
+                                            <option value="{$v.id}"
+                                            {gt name="id" value="0"}
+                                                {if condition="in_array($v.id,$info.goods_ids)"}
+                                                selected
+                                                {/if}
+                                            {/gt}>
+                                            {$v.goods_name}({$v.id})</option>
+                                        {/foreach}
+                                    </select>
+                                    <input type="hidden" name="goods_ids" value="{$info.goods_id}">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">促销活动时间段：</label>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="促销活动开始时间" name="start_time" time_plugin="start_time" data-min="input"  {gt name="$id" value="0"} value="{$info.start_time}" {/gt} >
+                                    <label class="laydate-icon"></label>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="form-control layer-date " placeholder="促销活动结束时间" name="end_time" time_plugin="end_time" data-min="start_time"  {gt name="$id" value="0"} value="{$info.end_time}" {/gt}>
+                                    <label class="laydate-icon"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">描述：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="8" name="description"  class="form-control" placeholder="描述" >{$info.description}</textarea>
+                                <span class="help-block m-b-none"> <i class="fa fa-info-circle"></i> 2000个字符以内</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed avalue"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">适合用户类型：</label>
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <select class="form-control m-b chosen-select" name="user_group_ida" multiple id="user_group_id" data-placeholder="可以多选">
+                                        {foreach $level_list as $k=>$v}
+                                        <option value="{$k}"
+                                            {gt name="id" value="0"}
+                                            {if condition="in_array($k,$info.user_group_ids)"}
+                                                selected
+                                            {/if}
+                                            {/gt}>
+                                        {$v}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="help-block m-b-none"> <i class="fa fa-info-circle"></i> 不填写则为所有用户</span>
+
+                                    <input type="hidden" name="user_group_id" value="{$info.user_group_id}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script src="/static/admin/js/chosen/chosen.jquery.js"></script>
+
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var expression = $("input[name=expression]").val();
+        if(isEmpty('',$("input[name=name]").val(),'促销活动名称不能为空') == false){return false;}
+        if(isEmpty('',expression,'优惠信息不能为空') == false){return false;}
+        if(isEmpty('',$("input[name=goods_ids]").val(),'请选择活动商品') == false){return false;}
+        if(isEmpty('',$("input[name=start_time]").val(),'请选择促销活动开始时间') == false){return false;}
+        if(isEmpty('',$("input[name=end_time]").val(),'请选择促销活动结束时间') == false){return false;}
+        if(isEmpty('',$("textarea[name=description]").val(),'描述不能为空') == false){return false;}
+        var type = $("select[name=type]").val();
+        if(type ==0){
+            if(prexRule(/^[4-9][5-9]$/,expression,'折扣率只能是45-99之间的数字') == false){return false;};
+        }
+        if(type==1 || type==2){
+            if(!parseFloat(expression)){
+                layer.msg('金额必须为浮点型字符', {icon: 5,time:2000}, function(index){
+                    layer.close(index);
+                });
+                return false;
+            }
+
+        }
+        if(type ==4){
+            if(prexRule(/^[1-9]\/[1-7]+$/,expression,'必须为M/N格式;M、N必须是大于1的整数')== false){return false;};
+        }
+        ajaxFormBtn("{:url('goodsPromHandle',['id'=>$id])}",'btnForm');
+    });
+    /*根据活动类型获取优惠体现*/
+    $("select[name=type]").on('change',function(){
+        var type = parseInt($(this).val());
+        var expression = '';
+        switch(type){
+            case 0:{
+                expression = '<label class="col-sm-3 control-label">折扣：</label> <div class="input-group col-sm-1"> <input type="number" class="form-control" name="expression"  value="{$info.expression}" placeholder="折扣" pattern="int"> <span class="help-block m-b-none"> 折扣值(1-100 如果打9折，请输入90)</span> </div>'
+                break;
+            }
+            case 1:{
+                expression = '<label class="col-sm-3 control-label">立减金额：</label> <div class="input-group col-sm-1"> <input type="number" class="form-control" name="expression"  value="{$info.expression}" placeholder="0.00" pattern="float"> <span class="help-block m-b-none"> 立减金额(20.00)</span> </div>'
+                break;
+            }
+            case 2:{
+                expression = '<label class="col-sm-3 control-label">出售金额：</label> <div class="input-group col-sm-1"> <input type="number" class="form-control" name="expression"  value="{$info.expression}" placeholder="0.00" pattern="float"> <span class="help-block m-b-none"> 出售金额(20.00)</span> </div>'
+                break;
+            }
+            case 3:{
+                expression = ' <label class="col-sm-3 control-label">代金券：</label> <div class="form-group"> <div class="col-md-2"> <select class="form-control m-b chosen-select" name="expression" >{foreach $coupon as $k=>$v}<option value="{$k}" {eq name="info.expression" value="$k"}selected{/eq}>{$v}</option> {/foreach}</select> </div> </div>';
+                break;
+            }
+            case 4:{
+                expression = '<label class="col-sm-3 control-label">买M送N：</label> <div class="input-group col-sm-1"> <input type="text" class="form-control" name="expression"  value="{$info.expression}" placeholder="3/1" pattern="\\d+\/\\d+"> <span class="help-block m-b-none"> 买几件送几件（如买3件送1件: 3/1）</span> </div>'
+                break;
+            }
+        }
+        $("#expression").html(expression);
+    });
+    $("select[name=type]").trigger('change');
+
+
+    /*会员等级多选下拉框 ------------start */
+
+        //多选初始化
+        $("#user_group_id").chosen({
+//        max_selected_options:3,
+            no_results_text:'无匹配项',
+            display_selected_options:false
+        });
+    //获取选中的值
+    $('#user_group_id').on('change', function(e, params) {
+        var data = '';
+        $("input[name=user_group_id]").val($(this).val());
+
+        $('.chosen-choices li span').each(function(index,el){
+            console.log($(this));
+            if (index == 0){
+                data +=$(this).text();
+            }else{
+                data += ',' + $(this).text();
+            }
+        });
+    });
+    /*会员等级多选下拉框 ------------end */
+
+    /*选择商品多选下拉框 ------------start */
+    //多选初始化
+    $("#goods_id").chosen({
+//        max_selected_options:3,
+        no_results_text:'无匹配项',
+        display_selected_options:false
+    });
+    //获取选中的值
+    $('#goods_id').on('change', function(e, params) {
+        var data = '';
+        $("input[name=goods_ids]").val($(this).val());
+        $('.chosen-choices li a').each(function(index,el){
+            if (index == 0){
+                data +=$(this).text();
+            }else{
+                data += ',' + $(this).text();
+            }
+        });
+
+    });
+    /*选择商品多选下拉框 ------------end */
+
+
+
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+{include file="public/header" /}
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> {$row.name}配送区域配置</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_tongyong">
+
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td width="20%">配送区域名称：</td>
+                                        <td>
+                                            <input  type="text" value="{$info.shipping_area_name}" name="shipping_area_name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            首&nbsp;&nbsp;重
+                                            <select name="config[first_weight]">
+                                                {for start="500" end="8000"  step="500" }
+                                                <option value="{$i}"{eq name="info.config.first_weight" value="$i"}selected{/eq}>{$i}</option>
+                                                {/for}
+                                            </select>
+                                            克以内费用：
+                                        </td>
+                                        <td>
+                                            <input class="col-sm-1" type="number" value="{$info.config.money}" name="config[money]" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            续重每
+                                            <select name="config[second_weight]">
+                                                {for start="500" end="8000"  step="500"}
+                                                <option value="{$i}"{eq name="info.config.second_weight" value="$i"}selected{/eq}>{$i}</option>
+                                                {/for}
+                                            </select>
+                                            克或其零数的费用：
+                                        </td>
+                                        <td>
+                                            <input type="text" class="col-sm-1" value="{$info.config.add_money}" name="config[add_money]" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onKeyUp="this.value=this.value.replace(/[^\d.]/g,'')"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>配送区域：</td>
+                                        <td id="area_list">
+                                            {foreach $select_area as $area}
+                                                <input class="area_list" type="checkbox" checked name="area_list[]" value="{$area.region_id}">{$area.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            {/foreach}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td style="width: 150px">添加配送区域：</td>
+                            <td>
+                                <select class="province_select"  name="province_id"  id="province" size="10" onchange="getCity(this)">
+                                    <option value="">请选择省份</option>
+                                    {foreach $province as $k=>$v}
+                                    <option  value="{$v.id}">{$v.name}</option>
+                                    {/foreach}
+                                </select>
+                                <select name="city_id" id="city" size="10" onChange="getArea(this)">
+                                    <option  value="">请选择城市</option>
+                                </select>
+                                <select name="area_id" id="district" size="10">
+                                    <option  value="">请选择区域</option>
+                                </select>
+                                <button onclick="addArea()" class="btn btn-info" type="button">
+                                    <i class="ace-icon fa fa-plus bigger-110"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script type="text/javascript">
+
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        ajaxFormBtn("{:url('shippingHandle',['id'=>$id,'type'=>$row.type,'code'=>$row.code])}",'btnForm');
+    });
+    //  添加配送区域
+    function addArea() {
+        //
+        var province = $("#province").val(); // 省份
+        var city = $("#city").val();        // 城市
+        var area = $("#district").val(); // 区域
+        var text = '';  // 中文文本
+        var tpl = ''; // 输入框 html
+        var space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+        var is_set = 0; // 是否已经设置了
+
+        // 设置 区域
+        if(area > 0){
+            text = $("#district").find('option:selected').text();
+            tpl = '<input class="area_list" type="checkbox" checked name="area_list[]" value="'+area+'">'+text+space;
+            is_set = area; // 街道设置了不再设置市
+        }
+        // 如果县镇没设置 就获取城市
+        if(is_set == 0 && city > 0){
+            text = $("#city").find('option:selected').text();
+            tpl = '<input class="area_list" type="checkbox" checked name="area_list[]" value="'+city+'">'+text+space;
+            is_set = city;  // 市区设置了不再设省份
+
+        }
+        // 如果城市没设置  就获取省份
+        if(is_set == 0 && province > 0){
+            text = $("#province").find('option:selected').text();
+            tpl = '<input class="area_list" type="checkbox" checked name="area_list[]" value="'+province+'">'+text+space;
+            is_set = province;
+        }
+        var obj = $("input[class='area_list']"); // 已经设置好的复选框拿出来
+        var exist = 0;  // 表示下拉框选择的 是否已经存在于复选框中
+        $(obj).each(function(){
+            if($(this).val() == is_set){  //当前下拉框的如果已经存在于 复选框 中
+                layer.msg('已经存在该区域', {icon: 5,time:1000});  // alert("已经存在该区域");
+                exist = 1; // 标识已经存在
+            }
+        });
+        if(!exist){
+            $('#area_list').append(tpl); // 不存在就追加进 去
+        }
+    }
+</script>
+</body>
+</html>

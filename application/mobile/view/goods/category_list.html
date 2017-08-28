@@ -1,0 +1,91 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta charset="urlTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>所有分类-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/catalog.css"/>
+    <style>
+        .goods_nav{ width:30%; float:right; right:5px; overflow:hidden; position:fixed;margin-top:25px; z-index:9999999}
+    </style>
+</head>
+<body>
+<!--分类切换-->
+<div class="container">
+    <div class="category-box">
+        <div class="category1" style="outline: none;" tabindex="5000">
+            <ul class="clearfix" style="padding-bottom:50px;">
+                {assign name="m" value="0" /}
+                {foreach $goods_category_tree as $k=>$v}
+                {eq name="v.level" value="0"}
+                <li {eq name="$m" value="0"}class='cur' style='margin-top:46px'{/eq} data-id="{$m++}" >{$v.mobile_cat_name|getSubstr=0,12}</li>
+                {/eq}
+                {/foreach}
+            </ul>
+        </div>
+        <div class="category2" style=" outline: none;" tabindex="5001">
+            {assign name="j" value="0" /}
+            {foreach $goods_category_tree as $kk=>$vv}
+            <dl style="margin-top:46px;padding-bottom:50px;{eq name='j' value='0'} display:block; {else/} display:none;{/eq}" data-id="{$j++}">
+               <span>
+                 {zhjaa:adv pid="4" limit="1" item="mm"}
+                      <a href="{$mm.ad_link}"  {eq name="mm.is_target" value="1"}target="_blank"{/eq}>
+                      <em>全部>></em>
+                      <img src="{$mm.ad_code}" title="" style="" alt="广告位">
+                      </a>
+                {/zhjaa:adv}
+                </span>
+                {notempty name="vv.tmenu" value=""}
+                {foreach $vv.tmenu as $v2}
+                <dt><a href="{:url('mobile/Goods/goodsList',array('id'=>$v2.id))}" >{$v2.mobile_cat_name}</a></dt>
+                <dd>
+                    <div class="fenimg">
+                        {empty name="v2.sub_menu" value=""}{else/}
+                        {foreach $v2.sub_menu as $v3}
+                        <div class="fen">
+                            <a href="{:url('mobile/Goods/goodsList',array('id'=>$v3.id))}">{$v3.mobile_cat_name}</a>
+                        </div>
+                        {/foreach}
+                        {/empty}
+                    </div>
+                </dd>
+                {/foreach}
+                {/notempty}
+
+            </dl>
+            {/foreach}
+        </div>
+    </div>
+</div>
+{include file="public/footer_nav" /}
+
+<script>
+    $(function () {
+        //滚动条
+        $(".category1,.category2").niceScroll({ cursorwidth: 0,cursorborder:0 });
+
+        //图片延迟加载
+        //$(".lazyload").scrollLoading({ container: $(".category2") });
+        //$('.category-box').height($(window).height());
+
+        //点击切换2 3级分类
+        var array=new Array();
+        $('.category1 li').each(function(){
+            array.push($(this).position().top-0);
+        });
+
+        $('.category1 li').click(function() {
+            var index=$(this).index();//第几个li--从0开始
+            console.log(index);
+            $('.category1').delay(200).animate({scrollTop:array[index]},300);
+            $(this).addClass('cur').siblings().removeClass();
+            $('.category2 dl').eq(index).show().siblings().hide();//dl的所有其它同类元素设置隐藏属性
+            $('.category2').scrollTop(0);
+        });
+
+    });
+</script>
+<script src="/static/mobile/js/jquery.nicescroll.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>权限菜单列表</h5>
+                    <div class="ibox-content">
+                        <!--搜索框开始-->
+                        <div class="row">
+                            <form action="" method="post" >
+                                <div class="col-sm-2">
+                                    <select class="form-control m-b chosen-select" name="group">
+                                        <option value="0">所属分组</option>
+                                        {foreach $group as $v}
+                                        <option value="{$v.id}" {eq name="v.id" value="$groups"}selected{/eq}>{$v.name}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="input-group">
+                                        <input type="text"  class="form-control" name="keywords" value="{$keywords}" placeholder="输入权限名称" />
+                                           <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="col-sm-2 pull-right">
+                                <div class="btn-group pull-right"  role="group" style="clear: both">
+                                    <a href="{:url('rightMenuHandle',['id'=>0])}" class="btn btn-outline btn-default "><i class="fa fa-plus"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-outline btn-default " onclick="getIds(this)" data-url="{:url('delRightMenu')}"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--搜索框结束-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                <th>权限名称</th>
+                                <th>所属分组</th>
+                                <th>权限码</th>
+                                <th>状态</th>
+                                <th>创建时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {empty name="lists"}
+                            <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                            {else/}
+                            {foreach $lists as $v}
+                            <tr>
+                                <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+                                <td>{$v.name}</td>
+                                <td>{$v.gname}</td>
+                                <td>{$v.right|handleStr=###,0,66,true}</td>
+                                <td>
+                                    {if condition="$v.delete_at eq 0 "}
+                                    <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="1" data-url="{:url('powerSwitch')}">
+                                        <div id="zt{$v.id}"><span class="label label-info">启用</span></div>
+                                    </a>
+                                    {else /}
+                                    <a class="updt" href="javascript:;" data-id="{$v.id}" data-val="0" data-url="{:url('powerSwitch')}">
+                                        <div id="zt{$v.id}"><span class="label label-danger">禁用</span></div>
+                                    </a>
+                                    {/if}
+                                </td>
+                                <td>{$v.created_at}</td>
+                                <td>
+                                    <a href="{:url('rightMenuHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-pencil-square-o"></i> 编辑
+                                    </a>&nbsp;&nbsp;
+                                    <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delRightMenu')}">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </a>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            {/empty}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+    /*节点显示隐藏切换*/
+    $(function(){
+        $(".updt").click(function(){
+            var id = $(this).attr('data-id')
+            var val = $(this).attr('data-val')
+            var url = $(this).attr('data-url')
+            $.post(url,{id:id,val:val},function(res){
+                if(res.code==1){
+                    var stu2='<span class="label label-info">启用</span>';
+                    $('#zt'+id).html(stu2);
+                    layer.msg(res.msg,{icon:1,time:1500,shade: 0.1},function(){
+                        location.href = location.href;
+                    });
+                }else{
+                    var stu1='<span class="label label-danger">禁用</span>';
+                    $('#zt'+id).html(stu1);
+                    layer.msg(res.msg,{icon:2,time:1500,shade: 0.1},function(){
+                        location.href = location.href;
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>

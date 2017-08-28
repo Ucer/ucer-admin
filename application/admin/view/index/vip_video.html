@@ -1,0 +1,349 @@
+{include file="public/header" /}
+<style type="text/css">
+    body{background:url("img/bg.gif") no-repeat center top fixed; margin-top:0px;}
+    img, div, input{behavior:url("iepngfix.htc");}
+</style>
+<script src="/static/css/video/js/snow.js" type="text/javascript"></script>
+
+<link href="/static/admin/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+
+<!-- Loading Flat UI -->
+<link href="/static/css/video/flat-ui.css" rel="stylesheet">
+<link href="/static/css/video/newcommons.css" rel="stylesheet" type="text/css">
+<style type="text/css">@font-face{font-family:"tf";src:url("/tfboys.360.cn/m/f/tf.eot");src:url("/tfboys.360.cn/m/f/tf.eot?#qiwoo-font") format("embedded-opentype"),url("/tfboys.360.cn/m/f/tf.woff") format("woff"),url("/tfboys.360.cn/m/f/tf.ttf") format("truetype"),url("/tfboys.360.cn/m/f/tf.svg") format("svg");font-weight:normal;font-style:normal}@font-face{font-family:"\601d\6e90\9ed1\4f53\52a9\624b\7248";font-style:normal;font-weight:normal;src:url('sycn.eot');src:url('sycn.eot?#iefix') format('embedded-opentype'),url(sycn.ttf) format('truetype')}
+body{font-family:'Microsoft YaHei','\5fae\8f6f\96c5\9ed1'}
+.head{background:#006666;height:60px;position:fixed;width:100%;min-width:1068px;top:0;box-shadow:0 0 2px rgba(0,0,0,.1);z-index:1001}
+.head .bg-mask{position:absolute;width:100%;height:100%;background:#fff;opacity:.1;filter:alpha(opacity=10);-ms-filter:"alpha(opacity=10)"}
+.zslogo{position:absolute;top:0;left:0;margin:13px 0 0 35px}
+.head .navList{position:absolute;right:0;top:0}
+.link{padding:0 15px;display:block;height:60px;float:left}
+.link span{display:inline-block;height:60px;color:#fff;font-size:16px;line-height:60px}
+.link,.link:hover{text-decoration:none}
+.link-app{padding:0;margin-left:0;margin-right:36px;position:relative;text-align:center;width:102px}
+.link-app img,.link-app span{vertical-align:middle;margin-right:5px}
+.link-app .icon-arrow{display:inline-block;*display:inline;*zoom:1;width:9px;height:5px;background:url(img/tip.png) no-repeat;margin-right:0}
+.link-app:hover{border-radius:0;background-color:rgba(0,0,0,.4);height:180px}
+.link-app .qrcode{display:none}.link-app:hover .qrcode{display:block}
+.link-app:hover .qrcode img{margin-right:0;margin-top:3px}
+.link-app:hover .icon-arrow{background-position:0 -5px}
+.head .content .cur span{background:url(/img/cur.png) 0 0 repeat-x}
+.body{margin-top:60px;background:#4ebebd;position:relative}
+.body .bg{padding-top:448px}
+.bg_c{height:168px;background:url(img/cover.png) center bottom no-repeat}
+.bg_f{height:200px;background:#fff}
+.head,.body{-ms-transition:background 1s linear;-o-transition:background 1s linear;-moz-transition:background 1s linear;-webkit-transition:background 1s linear;transition:background 1s linear}
+.content{position:absolute;width:1068px;left:50%;margin-left:-534px;top:0}
+
+.lisContainer{position:absolute;width:381px;height:59px;top:449px;left:589px;text-align:center;padding-top:22px}
+.li{display:inline-block;width:16px;height:16px;background:url(img/lis.png) 0 0 no-repeat;margin-right:18px;position:relative}
+.li-gray{margin-right:0}
+.li em{width:100%;height:100%;background:url(img/t0154f6955a6485cd7f.png) 0 0 no-repeat;position:absolute;top:0;left:0;display:none}
+.lisContainer .cur em{display:block}
+.li-green{background-position:0 0}
+.li-blue{background-position:-33px 0}
+.li-pink{background-position:-67px 0}
+.li-yellow{background-position:-101px 0}
+.li-purple{background-position:-134px 0}
+.li-red{background-position:-168px 0}
+.li-gray{background-position:-201px 0}
+
+
+.containe{
+    text-align: center;
+}
+#url{
+    width:600px;
+    height:50px;
+    border-color:#54C754;
+    display: inline-block;
+    margin: 0px;
+}
+#doplayers{
+    margin: 0px;
+    width:150px;
+    height: 50px;
+    display: inline-block;
+
+}
+#doplayers1{
+    margin: 0px;
+    width:150px;
+    height: 50px;
+    display: inline-block;
+
+}
+.fromer{
+    text-align: center;
+    padding-top: 2px;
+
+}
+dl{
+    float: left;
+    margin-right: 2%;
+}
+
+</style>
+
+<script>
+    function test_post() {
+        var testform=document.getElementById("testform");
+        testform.action="player.php";
+        testform.submit();
+    }
+</script>
+<script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
+<SCRIPT language=javascript type=text/javascript>
+    <!--
+    document.oncontextmenu=new Function('event.returnValue=false;');
+    document.onselectstart=new Function('event.returnValue=false;');
+    -->
+</SCRIPT>
+<body class="gray-bg">
+
+<div class="page">
+    <div class="head js-bg-ele">
+        <em class="bg-mask"></em>
+        <div class="content">
+            <img src="/static/css/video/img/aaa.png" alt="" class="zslogo">
+
+            <div class="navList">
+                <a href="http://www.catme.net/?m=quan" target="_blank" class="link cur"><span>由漂过太平洋提供</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="body js-bg-ele">
+        <div class="bg">
+            <div class="bg">
+            </div>
+            <div class="content">
+                <br /> <p />
+                <!--   -->
+                </p><div class="containe">
+                <input name="doplayers" type="button" id="doplayers1" class="btn btn-block btn-lg btn-success" value="会员视频地址">
+                <input name="url" id="url" type="text" class="form-control" value="http://v.youku.com/v_show/id_XMTY1Njc5MTgwOA==.html" style="padding-top: 4px;">
+                <input name="doplayers" type="button" id="doplayers" class="btn btn-block btn-lg btn-success" value="立即播放">
+
+            </div>
+                <br>
+
+                <!--</div>-->
+                <div id="ckvip" style="position:relative;z-index:4000">
+                    <iframe border="0" id="vplay" name="vplay" src="video.html" style="width: 1010px; height: 570px" allowfullscreen="" allowtransparency="" frameborder="0">
+                        <!DOCTYPE html>
+                        <!-- saved from url=(0089)https://api.47ks.com/webcloud/?v=&url=http://v.youku.com/v_show/id_XMTY1Njc5MTgwOA==.html -->
+                        <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+                            <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+
+                            <title>47Player</title>
+                            <style type="text/css">body,html{padding: 0;margin: 0;width:100%;height:100%;background-color:#000; color:#999;}
+                            #a1,#loading,#error{padding: 0;margin: 0;width:100%;height:100%;background-color:#000; color:#999;}
+                            </style>
+                            <link href="https://api.47ks.com/favicon.ico" rel="shortcut icon">
+                            <script src="jquery.min(1).js"></script>
+                            <script type="text/javascript" src="ckplayer.js" charset="utf-8"></script>
+                        </head>
+                        <body style="overflow-y:hidden;">
+                        <input type="hidden" id="get" value="4665D7653F20DF4FE747B81D6A1168F4">
+                        <div id="loading" align="center" style="display: none;"><strong><br><br><br><br><br><span class="tips" style="display: none;">服务器正在解析中,请稍等....<font class="timemsg">40</font>s</span></strong><span class="timeout" style="color: rgb(255, 153, 0);">解析响应超时，请刷新重试！</span></div>
+                        <div id="a1" style=""><object pluginspage="http://www.macromedia.com/go/getflashplayer" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="100%" height="100%" id="ckplayer_a1" name="ckplayer_a1" align="middle"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"><param name="quality" value="high"><param name="bgcolor" value="#FFF"><param name="wmode" value="transparent"><param name="movie" value="/player/ckplayer/ckplayer.swf"><param name="flashvars" value="f=https%3A%2F%2Fapi.47ks.com%2Fyt%2Fwebmain.php%3Fkey%3Dc5a5s3ahh96HgjDgePdxjDYuh%2FwO5q7ZoKRGYTNHeTJCCKSImic7MtSy6%2FMNbe74DeO6BCX3o%2BoGvrZeuWcJDv9v%2B2gB4xOmASA1ohTg5M0%26token%3DgOp0tQODTmCEEV8j3PcECTguFfeEJ6MDV5JiY9Q%26cip%3D%26hd%3Dyh&amp;c=0&amp;s=2&amp;h=4&amp;p=1&amp;v=100&amp;e=1&amp;loaded=error"><embed allowscriptaccess="always" allowfullscreen="true" quality="high" bgcolor="#FFF" wmode="transparent" src="/player/ckplayer/ckplayer.swf" flashvars="f=https%3A%2F%2Fapi.47ks.com%2Fyt%2Fwebmain.php%3Fkey%3Dc5a5s3ahh96HgjDgePdxjDYuh%2FwO5q7ZoKRGYTNHeTJCCKSImic7MtSy6%2FMNbe74DeO6BCX3o%2BoGvrZeuWcJDv9v%2B2gB4xOmASA1ohTg5M0%26token%3DgOp0tQODTmCEEV8j3PcECTguFfeEJ6MDV5JiY9Q%26cip%3D%26hd%3Dyh&amp;c=0&amp;s=2&amp;h=4&amp;p=1&amp;v=100&amp;e=1&amp;loaded=error" width="100%" height="100%" name="ckplayer_a1" id="ckplayer_a1" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></object></div>
+                        <div id="error" align="center" style="display:none;color:#f90;"><br><br><br><br><br>视频解析失败/URL错误，请点击<a href="javascript:location.reload();">重试</a>...</div>
+                        </body></html>
+                    </iframe>
+                </div>
+
+
+                <!--</form>-->
+                <!--
+                 <p><font color="#FFFFFF">在下面 ☟ 输入您要观看视频地址,点击播放按钮即可免费观看Vip视频</font></p>
+             -->
+
+
+
+
+
+
+
+
+                <script type="text/javascript">
+                    players();
+                    $("#doplayers").bind("click", function() {
+                        players()
+                    });
+
+                    function players() {
+                        var a = $('#url').val();
+                        if ($('#url').val() == "") {
+                            alert('请输入视频网站网址！');
+                            $('#url').focus();
+                            return (false)
+                        }
+                        document.getElementById("vplay").src="https://api.47ks.com/webcloud/?v=" + a;
+
+                    }
+
+                    function players2() {
+                        var a = $('#url').val();
+                        if ($('#url').val() == "") {
+                            alert('请输入视频网站网址！');
+                            $('#url').focus();
+                            return (false)
+                        }
+                        var b = {
+                            f: 'https://api.47ks.com/webcloud/?v=' + a,
+                            c: 0,
+                            s: 2,
+                            p: 1,
+                            b: 1,
+                        };
+                        var c = {
+                            bgcolor: '#FFF',
+                            allowFullScreen: true,
+                            allowScriptAccess: 'always',
+                            wmode: 'transparent'
+                        };
+                        var d = ['https://api.47ks.com/webcloud/?v=' + a + '&mobile'];
+                        var e = ['iPad', 'iPhone', 'ios', 'android+false', 'msie10+false'];
+                        CKobject.embed('player/player.swf', 'ckplays', 'ckplayer_mains', '100%', '500', false, b, d, c)
+                    }
+
+                    function addhtml52() {
+                        if (CKobject.isHTML5()) {
+                            support = ['all'];
+                            CKobject._K_('moveid').innerHTML = '';
+                            CKobject.embedHTML5('moveid', 'ckplayer_a1', '100%', 530, video, flashvars, support)
+                        } else {
+                            addflash()
+                        }
+                    }
+                </script>
+
+                <p> </p><p><font color="#FFFFFF">目前本站完美支持的网址：乐视视频网址、奇艺视频网址、芒果视频网址、土豆视频网址、优酷视频网址等。</font></p>
+                </p><p><b><font color="#033">因为使用本网站线路的人较多：如果显示不能播放，请按F5多刷新几次就可以了！</font></B></p>
+                </p><p><font color="#FFFFFF">点击下面 ☟ 视频图标,可进入会员视频地址 </font></p>
+
+                <div id="ckplays"></div>
+                <div class="logos_lists" style="margin-left:30px;">
+                    <dl>
+                        <a target="_blank" href="http://vip.iqiyi.com/?fc=b4df9faa4b31aec4"><img src="/static/css/video/img/aqylogo.png" alt=""></a>
+                        <dd>爱奇艺视频</dd>
+                    </dl >
+                    <dl>
+                        <a target="_blank" href="http://film.qq.com/"><img src="/static/css/video/img/qqlogo.png" alt=""></a>
+                        <dd>腾讯视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://vip.youku.com/"><img src="/static/css/video/img/youkulogo.png" alt=""></a>
+                        <dd>优酷视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://vip.tudou.com/index.html"><img src="/static/css/video/img/tudoulogo.png" alt=""></a>
+                        <dd>土豆视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.56.com/"><img src="/static/css/video/img/56logo.png" alt=""></a>
+                        <dd>56视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://movie.ku6.com/"><img src="/static/css/video/img/ku6logo.png" alt=""></a>
+                        <dd>酷6视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://yuanxian.le.com/?ref=ym0101"><img src="/static/css/video/img/letvlogo.png" alt=""></a>
+                        <dd>乐视TV视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.fun.tv/"><img src="/static/css/video/img/fxw.png" alt=""></a>
+                        <dd>风行网</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.mgtv.com/vip/"><img src="/static/css/video/img/hunantvlogo.png" alt=""></a>
+                        <dd>芒果TV视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://tv.sohu.com/"><img src="/static/css/video/img/sohulogo.png" alt=""></a>
+                        <dd>搜狐视频</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.pptv.com/"><img src="/static/css/video/img/pps.png" alt=""></a>
+                        <dd>PPTV</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.kankan.com/"><img src="/static/css/video/img/xckk.png" alt=""></a>
+                        <dd>响巢看看</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.baofeng.com/"><img src="/static/css/video/img/bfyy.png" alt=""></a>
+                        <dd>暴风影音</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.catme.net/"><img src="/static/css/video/img/m18.png" alt="" width="150" height="50"></a>
+                        <dd>m1905电影网</dd>
+                    </dl>
+                    <dl>
+                        <a target="_blank" href="http://www.yinyuetai.com/"><img src="/static/css/video/img/yinyuetailogo.png" alt=""></a>
+                        <dd>音悦台MV</dd>
+                    </dl>
+
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div style=" width:960px; margin:0 auto; text-align:center; margin-top:100px">
+                <span id="span_dt_dt"></span>
+            </div>
+            <span id="sitetime"></span>
+
+            <script>
+                function secondToDate(second) {
+                    if (!second) {
+                        return 0;
+                    }
+                    var time = new Array(0, 0, 0, 0, 0);
+                    if (second >= 365 * 24 * 3600) {
+                        time[0] = parseInt(second / (365 * 24 * 3600));
+                        second %= 365 * 24 * 3600;
+                    }
+                    if (second >= 24 * 3600) {
+                        time[1] = parseInt(second / (24 * 3600));
+                        second %= 24 * 3600;
+                    }
+                    if (second >= 3600) {
+                        time[2] = parseInt(second / 3600);
+                        second %= 3600;
+                    }
+                    if (second >= 60) {
+                        time[3] = parseInt(second / 60);
+                        second %= 60;
+                    }
+                    if (second > 0) {
+                        time[4] = second;
+                    }
+                    return time;
+                }
+            </script>
+            <script type="text/javascript" language="javascript">
+                function setTime() {
+                    // 博客创建时间秒数，时间格式中，月比较特殊，是从0开始的，所以想要显示5月，得写4才行，如下
+                    var create_time = Math.round(new Date(Date.UTC(2016, 12, 7, 12, 06, 0))
+                                    .getTime() / 1000);
+                    // 当前时间秒数,增加时区的差异
+                    var timestamp = Math.round((new Date().getTime() + 8 * 60 * 60 * 1000) / 1000);
+                    currentTime = secondToDate((timestamp - create_time));
+                    currentTimeHtml = currentTime[0] + '年' + currentTime[1] + '天'
+                            + currentTime[2] + '时' + currentTime[3] + '分' + currentTime[4]
+                            + '秒';
+                    document.getElementById("htmer_time").innerHTML = currentTimeHtml;
+                }
+                setInterval(setTime, 1000);
+            </script>
+
+            {include file="public/footer" /}
+            <link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+</div>
+        </div>
+    </div>
+</body>
+
+

@@ -1,0 +1,194 @@
+<style type="text/css">
+    .page-shopping .bottom-panel{display: flex;}
+    .page-shopping .bottom-panel .info{margin-top: 4px;width: 50%;}
+    .page-shopping .bottom-panel .right{margin-top: 10px;}
+    .page-shopping .item-list .attr span{overflow: hidden;display: -webkit-box; font-weight: normal; white-space: nowrap;}
+</style>
+{empty name="cartList" value=""}
+{else/}
+{foreach $cartList as $k=>$v}
+<div  class="block" style="margin-top:0px;">
+    <div class="shop_title" >
+        <div class="fl"><a class="shopLink eclipse" href="javascript:void(0);">供货商：{$Think.config.web_site_name}</a>
+        <input type="hidden" name="supplierid" id="supplierid" value="7"></div>
+    </div>
+    <div class="item-list">
+        <div class="item">
+            <div class="inner">
+                <div style="width:60%; float:left; height:98px;">
+                    <div class="check-wrapper">
+                        <span  class="cart-checkbox  {eq name="v.selected" value="1"}checked{/eq}">
+                        <input type="checkbox" autocomplete="off" name="cart_select[{$v.id}]" style="display:none;" value="1" onclick="ajaxCartList();"  {eq name="v.selected" value="1"}checked{/eq} >
+                        </span>
+                    </div>
+                    <div  class="pic">
+                        <a href="{:url('mobile/Goods/goodsInfo',array('id'=>$v.goods_id))}"><img src="{$v.goods_img}"></a>
+                    </div>
+                    <div class="name">
+                        <span>  {$v.goods_name} </span>
+                    </div>
+                    <div class="attr">
+                        <span>{$v.spec_key_name}</span>
+                    </div>
+                    <div class="num">
+                        <div class="xm-input-number">
+                            <div class="act_wrap">
+                                <a href="javascript:;" onclick="switchNum(-1,'{$v.id}','{$v.store_count}');" id="jiannum6" class="input-sub active"></a>
+                                <input id="goods_num[{$v.id}]" type="text" onKeyDown='if(event.keyCode == 13) event.returnValue = false' name="goods_num[{$v.id}]"  value="{$v.goods_num}"  class="input-num"  onblur="switchNum(0,'{$v.id}','{$v.store_count}')"/>
+                                <a href="javascript:;" onclick="switchNum(1,'{$v.id}','{$v.store_count}');"  class="input-add active"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style=" position:absolute; right:0px; top:20px; width:100px; height:98px;">
+                    <div class="price">
+                        <span class="mar_price">￥{$v.market_price}元</span>
+                        <br>
+                        <span>￥{$v.discount_price}元</span>
+                    </div>
+                    <div class="delete">
+                        <a href="javascript:void(0);" onclick="delCartGoods('{$v.id}')">
+                            <div class="icon-shanchu"></div>
+                        </a>
+                    </div>
+                </div>
+                <div style="height:0px; line-height:0px; clear:both;"></div>
+            </div>
+            <div class="append"></div>
+        </div>
+    </div>
+</div>
+<form id="selcartValidate">
+    {:token()}
+</form>
+{/foreach}
+{/empty}
+<!--购物车底部 start-->
+{empty name="cartList" value=""}
+<div class="screen-wrap fullscreen login">
+    <section id="cart-content">
+        <div class="qb_tac" style="padding:50px 0">
+            <img src="/static/mobile/images/flow/empty_cart.png" width="100" height="95">
+            <br>购物车都快饿瘪了...</div>
+        <div class="qb_gap" style="width:60%; margin:0 auto;">
+            <a href="{:url('Index/index')}" class="mod_btn btn_strong">马上逛逛</a>
+        </div>
+    </section>
+    <div style="height:72px;"></div>
+    <section class="f_mask" style="display: none;"></section>
+    <section class="f_block" id="choose" style="height:0px;"></section>
+</div>
+{else/}
+<div class="bottom-panel">
+    <div class="quanxuan">
+        <div class="check-wrapper">
+            <span class="cart-checkbox" onclick="chkAllOnclick()"></span><span class="cart-checktext">全选</span>
+        </div>
+    </div>
+    <div class="info">
+        <span class="hot" id="cart_amount_desc"><em>总计：</em>￥{$total_price.total_fee}元</span>
+        <br>
+        <span class="hot_text">不含运费</span>
+    </div>
+    <div class="right">
+        <input type="button" href="javascript:void();"  onclick="selcartSubmit();" class="xm-button " value="去结算"></div>
+</div>
+{/empty}
+<!--购物车底部 end-->
+
+<script type="text/javascript">
+    /*选中状态*/
+    $(".check-wrapper .cart-checkbox").click(function(){
+        if($(this).hasClass('checked')){
+            $(this).removeClass('checked');
+            $(this).find('input').attr('checked',false);
+        }else{
+            $(this).addClass('checked');
+            $(this).find('input').attr('checked',true);
+        }
+        ajaxCartList();
+    })
+    var is_checked = true;
+    $('.inner .cart-checkbox').each(function(){
+        if(!$(this).hasClass('checked')) {
+            is_checked = false;
+            return false;
+        }
+    });
+    if(is_checked){
+        $('.quanxuan .cart-checkbox').addClass('checked');
+    }else {
+        $('.quanxuan .cart-checkbox').removeClass('checked');
+    }
+
+    function chkAllOnclick(){
+        if($('.quanxuan .cart-checkbox').hasClass('checked')){
+            $('.quanxuan .cart-checkbox').removeClass('checked');
+            $('.inner .cart-checkbox').removeClass('checked');
+            $("input[name^='cart_select']").prop('checked',false);
+            is_checked = false;
+        }
+        else{
+            $('.quanxuan .cart-checkbox').addClass('checked');
+            $('.inner .cart-checkbox').addClass('checked');
+            $("input[name^='cart_select']").prop('checked',true);
+            is_checked = true;
+        }
+        ajaxCartList();
+    }
+    /**
+     * 删除购物车中的商品
+     *@param cart_id 购物车的id
+     */
+    function delCartGoods(cart_id){
+        layer.open({
+            content: '温馨提示！',
+            btn: ['取消','确定删除'],
+            shadeClose: false,
+            yes: function(){
+                layer.closeAll();
+                return false;
+            }, no: function(){
+                var chk_value = [];
+                chk_value.push(cart_id);
+                // ajax调用删除
+                if(chk_value.length > 0){
+                    ajaxDelCart(chk_value.join(','));//将数组用字符来拼接成字符串
+                }else{
+                    layer.open({content:'请选择要删除的数据',time: 1});
+                }
+            }
+        });
+    }
+    /**
+     * 去结算商品
+     */
+    function selcartSubmit(){
+        var i = 0;//购物车中被选中商品的数量
+        $("input[name^=cart_select]:checked").each(function(){
+            i++;
+        });
+        if(i >0){
+            $.ajax({
+                type: "POST",
+                url: "{:url('mobile/Cart/validatea')}",//表单令牌验证
+                data:$("#selcartValidate").serialize(),
+                success:function(data){
+                    if(data.code ==1){
+                        location.href = "{:url('mobile/Cart/aplayInfo')}"; //支付第一步
+                    }else{
+                        layer.open({content:data.msg,time: 1});
+                        return false;
+                    }
+                },
+                error:function(){
+                    layer.open({content:'网络错误,请稍后再试',time: 1});
+                    return false;
+                }
+            });
+        }else{
+            layer.open({content:'请选择要结算的商品',time:1});
+            return false;
+        }
+    }
+</script>

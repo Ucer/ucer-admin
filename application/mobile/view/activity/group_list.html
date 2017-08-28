@@ -1,0 +1,89 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta name="Generator" content="tpshop" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>今日团购-{$Think.config.web_site_name}</title>
+    {include file="public/head" /}
+    <link rel="stylesheet" type="text/css" href="/static/mobile/css/group_buy.css"/>
+    <script type="text/javascript">
+        var Tday = new Array();
+        var daysms = 24 * 60 * 60 * 1000
+        var hoursms = 60 * 60 * 1000
+        var Secondms = 60 * 1000
+        var microsecond = 1000
+        var DifferHour = -1
+        var DifferMinute = -1
+        var DifferSecond = -1
+        function clock11(key)
+        {
+            var time = new Date()
+            var hour = time.getHours()
+            var minute = time.getMinutes()
+            var second = time.getSeconds()
+            var timevalue = ""+((hour > 12) ? hour-12:hour)
+            timevalue +=((minute < 10) ? ":0":":")+minute
+            timevalue +=((second < 10) ? ":0":":")+second
+            timevalue +=((hour >12 ) ? " PM":" AM")
+            var convertHour = DifferHour
+            var convertMinute = DifferMinute
+            var convertSecond = DifferSecond
+            var Diffms = Tday[key].getTime() - time.getTime()
+            DifferHour = Math.floor(Diffms / daysms)
+            Diffms -= DifferHour * daysms
+            DifferMinute = Math.floor(Diffms / hoursms)
+            Diffms -= DifferMinute * hoursms
+            DifferSecond = Math.floor(Diffms / Secondms)
+            Diffms -= DifferSecond * Secondms
+            var dSecs = Math.floor(Diffms / microsecond)
+
+            if(convertHour != DifferHour) e="<span class=hour>"+DifferHour+"</span>天";
+            if(convertMinute != DifferMinute) f="<span class=min>"+DifferMinute+"</span>时";
+            if(convertSecond != DifferSecond) g="<span class=sec>"+DifferSecond+"</span>分";
+            h="<span class=msec>"+dSecs+"</span>秒";
+            if (DifferHour>0) {e=e}
+            else {e=''}
+            document.getElementById("jstimerBox"+key).innerHTML = e + f + g + h;
+        }
+    </script>
+</head>
+<body style="background:#FFF;">
+<div class="tab_nav">
+    <div class="header">
+        <div class="h-left"><a class="sb-back" href="javascript:history.back(-1)" title="返回"></a></div>
+        <div class="h-mid">今日团购</div>
+        <div class="h-right">
+            <aside class="top_bar">
+                <div onClick="show_menu();$('#close_btn').addClass('hid');" id="show_more"><a href="javascript:;"></a> </div>
+            </aside>
+        </div>
+    </div>
+</div>
+{include file="public/right_menu" /}
+<ul class="product_list" id="good_list">
+    {foreach $list as $v}
+    <li>
+        <a class="url" href="{:url('mobile/Activity/groupInfo',array('id'=>$v.id))}">
+            <img src="{$v.goods_img}">   </a>
+        <a href="{:url('mobile/Activity/groupInfo',array('id'=>$v.id))}"  class="info_wrap">
+            <div class="fn good">{$v.goods_name}</div>
+            <div class="price_wrap">
+                <i class="discount"  style="display:;">{$v.discount}折</i> <span class="price" style="display:;">￥{$v.price}元</span> <del class="old_price"  style="display:;">￥{$v.market_price}元</del>
+            </div>
+            <div class="bottom_info">
+                <span class="remain_num" style="display:;">已售{$v.buy_num + $v.virtual_num}件</span>
+                <span class="sg_g_time last_g_time" id="jstimerBox{$v.goods_id}"></span>
+            </div>
+        </a>
+    </li>
+    <script>
+        Tday['{$v.goods_id}'] = new Date('{$v.end_time|date="Y/m/d H:i:s",###}');
+        window.setInterval(function()
+        {clock11('{$v.goods_id}');}, 1000);
+    </script>
+    {/foreach}
+</ul>
+
+</body>
+</html>

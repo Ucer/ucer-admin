@@ -1,0 +1,195 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 文章处理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">文章标题：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="title"  value="{$info.title}" placeholder="文章标题">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">上级分类：</label>
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <select class="form-control m-b chosen-select" name="cat_id" >
+                                        <option value="">选择分类</option>
+                                        {foreach $cat_list as $k=>$v}
+                                        <option value="{$v.id}" {eq name="info.cat_id" value="$v.id"}selected{/eq}>{:str_repeat('&nbsp;&nbsp;',$v.lev*2)}{$v.cat_name}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">封面图片：</label>
+                            <div class="input-group col-sm-1">
+                                <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="thumb" data-url="{:url('Uploadify/jqUpload')}" data-path="article" >+ 浏览文件
+                                    <input type="hidden" name="thumb" id="thumb" value="{$info.thumb}">
+                                </a>
+                                <img  height="100px" id="thumb_img" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/no_img.jpg'" src="{$info.thumb}"/>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group ">
+                            <label class="col-sm-3 control-label">seo关键词：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="5" name="keywords"  class="form-control" placeholder="关键词" >{$info.keywords}</textarea>
+                                <span class="help-block m-b-none"> 以逗号隔开 255个字符以内</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">描述：</label>
+                            <div class="input-group col-sm-4">
+                                <textarea type="text" rows="5" name="desc"  class="form-control" placeholder="描述" >{$info.desc}</textarea>
+                                <span class="help-block m-b-none"> 256个字符以内</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed avalue"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">外部链接：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="link"  value="{$info.link}" placeholder="外部链接">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">是否显示：</label>
+                            <div class="input-group col-sm-4">
+                                <div class="radio i-checks">
+                                    <input type="radio" name='is_show' value="0" {if condition="$id gt 0 "}{eq name="info.is_show" value="0"}checked{/eq}{else /}checked{/if} />显示&nbsp;&nbsp;
+                                    <input type="radio" name='is_show' value="1" {eq name="info.is_show" value="1"}checked{/eq} />隐藏
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group avalue">
+                            <label class="col-sm-3 control-label">发布时间：</label>
+                            <div class="input-group col-sm-4">
+                                <input class="form-control layer-date" placeholder="YYYY-MM-DD hh:mm:ss" name="publish_time" time_plugin="publish_time" data-min="input" {gt name="$id" value="0"} value="{$info.publish_time}" {/gt}>
+                                <label class="laydate-icon"></label>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed "></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 作者：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="author"  value="{$info.author}" placeholder="作者">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 文章内容：</label>
+                            <div class=" col-sm-8">
+                                <div class="span12 ckeditor" id="content" title="" style="height:800px;max-height:1000px;">{$info.content}</div>
+                            </div>
+                            <input type="hidden" name="content" value="">
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label"> 排序：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="number" name="sort"  {if condition="$info.id gt 0"}value="{$info.sort}" {else /}value="10" {/if}placeholder="排序"  class="form-control" />
+                                <span class="lbl">&nbsp;&nbsp;默认为10</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<!--以下是在线编辑器 代码 -->
+<link rel="stylesheet" type="text/css" href="/static/admin/wangeditor/css/wangEditor.min.css">
+<!--//防xss攻击js-->
+<script src="/static/admin/js/xss.js"></script>
+
+<!--引入jquery和wangEditor.js-->   <!--注意：javascript必须放在body最后，否则可能会出现问题-->
+<script type="text/javascript" src="/static/admin/wangeditor/js/wangEditor.min.js"></script>
+
+<!--这里引用jquery和wangEditor.js-->
+<script type="text/javascript">
+    var editor = new wangEditor('content');
+    // 配置自定义表情
+    editor.config.emotions = {
+        'default': {
+            title: '常用',  // 组名称
+            data: '/static/admin/wangeditor/js/emotions.data'
+        },
+        /* 第二组，id叫做'weibo'*/
+        'weibo': { title: '微博表情', /* 组名称*/ data: [/* data 还可以直接赋值为一个表情包数组*/ {icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/7a/shenshou_thumb.gif', value: '[草泥马]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/60/horse2_thumb.gif', value: '[神马]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/fuyun_thumb.gif', value: '[浮云]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c9/geili_thumb.gif', value: '[给力]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/f2/wg_thumb.gif', value: '[围观]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/70/vw_thumb.gif', value: '[威武]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/6e/panda_thumb.gif', value: '[熊猫]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/81/rabbit_thumb.gif', value: '[兔子]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/bc/otm_thumb.gif', value: '[奥特曼]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/15/j_thumb.gif', value: '[囧]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/89/hufen_thumb.gif', value: '[互粉]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/c4/liwu_thumb.gif', value: '[礼物]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/ac/smilea_thumb.gif', value: '[呵呵]'}, { icon: 'http://img.t.sinajs.cn/t35/style/images/common/face/ext/normal/0b/tootha_thumb.gif', value: '[哈哈]'}]}
+    };
+    editor.config.pasteFilter = false;// 粘贴过滤
+    // 只粘贴纯文本
+    // （注意，如果你在上面设置了 editor.config.pasteFilter = false 那么这个粘贴纯文本的设置将失效）
+    editor.config.pasteText = false;
+
+    // 上传图片
+    editor.config.uploadImgUrl = "{:url('Uploadify/editUpload')}";
+    editor.config.uploadImgFileName = 'myfile'// 配置上传文件名
+
+    // 配置自定义参数
+    editor.config.uploadParams = {
+        path:'article'
+    };
+    // 设置 headers
+    editor.config.uploadHeaders = {
+        'Accept' : 'text/x-json'
+    };
+    // 隐藏掉插入网络图片功能。该配置，只有在你正确配置了图片上传功能之后才可用。
+    editor.config.hideLinkImg = false;
+    editor.create();
+
+</script>
+<!--以上是在线编辑器 代码  end-->
+
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var content = editor.$txt.html();//文章内容
+        $("input[name=content]").val(filterXSS(content));//过滤xss攻击
+
+        if(isEmpty('',$("input[name=title]").val(),'文章标题不能为空') == false){return false;}
+        if(isEmpty('',$("select[name=cat_id]").val(),'请选择文章分类') == false){return false;}
+        if(isEmpty('',$("input[name=thumb]").val(),'请上传分类图片') == false){return false;}
+        if(isEmpty('',$("textarea[name=desc]").val(),'文章简介不能为空') == false){return false;}
+        if(isEmpty('',content,'请填写文章内容') == false){return false;}
+        if(isEmpty('',$("input[name=author]").val(),'请填写作者名称') == false){return false;}
+        ajaxFormBtn("{:url('articleHandle',['id'=>$id])}",'btnForm');
+    });
+
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+</body>
+</html>

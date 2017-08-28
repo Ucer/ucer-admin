@@ -1,0 +1,20 @@
+<div class="com_top">
+    <h2><a href="{:url('mobile/Users/userinfo')}">设置</a></h2>
+    <p class="tuij_cas">
+        {$user.nickname}
+    </p>
+    <dl>
+        <dt>
+            <img src="{$user.head_pic}" alt="" onerror="this.src='/static/admin/images/head_default.gif'">
+
+        <dd>{$user_level}</dd>
+        </dt>
+    </dl>
+</div>
+<div class="uer_topnav">
+    <ul>
+        <li class="bain"><a href="{:url('mobile/Users/orderList')}" ><span>{$order_count}</span>我的订单</a></li>
+        <li class="bain"><a href="{:url('mobile/Users/collectList')}"><span>{$goods_collect_count}</span>我的收藏</a></li>
+        <li><a href="{:url('Mobile/User/comment')}"><span>{$comment_count}</span>我的评价</a></li>
+    </ul>
+</div>

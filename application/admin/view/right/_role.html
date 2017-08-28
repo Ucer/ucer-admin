@@ -1,0 +1,105 @@
+<style>
+    ul li{
+        list-style: none;
+        float: left;
+        margin-right: 2%;
+    }
+</style>
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 角色管理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"  method="post" action="{:url('roleHandle',['id'=>$id])}" id="btnForm">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <th>角色名称:</th>
+                                <td><div class="col-xs-6"><input type="text" name="role_name" class="form-control" value="{$info.role_name}"></div></td>
+                                <th >角色描述:</th>
+                                <td><textarea rows="2" cols="50" name="role_desc">{$info.role_desc}</textarea></td>
+                            </tr>
+                        </table>
+                        <h3>权限分配：<input type="checkbox" onclick="chooseBox(this)">全选</h3>
+                        <table class="table table-bordered table-striped dataTable">
+                            <tbody>
+                            {empty name="modules"}
+                            <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无权限</td></tr>
+                            {else/}
+                            {foreach $modules as $k=>$v}
+                            <tr>
+                                <td class="title left" style="padding-right:50px;">
+                                    <b>{$group[$k]}</b>
+                                    <label class="right"><input type="checkbox" value="1" cka="mod-{$k}">全选</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <ul class="group-list">
+                                        {foreach $v as $vv}
+                                        <li><label><input type="checkbox" name="right_menu_ids[]" value="{$vv.id}" {eq name="vv.default" value="1"}checked{/eq} ck="mod-{$k}">{$vv.name}</label></li>
+                                        {/foreach}
+                                        <div class="clear-both"></div>
+                                    </ul>
+                                </td>
+                            </tr>
+                            {/foreach}
+                            {/empty}
+                            </tbody>
+                            <tfoot>
+                            <tr align="center">
+                                <td>
+                                    <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<script type="text/javascript">
+    /*全选jq*/
+    $(document).ready(function(){
+       $(":checkbox[cka]").click(function(){
+           var cks = $(":checkbox[ck='"+$(this).attr("cka")+"']");
+           if($(this).is(":checked")){
+               cks.each(function(){$(this).prop("checked",true);});
+           }else{
+               cks.each(function(){$(this).removeAttr('checked');});
+           }
+       }) ;
+    });
+    var chooseBox = function(obj){
+        var vt = $(obj).is(":checked");
+        if(vt){
+            $("input[type=checkbox]").prop('checked',vt);
+        }else{
+            $("input[type=checkbox]").removeAttr('checked');
+        }
+    };
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        var rname = $("input[name=role_name]").val();
+        var rdesc = $("textarea[name=role_desc]").val();
+        if(isEmpty('',rname,'角色名称不能为空') == false){return false;}
+        if(isEmpty('',rdesc,'角色描述不能为空') == false){return false;}
+        $("#btnForm").submit()
+    })
+</script>
+</body>
+</html>

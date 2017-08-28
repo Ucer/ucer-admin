@@ -1,0 +1,139 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="fa fa-bars"> 会员处理</h5>
+                    <div class="ibox-tools">
+                        <a href="javascript:history.go(-1)"  title="返回">
+                            <i class="fa fa-reply"> 返回</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t"   id="btnForm">
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">昵称：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="nickname"  value="{$info.nickname}" placeholder="昵称">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">会员等级：</label>
+                            <div class="col-sm-2" >
+                                <select class="form-control m-b chosen-select" name="cat_id" >
+                                    {foreach $level_list as $k=>$v}
+                                    <option value="{$v.id}" {eq name="info.level_id" value="$v.id"}selected{/eq}>{$v.name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">会员头像：</label>
+                            <div class="input-group col-sm-1">
+                                <a  class="btn btn-info" href="javascript:void(0);" style="float: left" uploader="head_pic" data-url="{:url('Uploadify/jqUpload')}" data-path="ulogo" >+ 浏览文件
+                                    <input type="hidden" name="head_pic" id="head_pic" value="{$info.head_pic}">
+                                </a>
+                                <img  height="100px" id="head_pic_img" class="img-circle" style="float:left;margin-left: 120px;margin-top: -50px;" onerror="this.src='/static/admin/images/head_default.gif'" src="{$info.head_pic}"/>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="password" class="form-control" name="password"  value="" placeholder="密码">
+                                <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>  修改密码时填写。由6-18位之间的数字、字母、下划线组成</span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">密码确认：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="password" class="form-control" name="password_c"  placeholder="密码确认">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">姓别：</label>
+                            <div class="input-group col-sm-4">
+                                <div class="radio i-checks">
+                                    <input type="radio" name='sex' value="0" {if condition="$id gt 0 "}{eq name="info.sex" value="0"}checked{/eq}{else /}checked{/if} />保密&nbsp;&nbsp;
+                                    <input type="radio" name='sex' value="1" {eq name="info.sex" value="1"}checked{/eq} />男&nbsp;&nbsp;
+                                    <input type="radio" name='sex' value="2" {eq name="info.sex" value="2"}checked{/eq} />女
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">手机号：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="mobile"  value="{$info.mobile}" placeholder="手机号">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">邮箱：</label>
+                            <div class="input-group col-sm-4">
+                                <input type="text" class="form-control" name="email"  value="{$info.email}" placeholder="邮箱">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <a class="btn btn-primary" id="saveBtn"><i class="fa fa-save"></i> 保存</a>&nbsp;&nbsp;&nbsp;
+                                <a class="btn btn-danger" href="javascript:history.go(-1);"><i class="fa fa-close"></i> 返回</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+
+<script>
+    /*表单提交*/
+    $("#saveBtn").click(function(){
+        if(isEmpty('',$("input[name=nickname]").val(),'昵称不能为空') == false){return false;}
+        var id ="{$id}";
+        var password = $("input[name=password]").val();
+        var password_c = $("input[name=password_c]").val();
+        if(id <1 ){
+            if(isEmpty('',password,'请填写密码') == false){return false;}
+            passwordConfirm(password,password_c);
+        }else{
+            if($.trim(password)) {
+                passwordConfirm(password,password_c);
+            }
+        }
+        if(prexRule( /(^1[3|4|5|7|8][0-9]{9}$)/,$("input[name=mobile]").val(),'请输入正确的手机号') == false){return false;}
+
+        ajaxFormBtn("{:url('userHandle',['id'=>$id])}",'btnForm');
+    });
+    /*密码验证*/
+    function passwordConfirm(password,password_c){
+        if (prexRule(/^[a-z0-9_-]{6,18}$/, password, '密码只能是6-18位之间的数字、字母、下划线') == false) {
+            return false;
+        }
+        if (!password || $.trim(password) != $.trim(password_c)) {
+            layer.msg('两次输入的密码不一致', {icon: 5, time: 2000}, function (index) {
+                layer.close(index);
+            });
+            return false;
+        }
+    }
+
+    var config = {
+        '.chosen-select': {},
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+</script>
+</body>
+</html>

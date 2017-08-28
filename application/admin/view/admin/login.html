@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>漂过太平洋后台登录</title>
+    <link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+    <link href="__CSS__/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="__CSS__/animate.min.css" rel="stylesheet">
+    <link href="__CSS__/style.min.css" rel="stylesheet">
+    <link href="__CSS__/login.min.css" rel="stylesheet">
+    <!--极验验证需要引入的两个JS-->
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="http://static.geetest.com/static/tools/gt.js"></script>
+    <script>
+        if(window.top!==window.self){window.top.location=window.location};
+    </script>
+</head>
+
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7" style="color:#fff">
+            <div class="signin-info">
+                <div class="logopanel m-b">
+                </div>
+                <div class="m-b"></div>
+                <h4>欢迎使用 <strong>漂过太平洋后台</strong></h4>
+                <ul class="m-b">
+
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-5" style="color:#fff">
+            <form id="doLogin"  method="post" action="{:url('login')}">
+                <p class="m-t-md" id="err_msg">登录到后台</p>
+                <input type="text" class="form-control uname" placeholder="用户名"  name="username"/>
+                <input type="password" class="form-control pword m-b" placeholder="密码" name="password" />
+                {if condition="config('verify_type') eq 1"}
+                <div style="margin-bottom:70px">
+                    <input type="text" class="form-control" placeholder="验证码" style="color:black;width:120px;float:left;margin:0px 0px;" name="code" />
+                    <img src="{:url('checkVerify')}" onclick="javascript:this.src='{:url('checkVerify')}?tm='+Math.random();" style="float:right;cursor: pointer"/>
+                </div>
+                {else/}
+                <div id="embed-captcha"></div>
+                <p id="wait">正在加载验证码......</p>
+                {/if}
+                <button type="submit" class="btn btn-primary btn-block" id="loginBtn">登　录</button>
+            </form>
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left" style="color:#fff">
+            &copy; 2016 All Rights Reserved.漂过太平洋
+        </div>
+    </div>
+</div>
+<script src="__JS__/jquery.min.js?v=2.1.4"></script>
+<script src="__JS__/bootstrap.min.js?v=3.3.6"></script>
+<script src="__JS__/jquery.form.js"></script>
+<script src="__JS__/layer/layer.js"></script>
+<script src="__JS__/global.js"></script>
+
+<script>
+    document.onkeydown=function(event){
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if(e && e.keyCode==13){ // enter 键
+            $('#loginBtn').click();
+        }
+    };
+    /*
+    * 极验证码
+    * */
+    $(function(){
+        $.ajax({
+            url:"{:url('getVerify')}",
+            type:'get',
+            dataType:'json',
+            success:function(data){
+                // 使用initGeetest接口
+                // 参数1：配置参数
+                // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+                initGeetest({
+                    gt:data.gt,
+                    challenge:data.challenge,
+                    product:"float",// 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+                    offline:!data.success,// 表示用户后台检测极验服务器是否宕机，一般不需要关注
+                },handlerEmbed);
+            }
+        });
+    });
+    var handlerEmbed = function(captchaObj){
+        $("#embed-submit").click(function (e) {
+            var validate = captchaObj.getValidate();
+            if (!validate) {
+                $("#notice")[0].className = "show";
+                setTimeout(function () {
+                    $("#notice")[0].className = "hide";
+                }, 2000);
+                e.preventDefault();
+            }
+        });
+        // 将验证码加到id为captcha的元素里
+        captchaObj.appendTo("#embed-captcha");
+        captchaObj.onReady(function () {
+            $("#wait")[0].className = "hide";
+        });
+        // 更多接口参考：http://www.geetest.com/install/sections/idx-client-sdk.html
+    }
+    /*
+    * 表单提交
+    * */
+    $(function(){
+        $('#doLogin').ajaxForm({
+            beforeSubmit: checkForm, // 此方法主要是提交前执行的方法，根据需要设置
+            success: complete, // 这是提交后的方法
+            dataType: 'json'
+        });
+        /*
+        * 表单验证
+        * */
+        function checkForm(){
+            if(isEmpty('',$("input[name=username]").val(),'请输入用户名') ==false){return false;}
+            if(isEmpty('',$("input[name=password]").val(),'请输入密码') == false){return false;}
+            $("button").removeClass('btn-primary').addClass('btn-danger').text("登录中...");
+        }
+        function complete(data){
+            if(data.code==1){
+                layer.msg(data.msg, {icon: 6,time:2000}, function(index){
+                    layer.close(index);
+                    window.location.href=data.data;
+                });
+            }else{
+                layer.msg(data.msg, {icon: 5,time:2000});
+                $("button").removeClass('btn-danger').addClass('btn-primary').text("登　录");
+                return false;
+            }
+        }
+    });
+</script>
+</body>
+</html>

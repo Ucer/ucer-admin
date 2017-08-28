@@ -1,0 +1,75 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>会员等级列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                    <a href="{:url('levelHandle',['id'=>0])}" class="btn btn-primary "><i class="fa fa-plus"></i> 添加</a>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="table-responsive ">
+                            <table class="table table-responsive table-bordered table-hover">
+                                <thead>
+                                <tr class="long-tr">
+                                    <th width="5%"><input type="checkbox" onclick="checkAll(this)">ID</th>
+                                    <th >等级头衔</th>
+                                    <th >消费额度</th>
+                                    <th >描述</th>
+                                    <th >折扣率</th>
+                                    <th width="5%">排序</th>
+                                    <th >添加时间</th>
+                                    <th >修改时间</th>
+                                    <th >操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="list"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+                                {else/}
+                                {foreach $list as $v}
+                                <tr class="long-td">
+                                    <td><input type="checkbox" name="ids[]">{$v.id}</td>
+                                    <td>{$v.name}</td>
+                                    <td>{$v.amount}￥</td>
+                                    <td>{$v.desc|handleStr=###,0,15,true}</td>
+                                    <td>{$v.discount}%</td>
+                                    <td style="padding: 3px">
+                                        <div>
+                                            <input type="number" value="{$v.sort}" data-id="{$v.id}" data-column="sort" data-table="user_level" data-msg="排序修改成功" onchange="updateSort(this)" width="50%" style="text-align:center;" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td>{$v.created_at}</td>
+                                    <td>{$v.update_at}</td>
+                                    <td>
+                                        <a href="{:url('levelHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delLevel')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{include file="public/footer" /}
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

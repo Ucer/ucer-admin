@@ -1,0 +1,23 @@
+{foreach $goods_list as $k=>$vo}
+<li>
+    <a href="{:url('mobile/Goods/goodsInfo',array('id'=>$vo.id))}" class="item">
+        <div class="pic_box">
+            <div class="active_box">
+                <span style=" background-position:0px -36px">新品</span>
+            </div>
+            <img src="{:goodsThumb($vo.id,$vo.original_img,400,400)}">
+        </div>
+        <div class="title_box">{$vo.goods_name}</div>
+        <div class="price_box">
+            <span class="new_price"><i>￥{$vo.shop_price}元</i></span>
+        </div>
+        <div class="comment_box">已售0</div>
+    </a>
+    <div class="ui-number b">
+        <a class="decrease" onClick="goods_cut({$vo.id});">-</a>
+        <input class="num" id="number_{$vo.id}" type="text" onBlur="();" value="1" onFocus="if(value=='1') {value=''}" size="4" maxlength="5">
+        <a class="increase" onClick="goods_add('{$vo.id}');">+</a>
+    </div>
+    <span class="bug_car" onClick="ajaxAddCart('{$vo.id}',1,0);"><i class="icon-shop_cart"></i></span>
+</li>
+{/foreach}

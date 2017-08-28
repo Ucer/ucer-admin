@@ -1,0 +1,75 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>公众号列表</h5>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-2 pull-right">
+                                <div class="btn-group pull-right "  role="group" style="clear: both">
+                                    <a href="{:url('accountHandle',['id'=>0])}" class="btn btn-outline btn-default "><i class="fa fa-plus"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-outline btn-default " onclick="getIds(this)" data-url="{:url('delAccount')}"><i class="fa fa-trash-o"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="table-responsive ">
+                            <table class="table  table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th><input class="i-checks checkbox check-all" type="checkbox" >ID</th>
+                                    <th>公众号名称</th>
+                                    <th>创建时间</th>
+                                    <th>更新时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {empty name="lists"}
+                                <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">没有数据</td></tr>
+                                {else/}
+                                {foreach $lists as $v}
+                                <tr>
+                                    <td>
+                                        <input class="ids i-checks"  type="checkbox" name="ids[]" value="{$v.id}">{$v.id}
+                                    </td>
+                                    <td>{$v.name}</td>
+                                    <td>{$v.created_at}</td>
+                                    <td>{$v.update_at}</td>
+                                    <td>
+                                        <a href="{:url('accountHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-pencil-square-o"></i> 编辑
+                                        </a>&nbsp;&nbsp;
+                                        <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.name}" data-url="{:url('delAccount')}">
+                                            <i class="fa fa-trash-o"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/foreach}
+                                {/empty}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{include file="public/footer" /}
+<link href="__CSS__/plugins/iCheck/custom.css" rel="stylesheet">
+
+<script type="text/javascript">
+    //全选的实现
+    $('.check-all').on('ifChecked', function (event) {
+        $('input[name="ids[]"]').iCheck('check');
+    });
+    $('.check-all').on('ifUnchecked', function (event) {
+        $('input[name="ids[]"]').iCheck('uncheck');
+    });
+</script>
+</body>

@@ -1,0 +1,62 @@
+<div class="table-responsive ">
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th><input type="checkbox" onclick="checkAll(this)">ID</th>
+        <th>团购名称</th>
+        <th >团购价</th>
+        <th >活动商品</th>
+        <th >已参团</th>
+        <th >参团限量</th>
+        <th >折扣</th>
+        <th >开始时间</th>
+        <th >结束时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {empty name="lists"}
+    <tr><td colspan="20" style="padding-top:10px;padding-bottom:10px;font-size:16px;text-align:center">暂无数据</td></tr>
+    <input type="hidden" name="test" value="1">
+    {else/}
+    {foreach $lists as $v}
+    <tr>
+        <td><input type="checkbox" name="ids[]" value="{$v.id}">{$v.id}</td>
+        <td>{$v.title}</td>
+        <td>{$v.price}￥</td>
+        <td>
+            {foreach $goods_list as $vv}
+            {eq name="vv.id" value="$v.goods_id"}{$vv.goods_name}{/eq}
+            {/foreach}
+        </td>
+        <td>{$v.buy_num}</td>
+        <td>{$v.goods_num}</td>
+        <td>{$v.rebate}</td>
+        <td>{:date('Y-m-d H:i:s',time($v.start_time))}</td>
+        <td>{:date('Y-m-d H:i:s',time($v.end_time))}</td>
+        <td>
+            <a href="{:url('groupHandle',['id'=>$v.id])}" class="btn btn-primary btn-xs">
+                <i class="fa fa-pencil-square-o"></i> 编辑
+            </a>&nbsp;&nbsp;
+            <a href="javascript:;"class="btn btn-danger btn-xs" onclick="delBtn(this)" data-id="{$v.id}" data-name="{$v.title}" data-url="{:url('delGroupBuy')}">
+                <i class="fa fa-trash-o"></i> 删除
+            </a>
+        </td>
+    </tr>
+    {/foreach}
+    {/empty}
+    </tbody>
+</table>
+<div class="pull-right">
+    {$page}
+</div>
+</div>
+<script type="text/javascript">
+    //分页
+    $('.pagination a').click(function () {
+        form = '';//表单id 全局变量
+        p = $(this).data('p');//当前分页
+        turl = "/admin/Promotion/ajaxGroupList/page/"+p;//url
+        ajaxList(form,turl);
+    });
+</script>
