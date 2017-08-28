@@ -3,7 +3,7 @@
   <b>Ucer-admin</b>
   <br>
   <a href="https://www.codehaoshi.com">
-    <img src="https://yousails.com/banners/brand.png" width=350>
+    <img src="http://ovdt3w8zp.bkt.clouddn.com/2017-08-28%2014-27-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png" width=350>
   </a>
   
   <br>
@@ -30,6 +30,16 @@
 - Nginx 1.8+
 - PHP 5.6+
 - Mysql 5.6+
+
+
+## 演示
+
+![ucer-admin 后台管理系统](http://uadmin.codehaoshi.com/)
+
+*管理员账号密码 test test
+
+
+![ucer-admin 前台](http://uadmin.codehaoshi.com/mobile)
 
 ## 开发环境部署/安装
 
@@ -84,6 +94,16 @@ $ cp database.example.php application/database.php
 
 * 管理后台：http://xxx/admin
 * 前台地址：http://xxx/mobile
+*后台管理员账号密码默认 admin admin 。 登录后请自行修改
 
-后台管理员账号密码默认 admin admin 。 登录后请自行修改
+## Contributors
 
+- [Code 好事](http://codehaoshi.com)
+
+## License
+
+> 本代码仅提供初学都学习参考。使用 ucer-admin 构建，或者基于 ucer-admin 源代码修改的站点 **必须** 在页脚加上 `Powered by Ucer` 字样，并且必须链接到 `https://codehaoshi.com` 上。**必须** 在页面的每一个标题上加上 `Powered by Ucer` 字样。
+
+在遵守以上规则的情况下，你可以享受等同于 MIT 协议的授权。
+
+或者你可以联系 `185429135@qq.com` 购买商业授权，商业授权允许移除页脚和标题的 `Powered by Ucer` 字样。

@@ -87,7 +87,7 @@ class Order extends Base{
         }
         list($list,$page) = $this->order->getPageList($where,$this->page,'*',$ssort);
         $ajax_page=preg_replace("(<a[^>]*page[=|/](\d+).+?>(.+?)<\/a>)","<a data-p=$1 href='javascript:void($1);'>$2</a>",$page);
-        return view('order/ajax_order_List', [
+        return view('order/ajax_order_list', [
             'lists'=>$list,
             'page'=>$ajax_page,
             'order_by'=>$order_by,
@@ -136,7 +136,7 @@ class Order extends Base{
         if($action && $order_id){
             $a = $this->order->orderProcessHandle($order_id,$action);//各种状态操作 TODO
             if($action =='remove'){//如果是移除订单
-                $url = Url::build('orderList');
+                $url = Url::build('orderlist');
             }else{
                 $res = $this->order->orderActionLog($order_id,$action,$note);//记录入order_action表中
                 $url = Url::build('Order/orderDetail',['id'=>$order_id]);
