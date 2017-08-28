@@ -36,7 +36,7 @@
 
 ![ucer-admin 后台管理系统](http://uadmin.codehaoshi.com/)
 
-*管理员账号密码 test test
+*管理员账号密码 test 111111
 
 
 ![ucer-admin 前台](http://uadmin.codehaoshi.com/mobile)
@@ -94,7 +94,7 @@ $ cp database.example.php application/database.php
 
 * 管理后台：http://xxx/admin
 * 前台地址：http://xxx/mobile
-*后台管理员账号密码默认 admin admin 。 登录后请自行修改
+*后台管理员账号密码默认 admin 111111 。 登录后请自行修改
 
 ## Contributors
 
