@@ -34,12 +34,12 @@
 
 ## 演示
 
-![ucer-admin 后台管理系统](http://uadmin.codehaoshi.com/)
+[ucer-admin 后台管理系统](http://uadmin.codehaoshi.com/)
 
 *管理员账号密码 test 111111
 
 
-![ucer-admin 前台](http://uadmin.codehaoshi.com/mobile)
+[ucer-admin 前台](http://uadmin.codehaoshi.com/mobile)
 
 ## 开发环境部署/安装
 
